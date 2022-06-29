@@ -9,6 +9,5 @@ package ProyectoFG1.Modelos;
  *
  * @author POSITIVO BGH
  */
-public class ClasseBoba1 {
-    
+public class Inmueble {
 }

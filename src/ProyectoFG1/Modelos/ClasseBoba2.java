@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ProyectoFinalG1_Modelos;
+package ProyectoFG1.Modelos;
 
 /**
  *
  * @author POSITIVO BGH
  */
-public class ClasseBoba1 {
+public class ClasseBoba2 {
     
 }

@@ -1,13 +1,26 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ProyectoFG1.Modelos;
 
-/**
- *
- * @author POSITIVO BGH
- */
 public class Inmueble {
+
+    private int idInmueble;
+
+    private String accesibilidad;
+
+    private String caracteristicas;
+
+    private String direccion;
+
+    private double precio;
+
+    private float superficie;
+
+    private String tipoLocal;
+
+    private int zona;
+
+    private Propietario propietario;
+
+    private boolean estado;
+
+    private String codigoInmueble;
 }

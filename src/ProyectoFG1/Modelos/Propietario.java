@@ -1,5 +1,7 @@
 package ProyectoFG1.Modelos;
 
+import java.util.Objects;
+
 public class Propietario {
 
     private int idPropietario;
@@ -14,24 +16,28 @@ public class Propietario {
 
     private String domicilio;
 
+    private boolean activo;
+
     public Propietario() {
     }
 
-    public Propietario(int idPropietario, String nombre, String apellido, int dni, int telefono, String domicilio) {
+    public Propietario(String nombre, String apellido, int dni, int telefono, String domicilio, boolean activo) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.dni = dni;
+        this.telefono = telefono;
+        this.domicilio = domicilio;
+        this.activo = activo;
+    }
+
+    public Propietario(int idPropietario, String nombre, String apellido, int dni, int telefono, String domicilio, boolean activo) {
         this.idPropietario = idPropietario;
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;
         this.telefono = telefono;
         this.domicilio = domicilio;
-    }
-
-    public Propietario(String nombre, String apellido, int dni, int telefono, String domicilio) {
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.dni = dni;
-        this.telefono = telefono;
-        this.domicilio = domicilio;
+        this.activo = activo;
     }
 
     public int getIdPropietario() {
@@ -82,11 +88,24 @@ public class Propietario {
         this.domicilio = domicilio;
     }
 
+    public boolean isActivo() {
+        return activo;
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
+    }
+
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 23 * hash + this.idPropietario;
-        hash = 23 * hash + this.dni;
+        int hash = 7;
+        hash = 31 * hash + this.idPropietario;
+        hash = 31 * hash + Objects.hashCode(this.nombre);
+        hash = 31 * hash + Objects.hashCode(this.apellido);
+        hash = 31 * hash + this.dni;
+        hash = 31 * hash + this.telefono;
+        hash = 31 * hash + Objects.hashCode(this.domicilio);
+        hash = 31 * hash + (this.activo ? 1 : 0);
         return hash;
     }
 
@@ -102,9 +121,6 @@ public class Propietario {
             return false;
         }
         final Propietario other = (Propietario) obj;
-        if (this.idPropietario != other.idPropietario) {
-            return false;
-        }
         if (this.dni != other.dni) {
             return false;
         }
@@ -113,7 +129,7 @@ public class Propietario {
 
     @Override
     public String toString() {
-        return "Propietario{" + "idPropietario=" + idPropietario + ", nombre=" + nombre + ", apellido=" + apellido + ", dni=" + dni + ", telefono=" + telefono + ", domicilio=" + domicilio + '}';
+        return "Propietario{" + "idPropietario=" + idPropietario + ", nombre=" + nombre + ", apellido=" + apellido + ", dni=" + dni + ", telefono=" + telefono + ", domicilio=" + domicilio + ", activo=" + activo + '}';
     }
     
     

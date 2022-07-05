@@ -6,8 +6,6 @@ public class Inmueble {
 
     private int idInmueble;
 
-    private String accesibilidad;
-
     private String caracteristicas;
 
     private String direccion;
@@ -22,38 +20,36 @@ public class Inmueble {
 
     private Propietario propietario;
 
-    private boolean estado;
-
     private String codigoInmueble;
-
-    public Inmueble(int idInmueble, String accesibilidad, String caracteristicas, String direccion, double precio, float superficie, String tipoLocal, int zona, Propietario propietario, boolean estado, String codigoInmueble) {
-        this.idInmueble = idInmueble;
-        this.accesibilidad = accesibilidad;
-        this.caracteristicas = caracteristicas;
-        this.direccion = direccion;
-        this.precio = precio;
-        this.superficie = superficie;
-        this.tipoLocal = tipoLocal;
-        this.zona = zona;
-        this.propietario = propietario;
-        this.estado = estado;
-        this.codigoInmueble = codigoInmueble;
-    }
-
-    public Inmueble(String accesibilidad, String caracteristicas, String direccion, double precio, float superficie, String tipoLocal, int zona, Propietario propietario, boolean estado, String codigoInmueble) {
-        this.accesibilidad = accesibilidad;
-        this.caracteristicas = caracteristicas;
-        this.direccion = direccion;
-        this.precio = precio;
-        this.superficie = superficie;
-        this.tipoLocal = tipoLocal;
-        this.zona = zona;
-        this.propietario = propietario;
-        this.estado = estado;
-        this.codigoInmueble = codigoInmueble;
-    }
+    
+    private boolean activo;
 
     public Inmueble() {
+    }
+
+    public Inmueble(String caracteristicas, String direccion, double precio, float superficie, String tipoLocal, int zona, Propietario propietario, String codigoInmueble, boolean activo) {
+        this.caracteristicas = caracteristicas;
+        this.direccion = direccion;
+        this.precio = precio;
+        this.superficie = superficie;
+        this.tipoLocal = tipoLocal;
+        this.zona = zona;
+        this.propietario = propietario;
+        this.codigoInmueble = codigoInmueble;
+        this.activo = activo;
+    }
+
+    public Inmueble(int idInmueble, String caracteristicas, String direccion, double precio, float superficie, String tipoLocal, int zona, Propietario propietario, String codigoInmueble, boolean activo) {
+        this.idInmueble = idInmueble;
+        this.caracteristicas = caracteristicas;
+        this.direccion = direccion;
+        this.precio = precio;
+        this.superficie = superficie;
+        this.tipoLocal = tipoLocal;
+        this.zona = zona;
+        this.propietario = propietario;
+        this.codigoInmueble = codigoInmueble;
+        this.activo = activo;
     }
 
     public int getIdInmueble() {
@@ -62,14 +58,6 @@ public class Inmueble {
 
     public void setIdInmueble(int idInmueble) {
         this.idInmueble = idInmueble;
-    }
-
-    public String getAccesibilidad() {
-        return accesibilidad;
-    }
-
-    public void setAccesibilidad(String accesibilidad) {
-        this.accesibilidad = accesibilidad;
     }
 
     public String getCaracteristicas() {
@@ -128,14 +116,6 @@ public class Inmueble {
         this.propietario = propietario;
     }
 
-    public boolean isEstado() {
-        return estado;
-    }
-
-    public void setEstado(boolean estado) {
-        this.estado = estado;
-    }
-
     public String getCodigoInmueble() {
         return codigoInmueble;
     }
@@ -144,16 +124,27 @@ public class Inmueble {
         this.codigoInmueble = codigoInmueble;
     }
 
-    @Override
-    public String toString() {
-        return "Inmueble{" + "idInmueble=" + idInmueble + ", accesibilidad=" + accesibilidad + ", caracteristicas=" + caracteristicas + ", direccion=" + direccion + ", precio=" + precio + ", superficie=" + superficie + ", tipoLocal=" + tipoLocal + ", zona=" + zona + ", propietario=" + propietario + ", estado=" + estado + ", codigoInmueble=" + codigoInmueble + '}';
+    public boolean isActivo() {
+        return activo;
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
     }
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 17 * hash + this.idInmueble;
-        hash = 17 * hash + Objects.hashCode(this.codigoInmueble);
+        int hash = 3;
+        hash = 97 * hash + this.idInmueble;
+        hash = 97 * hash + Objects.hashCode(this.caracteristicas);
+        hash = 97 * hash + Objects.hashCode(this.direccion);
+        hash = 97 * hash + (int) (Double.doubleToLongBits(this.precio) ^ (Double.doubleToLongBits(this.precio) >>> 32));
+        hash = 97 * hash + Float.floatToIntBits(this.superficie);
+        hash = 97 * hash + Objects.hashCode(this.tipoLocal);
+        hash = 97 * hash + this.zona;
+        hash = 97 * hash + Objects.hashCode(this.propietario);
+        hash = 97 * hash + Objects.hashCode(this.codigoInmueble);
+        hash = 97 * hash + (this.activo ? 1 : 0);
         return hash;
     }
 
@@ -169,13 +160,16 @@ public class Inmueble {
             return false;
         }
         final Inmueble other = (Inmueble) obj;
-        if (this.idInmueble != other.idInmueble) {
-            return false;
-        }
         if (!Objects.equals(this.codigoInmueble, other.codigoInmueble)) {
             return false;
         }
         return true;
     }
+
+    @Override
+    public String toString() {
+        return "Inmueble{" + "idInmueble=" + idInmueble + ", caracteristicas=" + caracteristicas + ", direccion=" + direccion + ", precio=" + precio + ", superficie=" + superficie + ", tipoLocal=" + tipoLocal + ", zona=" + zona + ", propietario=" + propietario + ", codigoInmueble=" + codigoInmueble + ", activo=" + activo + '}';
+    }
+
     
 }

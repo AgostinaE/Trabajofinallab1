@@ -1,5 +1,7 @@
 package ProyectoFG1.Modelos;
 
+import java.util.Objects;
+
 public class Inquilino {
 
     private int idInquilino;
@@ -15,20 +17,23 @@ public class Inquilino {
     private String nombreGarante;
 
     private int dniGarante;
+    
+    private boolean activo;
 
     public Inquilino() {
     }
 
-    public Inquilino(String nombre, String apellido, int cuil, String trabajo, String nombreGarante, int dniGarante) {
+    public Inquilino(String nombre, String apellido, int cuil, String trabajo, String nombreGarante, int dniGarante, boolean activo) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.cuil = cuil;
         this.trabajo = trabajo;
         this.nombreGarante = nombreGarante;
         this.dniGarante = dniGarante;
+        this.activo = activo;
     }
 
-    public Inquilino(int idInquilino, String nombre, String apellido, int cuil, String trabajo, String nombreGarante, int dniGarante) {
+    public Inquilino(int idInquilino, String nombre, String apellido, int cuil, String trabajo, String nombreGarante, int dniGarante, boolean activo) {
         this.idInquilino = idInquilino;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -36,6 +41,7 @@ public class Inquilino {
         this.trabajo = trabajo;
         this.nombreGarante = nombreGarante;
         this.dniGarante = dniGarante;
+        this.activo = activo;
     }
 
     public int getIdInquilino() {
@@ -94,16 +100,25 @@ public class Inquilino {
         this.dniGarante = dniGarante;
     }
 
-    @Override
-    public String toString() {
-        return "Inquilino{" + "idInquilino=" + idInquilino + ", nombre=" + nombre + ", apellido=" + apellido + ", cuil=" + cuil + ", trabajo=" + trabajo + ", nombreGarante=" + nombreGarante + ", dniGarante=" + dniGarante + '}';
+    public boolean isActivo() {
+        return activo;
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
     }
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 17 * hash + this.idInquilino;
-        hash = 17 * hash + this.dniGarante;
+        int hash = 3;
+        hash = 79 * hash + this.idInquilino;
+        hash = 79 * hash + Objects.hashCode(this.nombre);
+        hash = 79 * hash + Objects.hashCode(this.apellido);
+        hash = 79 * hash + this.cuil;
+        hash = 79 * hash + Objects.hashCode(this.trabajo);
+        hash = 79 * hash + Objects.hashCode(this.nombreGarante);
+        hash = 79 * hash + this.dniGarante;
+        hash = 79 * hash + (this.activo ? 1 : 0);
         return hash;
     }
 
@@ -119,13 +134,16 @@ public class Inquilino {
             return false;
         }
         final Inquilino other = (Inquilino) obj;
-        if (this.idInquilino != other.idInquilino) {
-            return false;
-        }
-        if (this.dniGarante != other.dniGarante) {
+        if (this.cuil != other.cuil) {
             return false;
         }
         return true;
     }
+
+    @Override
+    public String toString() {
+        return "Inquilino{" + "idInquilino=" + idInquilino + ", nombre=" + nombre + ", apellido=" + apellido + ", cuil=" + cuil + ", trabajo=" + trabajo + ", nombreGarante=" + nombreGarante + ", dniGarante=" + dniGarante + ", activo=" + activo + '}';
+    }
+
     
 }

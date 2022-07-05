@@ -100,5 +100,29 @@ public class Contrato {
     public String toString() {
         return "Contrato{" + "idContrato=" + idContrato + ", inicio=" + inicio + ", finalizacion=" + finalizacion + ", firma=" + firma + ", empleado=" + empleado + ", inquilino=" + inquilino + ", idInmueble=" + idInmueble + '}';
     }
+        @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 17 * hash + this.idContrato;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Contrato other = (Contrato) obj;
+        if (this.idContrato != other.idContrato) {
+            return false;
+        }
+        return true;
+    }
     
 }

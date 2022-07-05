@@ -7,7 +7,9 @@ package ProyectoFG1.Vistas;
 
 import java.awt.Graphics;
 import java.awt.Image;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 
 /**
  *
@@ -20,6 +22,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
      */
     public MenuPrincipal() {
         initComponents();
+        //jbPropietarios.setIcon(setIcono("src/images/propietarioIcon.png", jbPropietarios));
     }
 
     /**
@@ -31,13 +34,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
-        jMenuItem9 = new javax.swing.JMenuItem();
-        jMenuItem12 = new javax.swing.JMenuItem();
-        ImageIcon icon = new ImageIcon(getClass().getResource("/ProyectoFG1.Images/FondoPantalla.jpg"));
+        ImageIcon icon = new ImageIcon(getClass().getResource("/src/images/fondo1.jpg"));
         Image image = icon.getImage();
         jDesktopPane1 = new javax.swing.JDesktopPane(){
             public void paintComponent(Graphics g){
@@ -48,6 +45,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jbPropietarios = new javax.swing.JButton();
         jbInquilinos = new javax.swing.JButton();
         jbContratos = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jmPropietarios = new javax.swing.JMenu();
         jmiPropietarioNuevo = new javax.swing.JMenuItem();
@@ -59,23 +58,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jmiBuscarContrato = new javax.swing.JMenuItem();
         jmiNuevoContrato = new javax.swing.JMenuItem();
 
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane1.setViewportView(jList1);
-
-        jMenuItem1.setText("jMenuItem1");
-
-        jMenu3.setText("jMenu3");
-
-        jMenuItem9.setText("jMenuItem9");
-
-        jMenuItem12.setText("jMenuItem12");
-
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jbInmueblesDisponibles.setBackground(new java.awt.Color(204, 204, 204));
+        jbInmueblesDisponibles.setFont(new java.awt.Font("Microsoft JhengHei Light", 0, 18)); // NOI18N
+        jbInmueblesDisponibles.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buscarAlquilerIconTam.png"))); // NOI18N
         jbInmueblesDisponibles.setText("Inmuebles Disponibles");
         jbInmueblesDisponibles.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -83,59 +70,83 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jbPropietarios.setText("Propietarios");
+        jbPropietarios.setBackground(java.awt.Color.lightGray);
+        jbPropietarios.setFont(new java.awt.Font("Microsoft YaHei Light", 0, 18)); // NOI18N
+        jbPropietarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/propietarioIconTam.png"))); // NOI18N
+        jbPropietarios.setText("Propietario nuevo");
         jbPropietarios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbPropietariosActionPerformed(evt);
             }
         });
 
-        jbInquilinos.setText("Inquilinos");
+        jbInquilinos.setFont(new java.awt.Font("Microsoft JhengHei Light", 0, 18)); // NOI18N
+        jbInquilinos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/inquilinoIconTam.png"))); // NOI18N
+        jbInquilinos.setText("Inquilino nuevo");
 
-        jbContratos.setText("Contratos");
+        jbContratos.setFont(new java.awt.Font("Microsoft YaHei Light", 0, 18)); // NOI18N
+        jbContratos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/contratoIconTam.png"))); // NOI18N
+        jbContratos.setText("Contrato Nuevo");
         jbContratos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbContratosActionPerformed(evt);
             }
         });
 
+        jButton1.setFont(new java.awt.Font("Microsoft JhengHei Light", 0, 18)); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/agregarPropiedadTam.png"))); // NOI18N
+        jButton1.setText("Inmuebles Nuevos");
+
+        jButton2.setFont(new java.awt.Font("Microsoft JhengHei Light", 0, 18)); // NOI18N
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buscarContratoTam.png"))); // NOI18N
+        jButton2.setText("Búsqueda de Contratos");
+
         jDesktopPane1.setLayer(jbInmueblesDisponibles, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jbPropietarios, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jbInquilinos, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jbContratos, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jButton1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jButton2, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
         jDesktopPane1Layout.setHorizontalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                        .addGap(68, 68, 68)
-                        .addComponent(jbInmueblesDisponibles))
-                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                        .addGap(149, 149, 149)
-                        .addComponent(jbContratos))
-                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addComponent(jbPropietarios))
-                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                        .addGap(229, 229, 229)
-                        .addComponent(jbInquilinos)))
-                .addGap(122, 375, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
+                        .addGap(0, 118, Short.MAX_VALUE)
+                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jbContratos, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jbPropietarios, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addGap(81, 81, 81)
+                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jbInquilinos)
+                            .addComponent(jButton2))
+                        .addGap(84, 84, 84))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jbInmueblesDisponibles)
+                        .addContainerGap())))
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                .addGap(74, 74, 74)
-                .addComponent(jbInmueblesDisponibles)
-                .addGap(64, 64, 64)
-                .addComponent(jbInquilinos)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
-                .addComponent(jbPropietarios)
-                .addGap(54, 54, 54)
-                .addComponent(jbContratos)
-                .addGap(137, 137, 137))
+                .addGap(20, 20, 20)
+                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jbPropietarios)
+                    .addComponent(jbInquilinos))
+                .addGap(61, 61, 61)
+                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jbInmueblesDisponibles))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
+                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jbContratos)
+                    .addComponent(jButton2))
+                .addGap(39, 39, 39))
         );
 
         jmPropietarios.setText("Propietarios");
@@ -279,15 +290,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
     }
 
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JDesktopPane jDesktopPane1;
-    private javax.swing.JList<String> jList1;
-    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem12;
-    private javax.swing.JMenuItem jMenuItem9;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jbContratos;
     private javax.swing.JButton jbInmueblesDisponibles;
     private javax.swing.JButton jbInquilinos;

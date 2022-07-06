@@ -16,14 +16,14 @@ public class Inquilino {
 
     private String garante;
 
-    private int dniGarante;
+    private long dniGarante;
     
     private boolean activo;
 
     public Inquilino() {
     }
 
-    public Inquilino(String nombre, String apellido, int cuil, String trabajo, String nombreGarante, int dniGarante, boolean activo) {
+    public Inquilino(String nombre, String apellido, int cuil, String trabajo, String nombreGarante, long dniGarante, boolean activo) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.cuil = cuil;
@@ -33,7 +33,7 @@ public class Inquilino {
         this.activo = activo;
     }
 
-    public Inquilino(int idInquilino, String nombre, String apellido, int cuil, String trabajo, String nombreGarante, int dniGarante, boolean activo) {
+    public Inquilino(int idInquilino, String nombre, String apellido, int cuil, String trabajo, String nombreGarante, long dniGarante, boolean activo) {
         this.idInquilino = idInquilino;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -92,11 +92,11 @@ public class Inquilino {
         this.garante = garante;
     }
 
-    public int getDniGarante() {
+    public long getDniGarante() {
         return dniGarante;
     }
 
-    public void setDniGarante(int dniGarante) {
+    public void setDniGarante(long dniGarante) {
         this.dniGarante = dniGarante;
     }
 
@@ -110,17 +110,19 @@ public class Inquilino {
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 79 * hash + this.idInquilino;
-        hash = 79 * hash + Objects.hashCode(this.nombre);
-        hash = 79 * hash + Objects.hashCode(this.apellido);
-        hash = 79 * hash + this.cuil;
-        hash = 79 * hash + Objects.hashCode(this.trabajo);
-        hash = 79 * hash + Objects.hashCode(this.garante);
-        hash = 79 * hash + this.dniGarante;
-        hash = 79 * hash + (this.activo ? 1 : 0);
+        int hash = 5;
+        hash = 89 * hash + this.idInquilino;
+        hash = 89 * hash + Objects.hashCode(this.nombre);
+        hash = 89 * hash + Objects.hashCode(this.apellido);
+        hash = 89 * hash + this.cuil;
+        hash = 89 * hash + Objects.hashCode(this.trabajo);
+        hash = 89 * hash + Objects.hashCode(this.garante);
+        hash = 89 * hash + (int) (this.dniGarante ^ (this.dniGarante >>> 32));
+        hash = 89 * hash + (this.activo ? 1 : 0);
         return hash;
     }
+
+    
 
     @Override
     public boolean equals(Object obj) {

@@ -13,7 +13,7 @@ public class Contrato {
 
     private LocalDate firma;
 
-    private int dniEmpleado;
+    private Empleado empleado;
 
     private Inquilino inquilino;
     
@@ -24,22 +24,22 @@ public class Contrato {
     public Contrato() {
     }
 
-    public Contrato(LocalDate inicio, LocalDate finalizacion, LocalDate firma, int dniEmpleado, Inquilino inquilino, Inmueble inmueble, boolean activo) {
+    public Contrato(LocalDate inicio, LocalDate finalizacion, LocalDate firma, Empleado dniEmpleado, Inquilino inquilino, Inmueble inmueble, boolean activo) {
         this.inicio = inicio;
         this.finalizacion = finalizacion;
         this.firma = firma;
-        this.dniEmpleado = dniEmpleado;
+        this.empleado = dniEmpleado;
         this.inquilino = inquilino;
         this.inmueble = inmueble;
         this.activo = activo;
     }
 
-    public Contrato(int idContrato, LocalDate inicio, LocalDate finalizacion, LocalDate firma, int dniEmpleado, Inquilino inquilino, Inmueble inmueble, boolean activo) {
+    public Contrato(int idContrato, LocalDate inicio, LocalDate finalizacion, LocalDate firma, Empleado dniEmpleado, Inquilino inquilino, Inmueble inmueble, boolean activo) {
         this.idContrato = idContrato;
         this.inicio = inicio;
         this.finalizacion = finalizacion;
         this.firma = firma;
-        this.dniEmpleado = dniEmpleado;
+        this.empleado = dniEmpleado;
         this.inquilino = inquilino;
         this.inmueble = inmueble;
         this.activo = activo;
@@ -77,12 +77,12 @@ public class Contrato {
         this.firma = firma;
     }
 
-    public int getDniEmpleado() {
-        return dniEmpleado;
+    public Empleado getEmpleado() {
+        return empleado;
     }
 
-    public void setDniEmpleado(int dniEmpleado) {
-        this.dniEmpleado = dniEmpleado;
+    public void setDniEmpleado(Empleado dniEmpleado) {
+        this.empleado = dniEmpleado;
     }
 
     public Inquilino getInquilino() {
@@ -111,17 +111,19 @@ public class Contrato {
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 47 * hash + this.idContrato;
-        hash = 47 * hash + Objects.hashCode(this.inicio);
-        hash = 47 * hash + Objects.hashCode(this.finalizacion);
-        hash = 47 * hash + Objects.hashCode(this.firma);
-        hash = 47 * hash + this.dniEmpleado;
-        hash = 47 * hash + Objects.hashCode(this.inquilino);
-        hash = 47 * hash + Objects.hashCode(this.inmueble);
-        hash = 47 * hash + (this.activo ? 1 : 0);
+        int hash = 7;
+        hash = 73 * hash + this.idContrato;
+        hash = 73 * hash + Objects.hashCode(this.inicio);
+        hash = 73 * hash + Objects.hashCode(this.finalizacion);
+        hash = 73 * hash + Objects.hashCode(this.firma);
+        hash = 73 * hash + Objects.hashCode(this.empleado);
+        hash = 73 * hash + Objects.hashCode(this.inquilino);
+        hash = 73 * hash + Objects.hashCode(this.inmueble);
+        hash = 73 * hash + (this.activo ? 1 : 0);
         return hash;
     }
+
+    
 
     @Override
     public boolean equals(Object obj) {
@@ -143,8 +145,10 @@ public class Contrato {
 
     @Override
     public String toString() {
-        return "Contrato{" + "idContrato=" + idContrato + ", inicio=" + inicio + ", finalizacion=" + finalizacion + ", firma=" + firma + ", dniEmpleado=" + dniEmpleado + ", inquilino=" + inquilino + ", inmueble=" + inmueble + ", activo=" + activo + '}';
+        return "Contrato{" + "idContrato=" + idContrato + ", inicio=" + inicio + ", finalizacion=" + finalizacion + ", firma=" + firma + ", empleado=" + empleado + ", inquilino=" + inquilino + ", inmueble=" + inmueble + ", activo=" + activo + '}';
     }
+
+    
     
     
 }

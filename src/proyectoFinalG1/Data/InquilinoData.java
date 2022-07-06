@@ -82,11 +82,7 @@ public class InquilinoData {
             //Recupero los valores de la Base de Datos
             ps.setString(1, inquilino.getNombre());
             ps.setString(2, inquilino.getApellido());
-<<<<<<< HEAD
             ps.setLong(3, inquilino.getCuil());
-=======
-           ps.setLong(3, inquilino.getCuil());
->>>>>>> b6fc07c91c91a0dc95c5f17d38bc8dda39f6bc1c
             ps.setString(4, inquilino.getTrabajo());
             ps.setString(5, inquilino.getGarante());
             ps.setInt(6, inquilino.getDniGarante());

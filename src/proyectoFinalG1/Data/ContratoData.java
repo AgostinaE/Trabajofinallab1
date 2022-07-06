@@ -64,4 +64,15 @@ public class ContratoData {
         }
         return creado;
     }
+
+    /*public boolean cancelarContrato(){
+        boolean cancelado = true;
+        try{
+            String sql 
+            
+        }catch(Exception ex){
+            
+            
+        }
+    }*/
 }

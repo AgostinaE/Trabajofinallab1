@@ -5,6 +5,7 @@
  */
 package proyectoFinalG1.Vistas;
 
+import java.time.LocalDate;
 import proyectoFinalG1.Data.Conexion;
 import proyectoFinalG1.Data.InmuebleData;
 
@@ -196,7 +197,7 @@ public class NuevoInmueble extends javax.swing.JInternalFrame {
     private void jBGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarActionPerformed
 
                
-         String direccion = jTDireccion.getText();
+        /*String direccion = jTDireccion.getText();
         String altura = jtApellidoAlumno.getText();        
         Long dni = Long.parseLong(jtDni.getText());
         Boolean activo = jcbActivo.isSelected();
@@ -214,7 +215,7 @@ public class NuevoInmueble extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Alumno Agregado con Exito");            
             jbNuevo.setEnabled(true);
             
-        }
+        }*/
         
     }//GEN-LAST:event_jBGuardarActionPerformed
 

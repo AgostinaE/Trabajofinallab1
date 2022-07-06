@@ -63,7 +63,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jbInmueblesDisponibles.setBackground(new java.awt.Color(204, 204, 204));
         jbInmueblesDisponibles.setFont(new java.awt.Font("Microsoft JhengHei Light", 0, 18)); // NOI18N
-        jbInmueblesDisponibles.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buscarAlquilerIconTam.png"))); // NOI18N
+        jbInmueblesDisponibles.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectoFinalG1/VistasImagenes/buscarAlquilerIconTam.png"))); // NOI18N
         jbInmueblesDisponibles.setText("Inmuebles Disponibles");
         jbInmueblesDisponibles.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -73,7 +73,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jbPropietarios.setBackground(java.awt.Color.lightGray);
         jbPropietarios.setFont(new java.awt.Font("Microsoft YaHei Light", 0, 18)); // NOI18N
-        jbPropietarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/propietarioIconTam.png"))); // NOI18N
+        jbPropietarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectoFinalG1/VistasImagenes/propietarioIconTam.png"))); // NOI18N
         jbPropietarios.setText("Propietario nuevo");
         jbPropietarios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -82,11 +82,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
 
         jbInquilinos.setFont(new java.awt.Font("Microsoft JhengHei Light", 0, 18)); // NOI18N
-        jbInquilinos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/inquilinoIconTam.png"))); // NOI18N
+        jbInquilinos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectoFinalG1/VistasImagenes/inquilinoIconTam.png"))); // NOI18N
         jbInquilinos.setText("Inquilino nuevo");
 
         jbContratos.setFont(new java.awt.Font("Microsoft YaHei Light", 0, 18)); // NOI18N
-        jbContratos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/contratoIconTam.png"))); // NOI18N
+        jbContratos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectoFinalG1/VistasImagenes/contratoIconTam.png"))); // NOI18N
         jbContratos.setText("Contrato Nuevo");
         jbContratos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -95,15 +95,15 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
 
         jButton1.setFont(new java.awt.Font("Microsoft JhengHei Light", 0, 18)); // NOI18N
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/agregarPropiedadTam.png"))); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectoFinalG1/VistasImagenes/agregarPropiedadTam.png"))); // NOI18N
         jButton1.setText("Inmuebles Nuevos");
 
         jButton2.setFont(new java.awt.Font("Microsoft JhengHei Light", 0, 18)); // NOI18N
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buscarContratoTam.png"))); // NOI18N
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectoFinalG1/VistasImagenes/buscarContratoTam.png"))); // NOI18N
         jButton2.setText("Búsqueda de Contratos");
 
         jButton3.setFont(new java.awt.Font("Microsoft JhengHei Light", 0, 18)); // NOI18N
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/empleadoTam.png"))); // NOI18N
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectoFinalG1/VistasImagenes/empleadoTam.png"))); // NOI18N
         jButton3.setText("Gestión Empleado");
 
         jDesktopPane1.setLayer(jbInmueblesDisponibles, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -131,7 +131,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 .addComponent(jbPropietarios)
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 147, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 93, Short.MAX_VALUE)
                         .addComponent(jbInmueblesDisponibles)
                         .addGap(25, 25, 25))
                     .addGroup(jDesktopPane1Layout.createSequentialGroup()
@@ -160,7 +160,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                     .addComponent(jbContratos))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton2)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jmPropietarios.setText("Propietarios");

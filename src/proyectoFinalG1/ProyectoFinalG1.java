@@ -10,6 +10,7 @@ import proyectoFinalG1.Data.ContratoData;
 import proyectoFinalG1.Data.EmpleadoData;
 import proyectoFinalG1.Modelos.Contrato;
 import proyectoFinalG1.Modelos.Empleado;
+import proyectoFinalG1.Modelos.Inquilino;
 
 /**
  *
@@ -21,7 +22,7 @@ public class ProyectoFinalG1 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-      /* Empleado e = new Empleado("Carlitos", "Perez", 45568978, true);
+       /*Empleado e = new Empleado("Carlitos", "Perez", 45568978, true);
        EmpleadoData ed = null;
        ed.agregarEmpleado(e);
        

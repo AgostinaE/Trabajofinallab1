@@ -10,20 +10,20 @@ public class Inquilino {
 
     private String apellido;
 
-    private int cuil;
+    private long cuil;
 
     private String trabajo;
 
     private String garante;
 
-    private long dniGarante;
+    private int dniGarante;
     
     private boolean activo;
 
     public Inquilino() {
     }
 
-    public Inquilino(String nombre, String apellido, int cuil, String trabajo, String nombreGarante, long dniGarante, boolean activo) {
+    public Inquilino(String nombre, String apellido, long cuil, String trabajo, String nombreGarante, int dniGarante, boolean activo) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.cuil = cuil;
@@ -33,7 +33,7 @@ public class Inquilino {
         this.activo = activo;
     }
 
-    public Inquilino(int idInquilino, String nombre, String apellido, int cuil, String trabajo, String nombreGarante, long dniGarante, boolean activo) {
+    public Inquilino(int idInquilino, String nombre, String apellido, long cuil, String trabajo, String nombreGarante, int dniGarante, boolean activo) {
         this.idInquilino = idInquilino;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -68,11 +68,11 @@ public class Inquilino {
         this.apellido = apellido;
     }
 
-    public int getCuil() {
+    public long getCuil() {
         return cuil;
     }
 
-    public void setCuil(int cuil) {
+    public void setCuil(long cuil) {
         this.cuil = cuil;
     }
 
@@ -92,11 +92,11 @@ public class Inquilino {
         this.garante = garante;
     }
 
-    public long getDniGarante() {
+    public int getDniGarante() {
         return dniGarante;
     }
 
-    public void setDniGarante(long dniGarante) {
+    public void setDniGarante(int dniGarante) {
         this.dniGarante = dniGarante;
     }
 
@@ -111,16 +111,18 @@ public class Inquilino {
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 89 * hash + this.idInquilino;
-        hash = 89 * hash + Objects.hashCode(this.nombre);
-        hash = 89 * hash + Objects.hashCode(this.apellido);
-        hash = 89 * hash + this.cuil;
-        hash = 89 * hash + Objects.hashCode(this.trabajo);
-        hash = 89 * hash + Objects.hashCode(this.garante);
-        hash = 89 * hash + (int) (this.dniGarante ^ (this.dniGarante >>> 32));
-        hash = 89 * hash + (this.activo ? 1 : 0);
+        hash = 97 * hash + this.idInquilino;
+        hash = 97 * hash + Objects.hashCode(this.nombre);
+        hash = 97 * hash + Objects.hashCode(this.apellido);
+        hash = 97 * hash + (int) (this.cuil ^ (this.cuil >>> 32));
+        hash = 97 * hash + Objects.hashCode(this.trabajo);
+        hash = 97 * hash + Objects.hashCode(this.garante);
+        hash = 97 * hash + this.dniGarante;
+        hash = 97 * hash + (this.activo ? 1 : 0);
         return hash;
     }
+
+    
 
     
 

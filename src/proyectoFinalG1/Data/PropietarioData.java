@@ -1,7 +1,5 @@
 package proyectoFinalG1.Data;
 
-
-
 import proyectoFinalG1.Data.Conexion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -177,5 +175,23 @@ public class PropietarioData {
 
         return propietarios;
     }
-    
+    //Metodo para "Borrar" un elemneto Propietario
+     public boolean borrarPropietario(int id){ 
+         boolean borrado=false;
+         String sql= "UPDATE propietario SET activo = 0 WHERE idPropietario = ?";
+         try {
+             
+             PreparedStatement ps= con.prepareStatement(sql);
+             ps.setInt(1, id);
+             
+             if(ps.executeUpdate()!=0){
+             
+                 borrado=true;
+             }
+             ps.close();
+         } catch (SQLException ex) {
+             JOptionPane.showMessageDialog(null, "Error de sintaxis ");
+         }
+         return borrado;
+     }
 }

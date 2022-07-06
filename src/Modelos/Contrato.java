@@ -1,4 +1,4 @@
-package ProyectoFG1.Modelos;
+package Modelos;
 
 import java.time.LocalDate;
 import java.util.Objects;

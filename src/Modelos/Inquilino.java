@@ -1,4 +1,4 @@
-package ProyectoFG1.Modelos;
+package Modelos;
 
 import java.util.Objects;
 
@@ -14,7 +14,7 @@ public class Inquilino {
 
     private String trabajo;
 
-    private String nombreGarante;
+    private String garante;
 
     private int dniGarante;
     
@@ -28,7 +28,7 @@ public class Inquilino {
         this.apellido = apellido;
         this.cuil = cuil;
         this.trabajo = trabajo;
-        this.nombreGarante = nombreGarante;
+        this.garante = nombreGarante;
         this.dniGarante = dniGarante;
         this.activo = activo;
     }
@@ -39,7 +39,7 @@ public class Inquilino {
         this.apellido = apellido;
         this.cuil = cuil;
         this.trabajo = trabajo;
-        this.nombreGarante = nombreGarante;
+        this.garante = nombreGarante;
         this.dniGarante = dniGarante;
         this.activo = activo;
     }
@@ -84,12 +84,12 @@ public class Inquilino {
         this.trabajo = trabajo;
     }
 
-    public String getNombreGarante() {
-        return nombreGarante;
+    public String getGarante() {
+        return garante;
     }
 
-    public void setNombreGarante(String nombreGarante) {
-        this.nombreGarante = nombreGarante;
+    public void setGarante(String garante) {
+        this.garante = garante;
     }
 
     public int getDniGarante() {
@@ -116,7 +116,7 @@ public class Inquilino {
         hash = 79 * hash + Objects.hashCode(this.apellido);
         hash = 79 * hash + this.cuil;
         hash = 79 * hash + Objects.hashCode(this.trabajo);
-        hash = 79 * hash + Objects.hashCode(this.nombreGarante);
+        hash = 79 * hash + Objects.hashCode(this.garante);
         hash = 79 * hash + this.dniGarante;
         hash = 79 * hash + (this.activo ? 1 : 0);
         return hash;
@@ -142,7 +142,7 @@ public class Inquilino {
 
     @Override
     public String toString() {
-        return "Inquilino{" + "idInquilino=" + idInquilino + ", nombre=" + nombre + ", apellido=" + apellido + ", cuil=" + cuil + ", trabajo=" + trabajo + ", nombreGarante=" + nombreGarante + ", dniGarante=" + dniGarante + ", activo=" + activo + '}';
+        return "Inquilino{" + "idInquilino=" + idInquilino + ", nombre=" + nombre + ", apellido=" + apellido + ", cuil=" + cuil + ", trabajo=" + trabajo + ", nombreGarante=" + garante + ", dniGarante=" + dniGarante + ", activo=" + activo + '}';
     }
 
     

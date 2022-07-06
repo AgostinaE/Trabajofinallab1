@@ -1,4 +1,4 @@
-package ProyectoFinalG1.Data;
+package Data;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -7,7 +7,6 @@ package ProyectoFinalG1.Data;
  */
 import ProyectoFG1.Modelos.Inmueble;
 import ProyectoFG1.Modelos.Propietario;
-import  ProyectoFinalG1.Data.Conexion;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;

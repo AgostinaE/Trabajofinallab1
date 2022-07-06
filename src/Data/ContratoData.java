@@ -1,8 +1,8 @@
 
-package ProyectoFinalG1.Data;
+package Data;
 
 import java.sql.Connection;
-import ProyectoFinalG1.Data.Conexion;
+
 /**
  *
  * @author POSITIVO BGH

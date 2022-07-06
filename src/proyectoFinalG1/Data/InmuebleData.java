@@ -1,12 +1,14 @@
-package Data;
+package proyectoFinalG1.Data;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-import ProyectoFG1.Modelos.Inmueble;
-import ProyectoFG1.Modelos.Propietario;
+
+import proyectoFinalG1.Data.Conexion;
+import proyectoFinalG1.Modelos.Inmueble;
+import proyectoFinalG1.Modelos.Propietario;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;

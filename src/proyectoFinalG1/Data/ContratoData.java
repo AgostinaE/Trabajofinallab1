@@ -1,6 +1,7 @@
 
-package Data;
+package proyectoFinalG1.Data;
 
+import proyectoFinalG1.Data.Conexion;
 import java.sql.Connection;
 
 /**

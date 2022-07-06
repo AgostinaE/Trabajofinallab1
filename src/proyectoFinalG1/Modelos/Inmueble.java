@@ -1,4 +1,4 @@
-package ProyectoFG1.Modelos;
+package proyectoFinalG1.Modelos;
 
 import java.util.Objects;
 

@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Data;
+package proyectoFinalG1.Data;
 
-import ProyectoFG1.Modelos.Empleado;
+import proyectoFinalG1.Data.Conexion;
+import proyectoFinalG1.Modelos.Empleado;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

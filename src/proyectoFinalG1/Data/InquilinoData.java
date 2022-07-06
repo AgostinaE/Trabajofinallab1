@@ -1,12 +1,13 @@
-package Data;
+package proyectoFinalG1.Data;
 
-import Modelos.Inquilino;
+import proyectoFinalG1.Data.Conexion;
+import proyectoFinalG1.Modelos.Inquilino;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import ProyectoFG1.Modelos.Propietario;
+import proyectoFinalG1.Modelos.Propietario;
 import java.util.ArrayList;
 import java.util.List;
 

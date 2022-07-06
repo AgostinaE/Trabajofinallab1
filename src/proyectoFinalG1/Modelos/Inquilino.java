@@ -1,4 +1,4 @@
-package Modelos;
+package proyectoFinalG1.Modelos;
 
 import java.util.Objects;
 

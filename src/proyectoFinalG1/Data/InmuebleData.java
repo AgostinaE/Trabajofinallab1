@@ -59,7 +59,7 @@ public boolean agregarInmueble(Inmueble inmueble){
      if (rs.next()) {
                 inmueble.setIdInmueble(rs.getInt(1));
             } else {
-                // JOptionPane.showMessageDialog(null, "Error al intentar agregar al alumno");
+               
                 insertado = false;
             }
 
@@ -96,8 +96,8 @@ public List<Inmueble> obtenerInmuebles() {
                 inmueble.setPrecio(resultSet.getDouble("precio"));
                 inmueble.setSuperficie(resultSet.getFloat("superficie"));
                 inmueble.setTipoLocal(resultSet.getString("tipoLocal"));
-                //Propietario i = propietarioData.obtenerPropietarioXId(resultSet.getInt("idPropietario"));
-                //inmueble.setPropietario(i); 
+                Propietario i = propietarioData.obetenerPropietarioPorID(resultSet.getInt("idPropietario"));
+                inmueble.setPropietario(i); 
                 inmueble.setCodigoInmueble(resultSet.getString("codigoInmueble"));
                 inmueble.setActivo(resultSet.getBoolean("activo"));
 
@@ -129,8 +129,8 @@ public Inmueble obtenerAlumnoXId(int id){
                 inmueble.setPrecio(resultSet.getDouble("precio"));
                 inmueble.setSuperficie(resultSet.getFloat("superficie"));
                 inmueble.setTipoLocal(resultSet.getString("tipoLocal"));
-                //Propietario i = propietarioData.obtenerPropietarioXId(resultSet.getInt("idPropietario"));
-                //inmueble.setPropietario(i); 
+                Propietario i = propietarioData.obetenerPropietarioPorID(resultSet.getInt("idPropietario"));
+                inmueble.setPropietario(i); 
                 inmueble.setCodigoInmueble(resultSet.getString("codigoInmueble"));
                 inmueble.setActivo(resultSet.getBoolean("activo"));
 
@@ -162,8 +162,8 @@ public Inmueble obtenerAlumnoXCodigoInmueble(String codigoInmueble){
                 inmueble.setPrecio(resultSet.getDouble("precio"));
                 inmueble.setSuperficie(resultSet.getFloat("superficie"));
                 inmueble.setTipoLocal(resultSet.getString("tipoLocal"));
-                //Propietario i = propietarioData.obtenerPropietarioXId(resultSet.getInt("idPropietario"));
-                //inmueble.setPropietario(i); 
+                Propietario i = propietarioData.obetenerPropietarioPorID(resultSet.getInt("idPropietario"));
+                inmueble.setPropietario(i); 
                 inmueble.setCodigoInmueble(resultSet.getString("codigoInmueble"));
                 inmueble.setActivo(resultSet.getBoolean("activo"));
                 

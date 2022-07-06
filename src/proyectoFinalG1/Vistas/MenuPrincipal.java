@@ -10,18 +10,24 @@ import java.awt.Image;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import proyectoFinalG1.Data.Conexion;
 
 /**
  *
  * @author fotin
  */
+
+     
+
 public class MenuPrincipal extends javax.swing.JFrame {
 
+    private Conexion conexion;
     /**
      * Creates new form MenuPrincipal
      */
     public MenuPrincipal() {
         initComponents();
+        conexion = new Conexion();
         //jbPropietarios.setIcon(setIcono("src/images/propietarioIcon.png", jbPropietarios));
     }
 
@@ -34,13 +40,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        ImageIcon icon = new ImageIcon(getClass().getResource("/src/images/fondo1.jpg"));
-        Image image = icon.getImage();
-        jDesktopPane1 = new javax.swing.JDesktopPane(){
-            public void paintComponent(Graphics g){
-                g.drawImage(image,0,0,getWidth(),getHeight(),this);
-            }
-        };
+        jDesktopPane1 = new javax.swing.JDesktopPane()
+        ;
         jbInmueblesDisponibles = new javax.swing.JButton();
         jbPropietarios = new javax.swing.JButton();
         jbInquilinos = new javax.swing.JButton();
@@ -97,6 +98,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jButton1.setFont(new java.awt.Font("Microsoft JhengHei Light", 0, 18)); // NOI18N
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectoFinalG1/VistasImagenes/agregarPropiedadTam.png"))); // NOI18N
         jButton1.setText("Inmuebles Nuevos");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setFont(new java.awt.Font("Microsoft JhengHei Light", 0, 18)); // NOI18N
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectoFinalG1/VistasImagenes/buscarContratoTam.png"))); // NOI18N
@@ -160,7 +166,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                     .addComponent(jbContratos))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
         jmPropietarios.setText("Propietarios");
@@ -231,8 +237,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(24, Short.MAX_VALUE)
-                .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jDesktopPane1)
                 .addContainerGap())
         );
 
@@ -270,6 +275,15 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private void jmiInmueblesDisponiblesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiInmueblesDisponiblesActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jmiInmueblesDisponiblesActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+jDesktopPane1.removeAll();
+        NuevoInmueble ni = new NuevoInmueble(conexion);
+        ni.setVisible(true);
+        jDesktopPane1.add(ni);
+        jDesktopPane1.moveToFront(ni);
+        jDesktopPane1.repaint();   
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments

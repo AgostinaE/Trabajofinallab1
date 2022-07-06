@@ -39,7 +39,7 @@ public InmuebleData(Conexion conexion){
 public boolean agregarInmueble(Inmueble inmueble){
     
     boolean insertado = true;
-     String sql = "INSERT INTO inmueble (caracteristica, direccion, precio, superficie, tipoLocal, zona, propietario, codigoInmueble, activo)  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+     String sql = "INSERT INTO inmueble (caracteristicas, direccion, precio, superficie, tipoLocal, zona, idPropietario, codigoInmueble, activo)  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             
@@ -49,8 +49,8 @@ public boolean agregarInmueble(Inmueble inmueble){
             ps.setDouble(4, inmueble.getSuperficie());
             ps.setString(5, inmueble.getTipoLocal());
             ps.setInt(6, inmueble.getZona());
-            ps.setString(7, inmueble.getCodigoInmueble());
-            ps.setInt(8, inmueble.getPropietario().getIdPropietario());
+            ps.setInt(7, inmueble.getPropietario().getIdPropietario());
+            ps.setString(8, inmueble.getCodigoInmueble());
             ps.setBoolean(9, inmueble.isActivo());
             
             ps.executeUpdate();
@@ -70,7 +70,7 @@ public boolean agregarInmueble(Inmueble inmueble){
                 JOptionPane.showMessageDialog(null, "Ya existe un Inmueble con ese Codigo " );
             }else {
             
-                JOptionPane.showMessageDialog(null, "Error de sintaxis "+ex );
+                JOptionPane.showMessageDialog(null, "Error de sintaxis aca "+ex );
                 
             }
             

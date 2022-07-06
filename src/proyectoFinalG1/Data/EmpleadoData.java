@@ -34,8 +34,8 @@ public boolean agregarEmpleado(Empleado empleado) {
             
             ps.setString(1, empleado.getNombre());
             ps.setString(2, empleado.getApellido());
-            ps.setLong(4, empleado.getDni());
-            ps.setBoolean(5, empleado.isActivo());
+            ps.setLong(3, empleado.getDni());
+            ps.setBoolean(4, empleado.isActivo());
             
             ps.executeUpdate();
             

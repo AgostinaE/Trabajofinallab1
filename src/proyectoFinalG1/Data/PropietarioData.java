@@ -28,7 +28,7 @@ public class PropietarioData {
     public boolean agregarPropietario(Propietario propietario) {
         boolean insert = true;
         //Sentancia SQL
-        String sql = "INSERT INTO propietario (nombre, apellido, dni, telefono, domicilio) VALUES ( ?,?,?,?,?)";
+        String sql = "INSERT INTO propietario (nombre, apellido, dni, telefono, domicilio, activo) VALUES (?, ?,?,?,?,?)";
 
         try {
             //preparar la sentencia
@@ -39,7 +39,7 @@ public class PropietarioData {
             ps.setInt(3, propietario.getDni());
             ps.setInt(4, propietario.getTelefono());
             ps.setString(5, propietario.getDomicilio());
-
+            ps.setBoolean(6, propietario.isActivo());
             //Ejecuto la accion
             ps.executeUpdate();
             //Devuelve un resultSet
@@ -65,7 +65,7 @@ public class PropietarioData {
                 JOptionPane.showMessageDialog(null, "Ya existe un propietario con ese dni ");
             } else {
                 //De lo contrario significa que hubo un error sintactico en la sentencia
-                JOptionPane.showMessageDialog(null, "Error de sintaxis " + ex);
+                JOptionPane.showMessageDialog(null, "Error de sintaxis" + ex);
             }
         }
         return insert;
@@ -74,7 +74,7 @@ public class PropietarioData {
     //Metodo Modificar Elemento Propietario
     public boolean modificarPropietario(Propietario propietario) {
         //Sentencia SQL
-        String sql = "UPDATE propietario SET nombre = ?, apellido = ?, dni = ?, telefono = ?, domicilio = ? WHERE idPropietario = ?";
+        String sql = "UPDATE propietario SET nombre = ?, apellido = ?, dni = ?, telefono = ?, domicilio = ? WHERE idPropietario = ? AND activo= true";
         boolean modificado = false;
         try {
             //preparar la sentencia
@@ -101,7 +101,7 @@ public class PropietarioData {
     public Propietario obetenerPropietarioPorID(int id) {
         Propietario propietario = null;
         try {
-            String sql = "SELECT * FROM propietario WHERE idPropietario = ?;";
+            String sql = "SELECT * FROM propietario WHERE idPropietario = ? AND activo= true;";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, id);
             ResultSet resultSet = ps.executeQuery();
@@ -127,7 +127,7 @@ public class PropietarioData {
     public Propietario obetenerPropietarioPorDNI(int dni) {
         Propietario propietario = null;
         try {
-            String sql = "SELECT * FROM propietario WHERE dni = ?;";
+            String sql = "SELECT * FROM propietario WHERE dni = ? AND activo= true;";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, dni);
             ResultSet resultSet = ps.executeQuery();

@@ -27,7 +27,7 @@ public class InquilinoData {
     public boolean agregarInquilino(Inquilino inquilino) {
         boolean insert = true;
         //Sentancia SQL
-        String sql = "INSERT INTO inquilino (nombre, apellido, cuil, trabajo, garante, dniGarante) VALUES ( ?,?,?,?,?,?)";
+        String sql = "INSERT INTO inquilino (nombre, apellido, cuil, trabajo, garante, dniGarante, activo) VALUES ( ?,?,?,?,?,?,?)";
 
         try {
             //preparar la sentencia
@@ -35,10 +35,11 @@ public class InquilinoData {
             //Recupero los valores de la Base de Datos
             ps.setString(1, inquilino.getNombre());
             ps.setString(2, inquilino.getApellido());
-            ps.setInt(3, inquilino.getCuil());
+            ps.setLong(3, inquilino.getCuil());
             ps.setString(4, inquilino.getTrabajo());
             ps.setString(5, inquilino.getGarante());
             ps.setInt(6, inquilino.getDniGarante());
+            ps.setBoolean(7, inquilino.isActivo());
             //Ejecuto la accion
             ps.executeUpdate();
             //Devuelve un resultSet
@@ -61,7 +62,7 @@ public class InquilinoData {
             insert = false;
             if (ex instanceof java.sql.SQLIntegrityConstraintViolationException) {
                 //Si existe un repetido se mostrara el mensaje
-                JOptionPane.showMessageDialog(null, "Ya existe un propietario con ese dni ");
+                JOptionPane.showMessageDialog(null, "Ya existe un inquilino con ese dni ");
             } else {
                 //De lo contrario significa que hubo un error sintactico en la sentencia
                 JOptionPane.showMessageDialog(null, "Error de sintaxis " + ex);
@@ -81,7 +82,7 @@ public class InquilinoData {
             //Recupero los valores de la Base de Datos
             ps.setString(1, inquilino.getNombre());
             ps.setString(2, inquilino.getApellido());
-            ps.setInt(3, inquilino.getCuil());
+            ps.setLong(3, inquilino.getCuil());
             ps.setString(4, inquilino.getTrabajo());
             ps.setString(5, inquilino.getGarante());
             ps.setInt(6, inquilino.getDniGarante());

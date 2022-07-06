@@ -35,7 +35,7 @@ public class InquilinoData {
             //Recupero los valores de la Base de Datos
             ps.setString(1, inquilino.getNombre());
             ps.setString(2, inquilino.getApellido());
-            ps.setInt(3, inquilino.getCuil());
+            ps.setLong(3, inquilino.getCuil());
             ps.setString(4, inquilino.getTrabajo());
             ps.setString(5, inquilino.getGarante());
             ps.setInt(6, inquilino.getDniGarante());
@@ -81,7 +81,7 @@ public class InquilinoData {
             //Recupero los valores de la Base de Datos
             ps.setString(1, inquilino.getNombre());
             ps.setString(2, inquilino.getApellido());
-            ps.setInt(3, inquilino.getCuil());
+           ps.setLong(3, inquilino.getCuil());
             ps.setString(4, inquilino.getTrabajo());
             ps.setString(5, inquilino.getGarante());
             ps.setInt(6, inquilino.getDniGarante());
@@ -110,7 +110,7 @@ public class InquilinoData {
                 inquilino.setIdInquilino(resultSet.getInt("idInquilino"));
                 inquilino.setNombre(resultSet.getString("nombre"));
                 inquilino.setApellido(resultSet.getString("apellido"));
-                inquilino.setCuil(resultSet.getInt("cuil"));
+                inquilino.setCuil(resultSet.getLong("cuil"));
                 inquilino.setTrabajo(resultSet.getString("trabajo"));
                 inquilino.setGarante(resultSet.getString("garante"));
                 inquilino.setDniGarante(resultSet.getInt("dniGarante"));
@@ -136,7 +136,7 @@ public class InquilinoData {
                 inquilino.setIdInquilino(resultSet.getInt("idInquilino"));
                 inquilino.setNombre(resultSet.getString("nombre"));
                 inquilino.setApellido(resultSet.getString("apellido"));
-                inquilino.setCuil(resultSet.getInt("cuil"));
+                inquilino.setCuil(resultSet.getLong("cuil"));
                 inquilino.setTrabajo(resultSet.getString("trabajo"));
                 inquilino.setGarante(resultSet.getString("garante"));
                 inquilino.setDniGarante(resultSet.getInt("dniGarante"));
@@ -163,7 +163,7 @@ public class InquilinoData {
                 inquilino.setIdInquilino(resultSet.getInt("idInquilino"));
                 inquilino.setNombre(resultSet.getString("nombre"));
                 inquilino.setApellido(resultSet.getString("apellido"));
-                inquilino.setCuil(resultSet.getInt("cuil"));
+                inquilino.setCuil(resultSet.getLong("cuil"));
                 inquilino.setTrabajo(resultSet.getString("trabajo"));
                 inquilino.setGarante(resultSet.getString("garante"));
                 inquilino.setDniGarante(resultSet.getInt("dniGarante"));

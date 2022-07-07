@@ -6,7 +6,9 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import javax.swing.JOptionPane;
 import proyectoFinalG1.Modelos.Contrato;
 
@@ -65,14 +67,41 @@ public class ContratoData {
         return creado;
     }
 
-    /*public boolean cancelarContrato(){
-        boolean cancelado = true;
+    public boolean cancelarContrato(int idContrato){
+        boolean cancelado = false;
+        String sql = "UPDATE contrato SET finalizacion = ? , activo = 0 WHERE idContrato = ?;";
         try{
-            String sql 
             
-        }catch(Exception ex){
+            PreparedStatement ps = con.prepareStatement(sql);
             
-            
+            ps.setDate(1, Date.valueOf(LocalDate.now()));
+            ps.setInt(2,idContrato);
+            if(ps.executeUpdate()!=0){
+                JOptionPane.showMessageDialog(null,"Se cancelo");
+                cancelado=true;
+            }
+            ps.close();
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, "Error de sintaxis ");
         }
-    }*/
+        return cancelado;
+    }
+    
+    public boolean renovarContrato(int idContrato, LocalDate renovacionI, LocalDate renovacionF){
+        boolean renovado = false;
+        String sql = "UPDATE contrato SET inicio = ? , finalizacion = ? WHERE idContrato = ?;";
+        try{
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setDate(1, Date.valueOf(renovacionI));
+            ps.setDate(2, Date.valueOf(renovacionF));
+            ps.setInt(3, idContrato);
+            if(ps.executeUpdate()!=0){
+            renovado=true;
+            }
+            JOptionPane.showMessageDialog(null,"Se cancelo");
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null,"se rompio");
+        }
+        return renovado;
+    }
 }

@@ -28,8 +28,9 @@ public class ProyectoFinalG1 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-       Conexion conexion=new Conexion(); 
         
+       Conexion conexion=new Conexion(); 
+       
        Empleado e = new Empleado("Carmen", "Paz", 123456, true);
        EmpleadoData ed = new EmpleadoData(conexion);
        ed.agregarEmpleado(e);
@@ -48,8 +49,9 @@ public class ProyectoFinalG1 {
        
        Contrato c = new Contrato(LocalDate.of(2022, 3, 4), LocalDate.of(2025, 11, 7), LocalDate.now(), e, i, in, true);
        ContratoData cd = new ContratoData(conexion);
-       cd.crearContrato(c);
-       
+       cd.crearContrato(c); 
+       cd.cancelarContrato(c.getIdContrato());
+        System.out.println("Paso");
     }
     
 }

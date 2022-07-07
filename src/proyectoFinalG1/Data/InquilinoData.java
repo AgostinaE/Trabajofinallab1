@@ -124,12 +124,12 @@ public class InquilinoData {
     }
 
     //Metodo para obetener el elemento inquilino por cuil
-    public  Inquilino obetenerInquilinoPorCuil(int cuil) {
+    public Inquilino obetenerInquilinoPorCuil(Long cuil) {
         Inquilino inquilino = null;
         try {
             String sql = "SELECT * FROM inquilino WHERE dni = ?;";
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, cuil);
+            ps.setLong(1, cuil);
             ResultSet resultSet = ps.executeQuery();
 
             while (resultSet.next()) {
@@ -177,5 +177,22 @@ public class InquilinoData {
 
         return inquilinos;
     }
+//Metodo para "Borrar" un elemento inquilino
 
+    public boolean borrarInquilino(int id) {
+
+        boolean borrado = false;
+        String sql = "UPDATE inquilino SET activo = 0 WHERE idInquilino = ?";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            if (ps.executeUpdate() != 0) {
+                borrado = true;
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error de sintaxis ");
+        }
+        return borrado;
+    }
 }

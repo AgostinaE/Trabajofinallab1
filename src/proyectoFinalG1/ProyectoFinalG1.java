@@ -30,23 +30,23 @@ public class ProyectoFinalG1 {
     public static void main(String[] args) {
        Conexion conexion=new Conexion(); 
         
-       Empleado e = new Empleado("Carlitos", "Perez", 45568978, true);
+       Empleado e = new Empleado("Carmen", "Paz", 123456, true);
        EmpleadoData ed = new EmpleadoData(conexion);
        ed.agregarEmpleado(e);
        
-       Inquilino i = new Inquilino("ElMas", "Capo", 2045475892, "Camionero", "DiosPaga", 001, true);
+       Inquilino i = new Inquilino("Lord", "Longbow", 20123456, "Programmer", "Yisus", 002, true);
        InquilinoData id = new InquilinoData(conexion);
        id.agregarInquilino(i);
        
-       Propietario p = new Propietario("PromocionAl", "Grupo", 45475892, 1161821564, "Carlotta 33", true);
+       Propietario p = new Propietario("Al", "Pachino", 8975492, 1164578564, "pastorutti 23", true);
        PropietarioData pd = new PropietarioData(conexion);
        pd.agregarPropietario(p);
        
-       Inmueble in = new Inmueble("4 habitaciones, 1 baño y balcon", "amsterdam 33", 15200.99, (float) 23.7, "departamento", 1, p, "obd34x", true);
+       Inmueble in = new Inmueble("2 habitaciones, 1 baño", "amsterdam 88", 15500.99, (float) 20.7, "departamento", 1, p, "asfd243", true);
        InmuebleData ind = new InmuebleData(conexion);
        ind.agregarInmueble(in);
        
-       Contrato c = new Contrato(LocalDate.of(2022, 2, 6), LocalDate.of(2025, 10, 15), LocalDate.now(), e, i, in, true);
+       Contrato c = new Contrato(LocalDate.of(2022, 3, 4), LocalDate.of(2025, 11, 7), LocalDate.now(), e, i, in, true);
        ContratoData cd = new ContratoData(conexion);
        cd.crearContrato(c);
        

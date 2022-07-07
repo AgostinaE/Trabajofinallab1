@@ -9,8 +9,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 import proyectoFinalG1.Modelos.Contrato;
+import proyectoFinalG1.Modelos.Empleado;
+import proyectoFinalG1.Modelos.Inmueble;
+import proyectoFinalG1.Modelos.Inquilino;
 
 /**
  *
@@ -22,6 +27,7 @@ public class ContratoData {
    private InquilinoData inquilinoData;
    private EmpleadoData empleadoData;
    private PropietarioData propietarioData;
+   private InmuebleData inmuebleData;
    //paso 2 creo un constructor y le paso el objeto connection e imboco al metodo getConection
 
     public ContratoData(Conexion conexion) {
@@ -67,19 +73,19 @@ public class ContratoData {
         return creado;
     }
 
-    public boolean cancelarContrato(int idContrato){
+    public boolean borrarContrato(int idContrato){
         boolean cancelado = false;
-        String sql = "UPDATE contrato SET finalizacion = ? , activo = 0 WHERE idContrato = ?;";
+        String sql = "DELETE FROM contrato WHERE idContrato = ?;";
         try{
             
             PreparedStatement ps = con.prepareStatement(sql);
-            
-            ps.setDate(1, Date.valueOf(LocalDate.now()));
-            ps.setInt(2,idContrato);
-            if(ps.executeUpdate()!=0){
-                JOptionPane.showMessageDialog(null,"Se cancelo");
-                cancelado=true;
+            ps.setInt(1,idContrato);
+            int rs = ps.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Eliminacion exitosa");
+            if (rs == 0) {
+                cancelado = false;
             }
+            //////// el if de arriba ////////
             ps.close();
         }catch(SQLException ex){
             JOptionPane.showMessageDialog(null, "Error de sintaxis ");
@@ -89,19 +95,195 @@ public class ContratoData {
     
     public boolean renovarContrato(int idContrato, LocalDate renovacionI, LocalDate renovacionF){
         boolean renovado = false;
-        String sql = "UPDATE contrato SET inicio = ? , finalizacion = ? WHERE idContrato = ?;";
+        String sql = "UPDATE contrato SET inicio = ? , finalizacion = ? , firma = ? WHERE idContrato = ?;";
         try{
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setDate(1, Date.valueOf(renovacionI));
             ps.setDate(2, Date.valueOf(renovacionF));
-            ps.setInt(3, idContrato);
+            ps.setDate(3, Date.valueOf(LocalDate.now()));
+            ps.setInt(4, idContrato);
             if(ps.executeUpdate()!=0){
             renovado=true;
             }
-            JOptionPane.showMessageDialog(null,"Se cancelo");
+            JOptionPane.showMessageDialog(null,"Se renovo");
         }catch(SQLException ex){
             JOptionPane.showMessageDialog(null,"se rompio");
         }
         return renovado;
+    }
+    
+    public Contrato buscarContratoXId(int idContrato){
+        Contrato contrato = null;
+        try{
+            String sql =" SELECT * FROM contrato WHERE idContrato = ?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, idContrato);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                //idContrato, inicio,finalizacion,firma,dniEmpleado,idInquilino,idInmueble,activo
+                contrato = new Contrato();
+                contrato.setIdContrato(rs.getInt("idContrato"));
+                contrato.setInicio(rs.getDate("inicio").toLocalDate());
+                contrato.setInicio(rs.getDate("finalizacion").toLocalDate());
+                contrato.setInicio(rs.getDate("firma").toLocalDate());
+                Empleado empleado = empleadoData.obtenerEmpleadoXDNI(rs.getInt("dniEmpleado"));
+                contrato.setDniEmpleado(empleado);
+                Inquilino inquilino = inquilinoData.obetenerInquilinoPorID(rs.getInt("idInquilino"));
+                contrato.setInquilino(inquilino);
+                Inmueble inmueble = inmuebleData.obtenerInmuebleXId(rs.getInt("idInmueble"));
+                contrato.setInmueble(inmueble);
+                contrato.setActivo(rs.getBoolean("activo"));
+            }
+            ps.close();
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, "ocurrio un error");
+        }
+        return contrato;
+    }
+    
+    public List<Contrato> buscarContratosXPropiedad(String codigoPropiedad){
+        ArrayList<Contrato> contratos = new ArrayList<Contrato>();
+        Inmueble in = inmuebleData.obtenerAlumnoXCodigoInmueble(codigoPropiedad);
+        int idPropiedad = in.getIdInmueble();
+        try{
+            Contrato contrato;
+            String sql = "SELECT * FROM contrato WHERE idPropiedad = ? ;";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, idPropiedad);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                contrato = new Contrato();
+                contrato.setIdContrato(rs.getInt("idContrato"));
+                contrato.setInicio(rs.getDate("inicio").toLocalDate());
+                contrato.setInicio(rs.getDate("finalizacion").toLocalDate());
+                contrato.setInicio(rs.getDate("firma").toLocalDate());
+                Empleado empleado = empleadoData.obtenerEmpleadoXDNI(rs.getInt("dniEmpleado"));
+                contrato.setDniEmpleado(empleado);
+                Inquilino inquilino = inquilinoData.obetenerInquilinoPorID(rs.getInt("idInquilino"));
+                contrato.setInquilino(inquilino);
+                Inmueble inmueble = inmuebleData.obtenerInmuebleXId(rs.getInt("idInmueble"));
+                contrato.setInmueble(inmueble);
+                contrato.setActivo(rs.getBoolean("activo"));
+                contratos.add(contrato);
+            }
+            ps.close();
+        }catch(SQLException ex){
+                  JOptionPane.showMessageDialog(null, "ocurrio un error");  
+            }
+        return contratos;
+    }
+    
+    public List<Contrato> buscarContratosXInquilino(long cuilInquilino){
+        ArrayList<Contrato> contratos = new ArrayList<Contrato>();
+        Inquilino in = inquilinoData.obetenerInquilinoPorCuil(cuilInquilino);
+        int idInquilino = in.getIdInquilino();
+        try{
+            Contrato contrato;
+            String sql = "SELECT * FROM contrato WHERE idPInquilino = ? ;";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, idInquilino);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                contrato = new Contrato();
+                contrato.setIdContrato(rs.getInt("idContrato"));
+                contrato.setInicio(rs.getDate("inicio").toLocalDate());
+                contrato.setInicio(rs.getDate("finalizacion").toLocalDate());
+                contrato.setInicio(rs.getDate("firma").toLocalDate());
+                Empleado empleado = empleadoData.obtenerEmpleadoXDNI(rs.getInt("dniEmpleado"));
+                contrato.setDniEmpleado(empleado);
+                Inquilino inquilino = inquilinoData.obetenerInquilinoPorID(rs.getInt("idInquilino"));
+                contrato.setInquilino(inquilino);
+                Inmueble inmueble = inmuebleData.obtenerInmuebleXId(rs.getInt("idInmueble"));
+                contrato.setInmueble(inmueble);
+                contrato.setActivo(rs.getBoolean("activo"));
+                contratos.add(contrato);
+            }
+            ps.close();
+        }catch(SQLException ex){
+                  JOptionPane.showMessageDialog(null, "ocurrio un error");  
+            }
+        return contratos;
+    }
+    
+    public List<Contrato> buscarContratosXVendedor(int dniEmpleado){
+        ArrayList<Contrato> contratos = new ArrayList<Contrato>();
+        Empleado em = empleadoData.obtenerEmpleadoXDNI(dniEmpleado);
+        int idEmpleado = em.getIdEmpleado();
+        try{
+            Contrato contrato;
+            String sql = "SELECT * FROM contrato WHERE dniEmpleado = ? ;";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, idEmpleado);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                contrato = new Contrato();
+                contrato.setIdContrato(rs.getInt("idContrato"));
+                contrato.setInicio(rs.getDate("inicio").toLocalDate());
+                contrato.setInicio(rs.getDate("finalizacion").toLocalDate());
+                contrato.setInicio(rs.getDate("firma").toLocalDate());
+                Empleado empleado = empleadoData.obtenerEmpleadoXDNI(rs.getInt("dniEmpleado"));
+                contrato.setDniEmpleado(empleado);
+                Inquilino inquilino = inquilinoData.obetenerInquilinoPorID(rs.getInt("idInquilino"));
+                contrato.setInquilino(inquilino);
+                Inmueble inmueble = inmuebleData.obtenerInmuebleXId(rs.getInt("idInmueble"));
+                contrato.setInmueble(inmueble);
+                contrato.setActivo(rs.getBoolean("activo"));
+                contratos.add(contrato);
+            }
+            ps.close();
+        }catch(SQLException ex){
+                  JOptionPane.showMessageDialog(null, "ocurrio un error");  
+            }
+        return contratos;
+    }
+    
+    public List<Contrato> buscarContratosVencidos(){
+        ArrayList<Contrato> contratos = new ArrayList<Contrato>();
+        try{
+            Contrato contrato;
+            String sql = "SELECT * FROM contrato WHERE finalizacion < ? ;";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setDate(1, Date.valueOf(LocalDate.now()));
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                contrato = new Contrato();
+                contrato.setIdContrato(rs.getInt("idContrato"));
+                contrato.setInicio(rs.getDate("inicio").toLocalDate());
+                contrato.setInicio(rs.getDate("finalizacion").toLocalDate());
+                contrato.setInicio(rs.getDate("firma").toLocalDate());
+                Empleado empleado = empleadoData.obtenerEmpleadoXDNI(rs.getInt("dniEmpleado"));
+                contrato.setDniEmpleado(empleado);
+                Inquilino inquilino = inquilinoData.obetenerInquilinoPorID(rs.getInt("idInquilino"));
+                contrato.setInquilino(inquilino);
+                Inmueble inmueble = inmuebleData.obtenerInmuebleXId(rs.getInt("idInmueble"));
+                contrato.setInmueble(inmueble);
+                contrato.setActivo(rs.getBoolean("activo"));
+                contratos.add(contrato);
+            }
+            ps.close();
+        }catch(SQLException ex){
+                  JOptionPane.showMessageDialog(null, "ocurrio un error");  
+            }
+        return contratos;
+    }
+    
+    public boolean cancelarContrato(int idContrato){
+        boolean cancelado = false;
+        String sql = "UPDATE contrato SET activo=0 WHERE idContrato = ?;";
+        try{
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1,idContrato);
+            System.out.println(idContrato);
+            int rs = ps.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Cancelacion exitosa");
+            if (rs == 0) {
+                cancelado = true;
+            }
+            //////// el if de arriba ////////
+            ps.close();
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, "Error de sintaxis ");
+        }
+        return cancelado;
     }
 }

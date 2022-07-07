@@ -111,7 +111,7 @@ public List<Inmueble> obtenerInmuebles() {
         return inmuebles;
     }
 
-public Inmueble obtenerAlumnoXId(int id){
+public Inmueble obtenerInmuebleXId(int id){
      
         Inmueble inmueble=null;
 

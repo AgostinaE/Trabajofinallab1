@@ -50,8 +50,7 @@ public class ProyectoFinalG1 {
        Contrato c = new Contrato(LocalDate.of(2022, 3, 4), LocalDate.of(2025, 11, 7), LocalDate.now(), e, i, in, true);
        ContratoData cd = new ContratoData(conexion);
        cd.crearContrato(c); 
-       cd.cancelarContrato(c.getIdContrato());
-        System.out.println("Paso");
+       cd.cancelarContrato(20);
     }
     
 }

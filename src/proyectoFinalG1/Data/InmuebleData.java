@@ -144,7 +144,7 @@ public Inmueble obtenerInmuebleXId(int id){
         return inmueble;
      }
 
-public Inmueble obtenerAlumnoXCodigoInmueble(String codigoInmueble){
+public Inmueble obtenerInmuebleXCodigoInmueble(String codigoInmueble){
      
         Inmueble inmueble=null;
 
@@ -226,4 +226,108 @@ public boolean modificarInmueble(Inmueble inmueble){
      return modificado;
      }
     
-}
+
+    //Listar los inmuebles que estén alquilados al día de hoy
+    public List<Inmueble> alquilados(){
+        ArrayList<Inmueble> inmuebles = new ArrayList<Inmueble>();
+
+        try {
+            String sql = "SELECT inmueble.* FROM contrato , inmueble WHERE inmueble.idInmueble=contrato.idInmueble AND inmueble.activo = 1 AND contrato.finalizacion>'?'; ";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setDate(1,Date.valueOf(LocalDate.now()));
+            ResultSet resultSet = ps.executeQuery();
+            Inmueble inmueble;
+            while (resultSet.next()) {
+                inmueble = new Inmueble();
+                inmueble.setIdInmueble(resultSet.getInt("idInmueble"));
+                inmueble.setCaracteristicas(resultSet.getString("caracteristicas"));
+                inmueble.setDireccion(resultSet.getString("direccion"));
+                inmueble.setPrecio(resultSet.getDouble("precio"));
+                inmueble.setSuperficie(resultSet.getFloat("superficie"));
+                inmueble.setTipoLocal(resultSet.getString("tipoLocal"));
+                Propietario i = propietarioData.obetenerPropietarioPorID(resultSet.getInt("idPropietario"));
+                inmueble.setPropietario(i); 
+                inmueble.setCodigoInmueble(resultSet.getString("codigoInmueble"));
+                inmueble.setActivo(resultSet.getBoolean("activo"));
+
+                inmuebles.add(inmueble);
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null," Error al obtener Inmuebles ");
+        }
+
+        return inmuebles;
+    }
+    //Listar los inmuebles no alquilados al día de hoy
+    public List<Inmueble> NoAlquilados(){
+        ArrayList<Inmueble> inmuebles = new ArrayList<Inmueble>();
+
+        try {
+            String sql = "SELECT inmueble.* FROM contrato , inmueble WHERE inmueble.activo=1 AND inmueble.idInmueble NOT IN (SELECT inmueble.idInmueble FROM inmueble WHERE inmueble.idInmueble=contrato.idInmueble AND inmueble.activo = 1 AND contrato.finalizacion>'?'); ";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setDate(1,Date.valueOf(LocalDate.now()));
+            ResultSet resultSet = ps.executeQuery();
+            Inmueble inmueble;
+            while (resultSet.next()) {
+                inmueble = new Inmueble();
+                inmueble.setIdInmueble(resultSet.getInt("idInmueble"));
+                inmueble.setCaracteristicas(resultSet.getString("caracteristicas"));
+                inmueble.setDireccion(resultSet.getString("direccion"));
+                inmueble.setPrecio(resultSet.getDouble("precio"));
+                inmueble.setSuperficie(resultSet.getFloat("superficie"));
+                inmueble.setTipoLocal(resultSet.getString("tipoLocal"));
+                Propietario i = propietarioData.obetenerPropietarioPorID(resultSet.getInt("idPropietario"));
+                inmueble.setPropietario(i); 
+                inmueble.setCodigoInmueble(resultSet.getString("codigoInmueble"));
+                inmueble.setActivo(resultSet.getBoolean("activo"));
+
+                inmuebles.add(inmueble);
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null," Error al obtener Inmuebles ");
+        }
+
+        return inmuebles;
+    }
+    
+    public List<Inmueble> obtenerDireccionYPrecioAlquileresXDueño(int idPropietario){
+        ArrayList<Inmueble> inmuebles = new ArrayList<Inmueble>();
+
+        try {
+            String sql = "SELECT inmueble.direccion, inmueble.precio FROM propietario , inmueble, contrato WHERE inmueble.idPropietario=propietario.idPropietario AND inmueble.activo = 1 AND ontrato.finalizacion>'?' AND propietario.idPropietario=? AND inmueble.idInmueble=contrato.idInmueble;";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setDate(1,Date.valueOf(LocalDate.now()));
+            ps.setInt(2,idPropietario);
+            ResultSet resultSet = ps.executeQuery();
+            Inmueble inmueble;
+            while (resultSet.next()) {
+                inmueble = new Inmueble();
+                inmueble.setIdInmueble(resultSet.getInt("idInmueble"));
+                inmueble.setCaracteristicas(resultSet.getString("caracteristicas"));
+                inmueble.setDireccion(resultSet.getString("direccion"));
+                inmueble.setPrecio(resultSet.getDouble("precio"));
+                inmueble.setSuperficie(resultSet.getFloat("superficie"));
+                inmueble.setTipoLocal(resultSet.getString("tipoLocal"));
+                Propietario i = propietarioData.obetenerPropietarioPorID(resultSet.getInt("idPropietario"));
+                inmueble.setPropietario(i); 
+                inmueble.setCodigoInmueble(resultSet.getString("codigoInmueble"));
+                inmueble.setActivo(resultSet.getBoolean("activo"));
+
+                inmuebles.add(inmueble);
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null," Error al obtener Inmuebles ");
+        }
+
+        return inmuebles;
+    }
+    //Listar dirección y precio de los inmuebles alquilados actualmente de un determinado propietario
+    
+    }
+/*
+
+SELECT inmueble.direccion, inmueble.precio FROM propietario , inmueble, contrato WHERE inmueble.idPropietario=propietario.idPropietario AND inmueble.activo = 1 AND ontrato.finalizacion>'?' AND propietario.idPropietario=? AND inmueble.idInmueble=contrato.idInmueble;
+*/

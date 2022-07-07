@@ -125,7 +125,7 @@ public class PropietarioData {
     public Propietario obetenerPropietarioPorDNI(int dni) {
         Propietario propietario = null;
         try {
-            String sql = "SELECT * FROM propietario WHERE dni = ? AND activo= true;";
+            String sql = "SELECT * FROM propietario WHERE dni = ? AND activo=1;";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, dni);
             ResultSet resultSet = ps.executeQuery();
@@ -151,7 +151,7 @@ public class PropietarioData {
         ArrayList<Propietario> propietarios = new ArrayList<Propietario>();
 
         try {
-            String sql = "SELECT * FROM propietario;";
+            String sql = "SELECT * FROM propietario WHERE activo = true;";
             PreparedStatement ps = con.prepareStatement(sql);
             
             ResultSet resultSet = ps.executeQuery();

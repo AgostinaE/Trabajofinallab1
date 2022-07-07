@@ -143,7 +143,7 @@ public class ContratoData {
     
     public List<Contrato> buscarContratosXPropiedad(String codigoPropiedad){
         ArrayList<Contrato> contratos = new ArrayList<Contrato>();
-        Inmueble in = inmuebleData.obtenerAlumnoXCodigoInmueble(codigoPropiedad);
+        Inmueble in = inmuebleData.obtenerInmuebleXCodigoInmueble(codigoPropiedad);
         int idPropiedad = in.getIdInmueble();
         try{
             Contrato contrato;

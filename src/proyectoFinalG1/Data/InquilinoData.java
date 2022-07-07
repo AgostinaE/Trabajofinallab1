@@ -101,7 +101,7 @@ public class InquilinoData {
     public Inquilino obetenerInquilinoPorID(int id) {
         Inquilino inquilino = null;
         try {
-            String sql = "SELECT * FROM inquilino WHERE idInquilino = ?;";
+            String sql = "SELECT * FROM inquilino WHERE idInquilino = ? AND activo=1;";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, id);
             ResultSet resultSet = ps.executeQuery();
@@ -127,7 +127,7 @@ public class InquilinoData {
     public Inquilino obetenerInquilinoPorCuil(Long cuil) {
         Inquilino inquilino = null;
         try {
-            String sql = "SELECT * FROM inquilino WHERE dni = ?;";
+            String sql = "SELECT * FROM inquilino WHERE dni = ? AND activo=1;";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setLong(1, cuil);
             ResultSet resultSet = ps.executeQuery();
@@ -154,7 +154,7 @@ public class InquilinoData {
         ArrayList<Inquilino> inquilinos = new ArrayList<Inquilino>();
 
         try {
-            String sql = "SELECT * FROM inquilino;";
+            String sql = "SELECT * FROM inquilino WHERE activo=1;";
             PreparedStatement ps = con.prepareStatement(sql);
 
             ResultSet resultSet = ps.executeQuery();

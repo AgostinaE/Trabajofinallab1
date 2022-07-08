@@ -129,7 +129,7 @@ public class Propietario {
 
     @Override
     public String toString() {
-        return "Propietario{" + "idPropietario=" + idPropietario + ", nombre=" + nombre + ", apellido=" + apellido + ", dni=" + dni + ", telefono=" + telefono + ", domicilio=" + domicilio + ", activo=" + activo + '}';
+        return apellido + ", " + nombre + ", " + telefono ;
     }
     
     

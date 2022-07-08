@@ -6,8 +6,17 @@
 package proyectoFinalG1.Vistas;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import javax.swing.JOptionPane;
 import proyectoFinalG1.Data.Conexion;
 import proyectoFinalG1.Data.InmuebleData;
+import proyectoFinalG1.Data.PropietarioData;
+import proyectoFinalG1.Data.Validacion;
+import proyectoFinalG1.Modelos.Empleado;
+import proyectoFinalG1.Modelos.Inmueble;
+import proyectoFinalG1.Modelos.Propietario;
 
 /**
  *
@@ -19,16 +28,29 @@ public class NuevoInmueble extends javax.swing.JInternalFrame {
      * Creates new form NuevoInmueble
      */
      private InmuebleData id;
+     private PropietarioData pd;
+     private ArrayList<Propietario> listaPropietarios;
 
     public NuevoInmueble(Conexion conexion) {
         initComponents();
         limpiarCampos();
-        desactivaCampos();
         id = new InmuebleData(conexion);
-        
+        pd = new PropietarioData(conexion);
+        listaPropietarios=(ArrayList<Propietario>) pd.obtenerPropietarios();
+        cargarPropietarios();
     }
     
-    
+    private void cargarPropietarios(){
+        Collections.sort(listaPropietarios, new Comparator<Propietario>() {
+            @Override
+            public int compare(Propietario t, Propietario t1) {
+                return t.getApellido().compareTo(t1.getApellido());
+            }
+        });
+        for (Propietario aux : listaPropietarios) {
+            jCbPropietarios.addItem(aux);
+        }
+    }
     
    
 
@@ -41,48 +63,28 @@ public class NuevoInmueble extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jCBTipo = new javax.swing.JComboBox<>();
+        jBGuardar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jCBPropietario = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jTDireccion = new javax.swing.JTextField();
-        jTAltura = new javax.swing.JTextField();
-        jTSuperficie = new javax.swing.JTextField();
-        jCBTipo = new javax.swing.JComboBox<>();
-        jTPrecio = new javax.swing.JTextField();
-        jCBZona = new javax.swing.JComboBox<>();
-        jBNuevo = new javax.swing.JButton();
-        jBGuardar = new javax.swing.JButton();
-        jBSalir = new javax.swing.JButton();
-
-        jLabel1.setFont(new java.awt.Font("Microsoft YaHei Light", 0, 24)); // NOI18N
-        jLabel1.setText("Nueva Propiedad");
-
-        jLabel2.setText("Elige el Propietario");
-
-        jLabel3.setText("Dirección");
-
-        jLabel4.setText("Altura");
-
-        jLabel5.setText("Tipo");
-
-        jLabel6.setText("Superficie");
-
-        jLabel7.setText("Precio");
-
-        jLabel8.setText("Zona");
-
-        jBNuevo.setText("Agregar Nueva Propiedad");
-        jBNuevo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBNuevoActionPerformed(evt);
-            }
-        });
+        jTxtPrecio = new javax.swing.JTextField();
+        jTxtSuperficie = new javax.swing.JTextField();
+        jTxtTipo = new javax.swing.JTextField();
+        jTxtCodigoPropiedad = new javax.swing.JTextField();
+        jCbPropietarios = new javax.swing.JComboBox<>();
+        jBtnNuevo = new javax.swing.JButton();
+        jBtnSalir = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
+        jCbZona = new javax.swing.JComboBox<>();
+        jTxtDireccion = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTxtAreaCaracteristicas = new javax.swing.JTextArea();
 
         jBGuardar.setText("Guardar");
         jBGuardar.addActionListener(new java.awt.event.ActionListener() {
@@ -91,108 +93,243 @@ public class NuevoInmueble extends javax.swing.JInternalFrame {
             }
         });
 
-        jBSalir.setText("Salir");
-        jBSalir.addActionListener(new java.awt.event.ActionListener() {
+        setBackground(new java.awt.Color(204, 204, 204));
+
+        jLabel1.setBackground(new java.awt.Color(51, 102, 255));
+        jLabel1.setFont(new java.awt.Font("SansSerif", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Nueva Propiedad");
+
+        jLabel2.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel2.setText("Elige el Propietario");
+
+        jLabel3.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel3.setText("Dirección");
+
+        jLabel4.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel4.setText("Codigo de Propiedad");
+
+        jLabel5.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel5.setText("Tipo de Inmueble");
+
+        jLabel6.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel6.setText("Superficie");
+
+        jLabel7.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel7.setText("Caracteristicas");
+
+        jLabel8.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel8.setText("Zona");
+
+        jTxtPrecio.setBackground(new java.awt.Color(204, 204, 204));
+        jTxtPrecio.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jTxtPrecio.setForeground(new java.awt.Color(0, 0, 0));
+
+        jTxtSuperficie.setBackground(new java.awt.Color(204, 204, 204));
+        jTxtSuperficie.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jTxtSuperficie.setForeground(new java.awt.Color(0, 0, 0));
+
+        jTxtTipo.setBackground(new java.awt.Color(204, 204, 204));
+        jTxtTipo.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jTxtTipo.setForeground(new java.awt.Color(0, 0, 0));
+
+        jTxtCodigoPropiedad.setBackground(new java.awt.Color(204, 204, 204));
+        jTxtCodigoPropiedad.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jTxtCodigoPropiedad.setForeground(new java.awt.Color(0, 0, 0));
+
+        jCbPropietarios.setBackground(new java.awt.Color(204, 204, 204));
+        jCbPropietarios.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jCbPropietarios.setForeground(new java.awt.Color(0, 0, 0));
+
+        jBtnNuevo.setBackground(new java.awt.Color(153, 153, 153));
+        jBtnNuevo.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jBtnNuevo.setForeground(new java.awt.Color(0, 0, 0));
+        jBtnNuevo.setText("Cargar Nueva Propiedad");
+        jBtnNuevo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBSalirActionPerformed(evt);
+                jBtnNuevoActionPerformed(evt);
             }
         });
+
+        jBtnSalir.setBackground(new java.awt.Color(153, 153, 153));
+        jBtnSalir.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jBtnSalir.setForeground(new java.awt.Color(0, 0, 0));
+        jBtnSalir.setText("Salir");
+        jBtnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnSalirActionPerformed(evt);
+            }
+        });
+
+        jLabel9.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel9.setText("Precio de Alquiler");
+
+        jCbZona.setBackground(new java.awt.Color(204, 204, 204));
+        jCbZona.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jCbZona.setForeground(new java.awt.Color(0, 0, 0));
+        jCbZona.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4" }));
+
+        jTxtDireccion.setBackground(new java.awt.Color(204, 204, 204));
+        jTxtDireccion.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jTxtDireccion.setForeground(new java.awt.Color(0, 0, 0));
+
+        jTxtAreaCaracteristicas.setBackground(new java.awt.Color(204, 204, 204));
+        jTxtAreaCaracteristicas.setColumns(20);
+        jTxtAreaCaracteristicas.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jTxtAreaCaracteristicas.setForeground(new java.awt.Color(0, 0, 0));
+        jTxtAreaCaracteristicas.setRows(5);
+        jScrollPane1.setViewportView(jTxtAreaCaracteristicas);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(45, 45, 45)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(35, 35, 35)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jCBPropietario, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTAltura)
-                            .addComponent(jTDireccion)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel8))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTSuperficie)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jCBTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jCBZona, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 0, Short.MAX_VALUE)))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(85, 85, 85)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel8)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel9)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel7)
+                    .addComponent(jBtnNuevo))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jBNuevo)
-                        .addContainerGap(23, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jBSalir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jBGuardar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(66, 66, 66))))
+                        .addGap(75, 75, 75)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTxtTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTxtCodigoPropiedad, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jCbPropietarios, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jCbZona, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTxtSuperficie, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTxtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTxtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(146, 146, 146)
+                        .addComponent(jBtnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jCBPropietario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jTDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(56, 56, 56)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jTAltura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(jTSuperficie, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jBNuevo))
+                    .addComponent(jTxtCodigoPropiedad, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jCBTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jBGuardar))
+                    .addComponent(jTxtTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jBSalir)
-                    .addComponent(jLabel7)
-                    .addComponent(jTPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jCbPropietarios, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
                 .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jCbZona, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(jTxtSuperficie, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(jTxtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jTxtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel8)
-                    .addComponent(jCBZona, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(43, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 6, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel7)
+                        .addGap(54, 54, 54)))
+                .addGap(27, 27, 27)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jBtnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBtnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(64, 64, 64))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jBNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBNuevoActionPerformed
-        limpiarCampos(); activaCampos();
-         jBGuardar.setEnabled(true);
+    private void jBtnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnNuevoActionPerformed
+        String codigoPropiedad = (String) jTxtCodigoPropiedad.getText();
+        String tipo =(String) jTxtTipo.getText();
+        Propietario propietario =(Propietario) jCbPropietarios.getSelectedItem();
+        int zona =Integer.parseInt((String)jCbZona.getSelectedItem());
+        float superficie = Float.parseFloat(jTxtSuperficie.getText());
+        double precio = Double.parseDouble(jTxtPrecio.getText());
+        String direccion =(String) jTxtDireccion.getText();
+        String caracteristicas = (String) jTxtAreaCaracteristicas.getText();
         
-    }//GEN-LAST:event_jBNuevoActionPerformed
+        boolean valido = true;
+        Validacion vd = new Validacion();
+        if(vd.EstaVacio(codigoPropiedad)){
+            JOptionPane.showMessageDialog(this, "No indico un codigo para la propiedad");
+            valido=false;
+        }
+        if(!vd.EsPalabra(tipo)){
+            JOptionPane.showMessageDialog(this, "No indico un tipo valido para la propiedad");
+            valido=false;
+        }
+        if(propietario==null){
+            JOptionPane.showMessageDialog(this, "No indico un propietario para la propiedad");
+            valido=false;
+        }
+        if(zona<0){
+            JOptionPane.showMessageDialog(this, "No indico una zona para la propiedad");
+            valido=false;
+        }
+        if(superficie<0){
+            JOptionPane.showMessageDialog(this, "No indico una superficie para la propiedad");
+            valido=false;
+        }
+        if(precio<0){
+            JOptionPane.showMessageDialog(this, "No indico un precio para la propiedad");
+            valido=false;
+        }
+        if(vd.EstaVacio(direccion)){
+            JOptionPane.showMessageDialog(this, "No indico una direccion para la propiedad");
+            valido=false;
+        }
+        if(vd.EstaVacio(caracteristicas)){
+            JOptionPane.showMessageDialog(this, "No indico caracteristicas para la propiedad");
+            valido=false;
+        }
+        
+        if(valido){
+            Inmueble inmueble = new Inmueble(caracteristicas, direccion, precio, superficie, tipo, zona, propietario, codigoPropiedad, true);
+            if(id.agregarInmueble(inmueble)){
+                JOptionPane.showMessageDialog(this, "La propiedad se cargo con exito");
+            }
+            limpiarCampos();
+        }
+        
+        jBGuardar.setEnabled(true);
+        
+    }//GEN-LAST:event_jBtnNuevoActionPerformed
 
     private void jBGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarActionPerformed
 
@@ -219,45 +356,47 @@ public class NuevoInmueble extends javax.swing.JInternalFrame {
         
     }//GEN-LAST:event_jBGuardarActionPerformed
 
-    private void jBSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalirActionPerformed
+    private void jBtnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSalirActionPerformed
         dispose();
-    }//GEN-LAST:event_jBSalirActionPerformed
+    }//GEN-LAST:event_jBtnSalirActionPerformed
 
     private void limpiarCampos() {
 
-        jTAltura.setText("");
-        jTDireccion.setText("");
-        jTPrecio.setText("");
-        jTSuperficie.setText("");
+        jTxtSuperficie.setText("");
+        jTxtPrecio.setText("");
+        jTxtCodigoPropiedad.setText("");
+        jTxtTipo.setText("");
+        jTxtAreaCaracteristicas.setText("");
+        jTxtDireccion.setText("");
     }
     
      private void activaCampos() {
-        jTAltura.setEnabled(true);
-        jTDireccion.setEnabled(true);
-        jTPrecio.setEnabled(true);
-        jTSuperficie.setEnabled(true);
-        jCBPropietario.setEnabled(true);
+        jTxtSuperficie.setEnabled(true);
+        jTxtPrecio.setEnabled(true);
+        jTxtCodigoPropiedad.setEnabled(true);
+        jTxtTipo.setEnabled(true);
+        jCbPropietarios.setEnabled(true);
         jCBTipo.setEnabled(true);
-        jCBZona.setEnabled(true);
+        jCbPropietarios.setEnabled(true);
     }
      
     private void desactivaCampos() {
-        jTAltura.setEnabled(false);
-        jTDireccion.setEnabled(false);
-        jTPrecio.setEnabled(false);
-        jTSuperficie.setEnabled(false);
-        jCBPropietario.setEnabled(false);
+        jTxtSuperficie.setEnabled(false);
+        jTxtPrecio.setEnabled(false);
+        jTxtCodigoPropiedad.setEnabled(false);
+        jTxtTipo.setEnabled(false);
+        jCbPropietarios.setEnabled(false);
         jCBTipo.setEnabled(false);
-        jCBZona.setEnabled(false);
+        jCbPropietarios.setEnabled(false);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBGuardar;
-    private javax.swing.JButton jBNuevo;
-    private javax.swing.JButton jBSalir;
-    private javax.swing.JComboBox<String> jCBPropietario;
+    private javax.swing.JButton jBtnNuevo;
+    private javax.swing.JButton jBtnSalir;
     private javax.swing.JComboBox<String> jCBTipo;
-    private javax.swing.JComboBox<String> jCBZona;
+    private javax.swing.JComboBox<Propietario> jCbPropietarios;
+    private javax.swing.JComboBox<String> jCbZona;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -266,9 +405,13 @@ public class NuevoInmueble extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JTextField jTAltura;
-    private javax.swing.JTextField jTDireccion;
-    private javax.swing.JTextField jTPrecio;
-    private javax.swing.JTextField jTSuperficie;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea jTxtAreaCaracteristicas;
+    private javax.swing.JTextField jTxtCodigoPropiedad;
+    private javax.swing.JTextField jTxtDireccion;
+    private javax.swing.JTextField jTxtPrecio;
+    private javax.swing.JTextField jTxtSuperficie;
+    private javax.swing.JTextField jTxtTipo;
     // End of variables declaration//GEN-END:variables
 }

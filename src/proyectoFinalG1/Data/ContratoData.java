@@ -56,10 +56,9 @@ public class ContratoData {
             
             if(rs.next()){
                 contrato.setIdContrato(rs.getInt(1));
-                JOptionPane.showMessageDialog(null,"Se agrego un contrato correctamente");
             }else{
                 creado= false;
-                JOptionPane.showMessageDialog(null,"pincho");
+                JOptionPane.showMessageDialog(null,"No se pudo cargar el contrato");
             }
             ps.close();
         }catch(Exception ex){
@@ -279,7 +278,6 @@ public class ContratoData {
             if (rs == 0) {
                 cancelado = true;
             }
-            //////// el if de arriba ////////
             ps.close();
         }catch(SQLException ex){
             JOptionPane.showMessageDialog(null, "Error de sintaxis ");

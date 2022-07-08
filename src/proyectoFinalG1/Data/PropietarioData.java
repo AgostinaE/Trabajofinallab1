@@ -170,7 +170,7 @@ public class PropietarioData {
             }
             ps.close();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null,"Error al obtener alumnos");
+            JOptionPane.showMessageDialog(null,"Error al obtener propietarios");
         }
 
         return propietarios;

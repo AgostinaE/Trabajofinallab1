@@ -11,6 +11,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import javax.swing.JOptionPane;
 import proyectoFinalG1.Data.Conexion;
 import proyectoFinalG1.Data.ContratoData;
 import proyectoFinalG1.Data.EmpleadoData;
@@ -328,7 +329,9 @@ public class NuevoContrato extends javax.swing.JInternalFrame {
         LocalDate firma = LocalDate.now();
         
         Contrato contrato = new Contrato(fechInicio,fechFinal,firma,empleado,inquilino,inmueble,true);
-        cd.crearContrato(contrato);
+        if( cd.crearContrato(contrato)){
+            JOptionPane.showMessageDialog(this, "Se Firmo el contrato con exito");
+        }
     }//GEN-LAST:event_jBtnFirmarActionPerformed
 
 

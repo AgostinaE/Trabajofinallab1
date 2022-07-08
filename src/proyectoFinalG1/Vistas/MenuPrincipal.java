@@ -279,7 +279,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jmiInmueblesDisponiblesActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-jDesktopPane1.removeAll();
+        jDesktopPane1.removeAll();
         NuevoInmueble ni = new NuevoInmueble(conexion);
         ni.setVisible(true);
         jDesktopPane1.add(ni);

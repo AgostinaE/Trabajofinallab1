@@ -188,7 +188,7 @@
                               <Group type="103" groupAlignment="1" attributes="0">
                                   <Component id="jLabel14" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel13" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jDateChooser2" alignment="1" min="-2" pref="350" max="-2" attributes="0"/>
+                                  <Component id="jDInicio" alignment="1" min="-2" pref="350" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="90" max="-2" attributes="0"/>
                           </Group>
@@ -200,7 +200,7 @@
                               <Component id="jCbEmpleados" pref="308" max="32767" attributes="0"/>
                           </Group>
                           <Component id="jLabel15" min="-2" max="-2" attributes="0"/>
-                          <Component id="jDateChooser3" min="-2" pref="350" max="-2" attributes="0"/>
+                          <Component id="jDFinal" min="-2" pref="350" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -234,8 +234,8 @@
               </Group>
               <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="jDateChooser2" pref="53" max="32767" attributes="0"/>
-                  <Component id="jDateChooser3" max="32767" attributes="0"/>
+                  <Component id="jDInicio" pref="53" max="32767" attributes="0"/>
+                  <Component id="jDFinal" max="32767" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="76" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -381,6 +381,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Salir"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBtnSalirActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jBtnFirmar">
       <Properties>
@@ -395,8 +398,11 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Firmar Contrato"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBtnFirmarActionPerformed"/>
+      </Events>
     </Component>
-    <Component class="com.toedter.calendar.JDateChooser" name="jDateChooser2">
+    <Component class="com.toedter.calendar.JDateChooser" name="jDInicio">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="cc" green="cc" red="cc" type="rgb"/>
@@ -409,7 +415,7 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="com.toedter.calendar.JDateChooser" name="jDateChooser3">
+    <Component class="com.toedter.calendar.JDateChooser" name="jDFinal">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="cc" green="cc" red="cc" type="rgb"/>

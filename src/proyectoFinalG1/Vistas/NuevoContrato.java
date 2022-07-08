@@ -5,6 +5,9 @@
  */
 package proyectoFinalG1.Vistas;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -12,8 +15,11 @@ import proyectoFinalG1.Data.Conexion;
 import proyectoFinalG1.Data.ContratoData;
 import proyectoFinalG1.Data.EmpleadoData;
 import proyectoFinalG1.Data.InmuebleData;
+import proyectoFinalG1.Data.InquilinoData;
+import proyectoFinalG1.Modelos.Contrato;
 import proyectoFinalG1.Modelos.Empleado;
 import proyectoFinalG1.Modelos.Inmueble;
+import proyectoFinalG1.Modelos.Inquilino;
 
 /**
  *
@@ -27,6 +33,7 @@ public class NuevoContrato extends javax.swing.JInternalFrame {
     private ContratoData cd;
     private EmpleadoData ed;
     private InmuebleData ind;
+    private InquilinoData id;
     private ArrayList<Empleado> listaEmpleados;
     private ArrayList<Inmueble> listaInmuebles;
     
@@ -37,10 +44,12 @@ public class NuevoContrato extends javax.swing.JInternalFrame {
         cd = new ContratoData(conexion);
         ed = new EmpleadoData(conexion);
         ind = new InmuebleData(conexion);
+        id = new InquilinoData(conexion);
         listaEmpleados =(ArrayList<Empleado>) ed.obtenerEmpleados();
         cargarComboEmpleados();
         listaInmuebles = (ArrayList<Inmueble>) ind.obtenerInmuebles();
         cargarComboInmuebles();
+        
     }
 
     ///// METODOS /////
@@ -114,8 +123,8 @@ public class NuevoContrato extends javax.swing.JInternalFrame {
         jLabel15 = new javax.swing.JLabel();
         jBtnSalir = new javax.swing.JButton();
         jBtnFirmar = new javax.swing.JButton();
-        jDateChooser2 = new com.toedter.calendar.JDateChooser();
-        jDateChooser3 = new com.toedter.calendar.JDateChooser();
+        jDInicio = new com.toedter.calendar.JDateChooser();
+        jDFinal = new com.toedter.calendar.JDateChooser();
 
         jLabel1.setFont(new java.awt.Font("Microsoft JhengHei Light", 0, 24)); // NOI18N
         jLabel1.setText("Nuevo Contrato");
@@ -197,19 +206,29 @@ public class NuevoContrato extends javax.swing.JInternalFrame {
         jBtnSalir.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jBtnSalir.setForeground(new java.awt.Color(0, 0, 0));
         jBtnSalir.setText("Salir");
+        jBtnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnSalirActionPerformed(evt);
+            }
+        });
 
         jBtnFirmar.setBackground(new java.awt.Color(204, 204, 204));
         jBtnFirmar.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jBtnFirmar.setForeground(new java.awt.Color(0, 0, 0));
         jBtnFirmar.setText("Firmar Contrato");
+        jBtnFirmar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnFirmarActionPerformed(evt);
+            }
+        });
 
-        jDateChooser2.setBackground(new java.awt.Color(204, 204, 204));
-        jDateChooser2.setForeground(new java.awt.Color(255, 255, 255));
-        jDateChooser2.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jDInicio.setBackground(new java.awt.Color(204, 204, 204));
+        jDInicio.setForeground(new java.awt.Color(255, 255, 255));
+        jDInicio.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
 
-        jDateChooser3.setBackground(new java.awt.Color(204, 204, 204));
-        jDateChooser3.setForeground(new java.awt.Color(255, 255, 255));
-        jDateChooser3.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jDFinal.setBackground(new java.awt.Color(204, 204, 204));
+        jDFinal.setForeground(new java.awt.Color(255, 255, 255));
+        jDFinal.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -238,7 +257,7 @@ public class NuevoContrato extends javax.swing.JInternalFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel14)
                                     .addComponent(jLabel13)
-                                    .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jDInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(90, 90, 90)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTxtCuilInquilino, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -246,7 +265,7 @@ public class NuevoContrato extends javax.swing.JInternalFrame {
                                 .addComponent(jCbInmuebles, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jCbEmpleados, 0, 308, Short.MAX_VALUE))
                             .addComponent(jLabel15)
-                            .addComponent(jDateChooser3, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jDFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(47, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -271,8 +290,8 @@ public class NuevoContrato extends javax.swing.JInternalFrame {
                     .addComponent(jLabel15))
                 .addGap(54, 54, 54)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jDateChooser2, javax.swing.GroupLayout.DEFAULT_SIZE, 53, Short.MAX_VALUE)
-                    .addComponent(jDateChooser3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jDInicio, javax.swing.GroupLayout.DEFAULT_SIZE, 53, Short.MAX_VALUE)
+                    .addComponent(jDFinal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(76, 76, 76)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBtnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -286,6 +305,31 @@ public class NuevoContrato extends javax.swing.JInternalFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jBtnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSalirActionPerformed
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_jBtnSalirActionPerformed
+
+    private void jBtnFirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnFirmarActionPerformed
+        Inmueble inmueble =(Inmueble) jCbInmuebles.getSelectedItem();
+        Empleado empleado =(Empleado) jCbEmpleados.getSelectedItem();
+        long cuil =Long.parseLong(jTxtCuilInquilino.getText()) ;
+        Inquilino inquilino = id.obetenerInquilinoPorCuil(cuil);
+        
+        SimpleDateFormat formatoFecha1 = new SimpleDateFormat("dd-MM-yyyy");        
+        String fecha = formatoFecha1.format(jDFinal.getDate());
+        LocalDate fechFinal = LocalDate.parse(fecha, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+        
+        SimpleDateFormat formatoFecha2 = new SimpleDateFormat("dd-MM-yyyy");        
+        String fecha2 = formatoFecha2.format(jDInicio.getDate());
+        LocalDate fechInicio = LocalDate.parse(fecha, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+        
+        LocalDate firma = LocalDate.now();
+        
+        Contrato contrato = new Contrato(fechInicio,fechFinal,firma,empleado,inquilino,inmueble,true);
+        cd.crearContrato(contrato);
+    }//GEN-LAST:event_jBtnFirmarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -302,9 +346,9 @@ public class NuevoContrato extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JComboBox<String> jComboBox4;
+    private com.toedter.calendar.JDateChooser jDFinal;
+    private com.toedter.calendar.JDateChooser jDInicio;
     private com.toedter.calendar.JDateChooser jDateChooser1;
-    private com.toedter.calendar.JDateChooser jDateChooser2;
-    private com.toedter.calendar.JDateChooser jDateChooser3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

@@ -246,6 +246,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void jbContratosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbContratosActionPerformed
         // TODO add your handling code here:
+        jDesktopPane1.removeAll();
+        NuevoContrato nc = new NuevoContrato(conexion);
+        nc.setVisible(true);
+        jDesktopPane1.add(nc);
+        jDesktopPane1.moveToFront(nc);
+        jDesktopPane1.repaint();   
     }//GEN-LAST:event_jbContratosActionPerformed
 
     private void jbPropietariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbPropietariosActionPerformed

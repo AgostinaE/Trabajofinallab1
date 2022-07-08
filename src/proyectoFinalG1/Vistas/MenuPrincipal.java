@@ -107,6 +107,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jButton2.setFont(new java.awt.Font("Microsoft JhengHei Light", 0, 18)); // NOI18N
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectoFinalG1/VistasImagenes/buscarContratoTam.png"))); // NOI18N
         jButton2.setText("Búsqueda de Contratos");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setFont(new java.awt.Font("Microsoft JhengHei Light", 0, 18)); // NOI18N
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectoFinalG1/VistasImagenes/empleadoTam.png"))); // NOI18N
@@ -180,6 +185,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jmPropietarios.add(jmiPropietarioNuevo);
 
         jmiNuevoInmueble.setText("Nuevo inmueble");
+        jmiNuevoInmueble.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiNuevoInmuebleActionPerformed(evt);
+            }
+        });
         jmPropietarios.add(jmiNuevoInmueble);
 
         jMenuBar1.add(jmPropietarios);
@@ -286,6 +296,26 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jDesktopPane1.moveToFront(ni);
         jDesktopPane1.repaint();   
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jmiNuevoInmuebleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiNuevoInmuebleActionPerformed
+        jDesktopPane1.removeAll();
+        NuevoInmueble ni = new NuevoInmueble(conexion);
+        ni.setVisible(true);
+        jDesktopPane1.add(ni);
+        jDesktopPane1.moveToFront(ni);
+        jDesktopPane1.repaint();           // TODO add your handling code here:
+    }//GEN-LAST:event_jmiNuevoInmuebleActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        jDesktopPane1.removeAll();
+        BusquedaContrato bc = new BusquedaContrato(conexion);
+        bc.setVisible(true);
+        jDesktopPane1.add(bc);
+        jDesktopPane1.moveToFront(bc);
+        jDesktopPane1.repaint(); 
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments

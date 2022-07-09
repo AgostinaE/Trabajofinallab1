@@ -178,7 +178,7 @@ public class ContratoData {
         int idInquilino = in.getIdInquilino();
         try{
             Contrato contrato;
-            String sql = "SELECT * FROM contrato WHERE idPInquilino = ? ;";
+            String sql = "SELECT * FROM contrato WHERE idInquilino = ? ;";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, idInquilino);
             ResultSet rs = ps.executeQuery();
@@ -284,4 +284,5 @@ public class ContratoData {
         }
         return cancelado;
     }
+    
 }

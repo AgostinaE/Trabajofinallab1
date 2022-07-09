@@ -127,7 +127,7 @@ public class InquilinoData {
     public Inquilino obetenerInquilinoPorCuil(Long cuil) {
         Inquilino inquilino = null;
         try {
-            String sql = "SELECT * FROM inquilino WHERE dni = ? AND activo=1;";
+            String sql = "SELECT * FROM inquilino WHERE cuil = ? AND activo=1;";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setLong(1, cuil);
             ResultSet resultSet = ps.executeQuery();

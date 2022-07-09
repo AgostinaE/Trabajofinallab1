@@ -5,7 +5,19 @@
  */
 package proyectoFinalG1.Vistas;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import javax.swing.table.DefaultTableModel;
 import proyectoFinalG1.Data.Conexion;
+import proyectoFinalG1.Data.ContratoData;
+import proyectoFinalG1.Data.EmpleadoData;
+import proyectoFinalG1.Data.InmuebleData;
+import proyectoFinalG1.Data.InquilinoData;
+import proyectoFinalG1.Modelos.Contrato;
+import proyectoFinalG1.Modelos.Empleado;
+import proyectoFinalG1.Modelos.Inmueble;
+import proyectoFinalG1.Modelos.Inquilino;
 
 /**
  *
@@ -16,11 +28,98 @@ public class BusquedaContrato extends javax.swing.JInternalFrame {
     /**
      * Creates new form BusquedaContrato
      */
+    private ContratoData cd;
+    private InmuebleData id;
+    private InquilinoData ind;
+    private EmpleadoData ed;
+    private DefaultTableModel modelo;
+    private ArrayList<Inquilino> listaInquilinos;
+    private ArrayList<Inmueble> listaInmuebles;
+    private ArrayList<Empleado> listaEmpleados;
+    private ArrayList<Contrato> listaContratos;
+    
     public BusquedaContrato(Conexion conexion) {
         initComponents();
+        cd = new ContratoData(conexion);
+        id = new InmuebleData(conexion);
+        ind = new InquilinoData(conexion);
+        ed = new EmpleadoData(conexion);
+        modelo = new DefaultTableModel();
+        armarTabla();
+        listaInquilinos = (ArrayList<Inquilino>) ind.obtenerInquilino();
+        cargarInquilinos();
+        listaInmuebles = (ArrayList<Inmueble>) id.obtenerInmuebles();
+        cargarInmuebles();
+        listaEmpleados = (ArrayList<Empleado>) ed.obtenerEmpleados();
+        cargarEmpleados();
+    }
+    
+    private void cargarEmpleados(){
+        Collections.sort(listaEmpleados, new Comparator<Empleado>() {
+            @Override
+            public int compare(Empleado t, Empleado t1) {
+                return t.getApellido().compareTo(t1.getApellido());
+            }
+        });
+        for (Empleado aux : listaEmpleados) {
+            jCbEmpleados.addItem(aux);
+        }
+    }
+    
+    private void cargarInmuebles(){
+        Collections.sort(listaInmuebles, new Comparator<Inmueble>() {
+            @Override
+            public int compare(Inmueble t, Inmueble t1) {
+                return t.getCodigoInmueble().compareTo(t1.getCodigoInmueble());
+            }
+        });
+        for (Inmueble aux : listaInmuebles) {
+            jCbInmuebles.addItem(aux);
+        }
+    }
+    
+    private void cargarInquilinos(){
+        Collections.sort(listaInquilinos, new Comparator<Inquilino>() {
+            @Override
+            public int compare(Inquilino t, Inquilino t1) {
+                return t.getApellido().compareTo(t1.getApellido());
+            }
+        });
+        for (Inquilino aux : listaInquilinos) {
+            jCbInquilinos.addItem(aux);
+        }
     }
 
+    private void armarTabla(){
+        ArrayList<Object> columnas = new ArrayList<>();
+        columnas.add("Codigo del Contrato");
+        columnas.add("Inquilino");
+        columnas.add("Codigo Inmueble");
+        columnas.add("Precio");
+        columnas.add("Inicio");
+        columnas.add("Finalizacion");
+        columnas.add("Vendedor");
+        columnas.add("Estado");
+        for (Object it : columnas) {
+
+            modelo.addColumn(it);
+        }
+        jTContratos.setModel(modelo);
+    }
     
+    public void cargarXInquilino(){
+        Inquilino selected = (Inquilino) jCbInquilinos.getSelectedItem();
+        listaContratos = (ArrayList<Contrato>)cd.buscarContratosXInquilino(selected.getCuil());
+        for (Contrato c : listaContratos) {
+            String estado;
+            if(c.isActivo()){
+                estado="Activo";
+            }else{
+                estado="Inactivo";
+            }
+            modelo.addRow(new Object[]{c.getIdContrato(), c.getInquilino().toString(), c.getInmueble().getCodigoInmueble(), c.getInmueble().getPrecio(), c.getInicio(),c.getFinalizacion(),c.getEmpleado().toString(),estado});
+        }
+    }
     
     
     /**
@@ -34,17 +133,17 @@ public class BusquedaContrato extends javax.swing.JInternalFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTContratos = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jCbInmuebles = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        jCbInquilinos = new javax.swing.JComboBox<>();
         jSeparator2 = new javax.swing.JSeparator();
         jLabel4 = new javax.swing.JLabel();
-        jComboBox3 = new javax.swing.JComboBox<>();
+        jCbEmpleados = new javax.swing.JComboBox<>();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
@@ -78,10 +177,10 @@ public class BusquedaContrato extends javax.swing.JInternalFrame {
         jLabel1.setText("Gestion de Contratos");
         jLabel1.setOpaque(true);
 
-        jTable1.setBackground(new java.awt.Color(204, 204, 204));
-        jTable1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jTable1.setForeground(new java.awt.Color(0, 0, 0));
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTContratos.setBackground(new java.awt.Color(204, 204, 204));
+        jTContratos.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jTContratos.setForeground(new java.awt.Color(0, 0, 0));
+        jTContratos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -96,12 +195,17 @@ public class BusquedaContrato extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTContratos);
 
         jButton1.setBackground(new java.awt.Color(153, 204, 255));
         jButton1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jButton1.setForeground(new java.awt.Color(0, 0, 0));
         jButton1.setText("Buscar Contratos Por Inquilino");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setBackground(new java.awt.Color(153, 204, 255));
         jButton2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -122,18 +226,18 @@ public class BusquedaContrato extends javax.swing.JInternalFrame {
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Seleccionar Codigo de Propiedad");
 
-        jComboBox1.setBackground(new java.awt.Color(204, 204, 204));
-        jComboBox1.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jComboBox1.setForeground(new java.awt.Color(0, 0, 0));
+        jCbInmuebles.setBackground(new java.awt.Color(204, 204, 204));
+        jCbInmuebles.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jCbInmuebles.setForeground(new java.awt.Color(0, 0, 0));
 
         jLabel3.setBackground(new java.awt.Color(255, 255, 255));
         jLabel3.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Seleccionar Inquilino");
 
-        jComboBox2.setBackground(new java.awt.Color(204, 204, 204));
-        jComboBox2.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jComboBox2.setForeground(new java.awt.Color(0, 0, 0));
+        jCbInquilinos.setBackground(new java.awt.Color(204, 204, 204));
+        jCbInquilinos.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jCbInquilinos.setForeground(new java.awt.Color(0, 0, 0));
 
         jSeparator2.setBackground(new java.awt.Color(204, 204, 204));
         jSeparator2.setForeground(new java.awt.Color(204, 204, 204));
@@ -144,9 +248,9 @@ public class BusquedaContrato extends javax.swing.JInternalFrame {
         jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Seleccionar Vendedor");
 
-        jComboBox3.setBackground(new java.awt.Color(204, 204, 204));
-        jComboBox3.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jComboBox3.setForeground(new java.awt.Color(0, 0, 0));
+        jCbEmpleados.setBackground(new java.awt.Color(204, 204, 204));
+        jCbEmpleados.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jCbEmpleados.setForeground(new java.awt.Color(0, 0, 0));
 
         jButton4.setBackground(new java.awt.Color(153, 204, 255));
         jButton4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -266,15 +370,15 @@ public class BusquedaContrato extends javax.swing.JInternalFrame {
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(jLabel3)
                                     .addGap(136, 136, 136)
-                                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jCbInquilinos, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(jLabel2)
                                     .addGap(33, 33, 33)
-                                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jCbInmuebles, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(116, 116, 116)
-                                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(jCbEmpleados, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                             .addGap(181, 181, 181)
                             .addComponent(jButton1))
@@ -366,19 +470,19 @@ public class BusquedaContrato extends javax.swing.JInternalFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(38, 38, 38)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jCbInquilinos, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel3))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jButton1)
                                 .addGap(40, 40, 40)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jCbInmuebles, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel2))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jButton2)
                                 .addGap(48, 48, 48)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jCbEmpleados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel4))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jButton4)
@@ -445,6 +549,11 @@ public class BusquedaContrato extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton7ActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        cargarXInquilino();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -457,9 +566,9 @@ public class BusquedaContrato extends javax.swing.JInternalFrame {
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
+    private javax.swing.JComboBox<Empleado> jCbEmpleados;
+    private javax.swing.JComboBox<Inmueble> jCbInmuebles;
+    private javax.swing.JComboBox<Inquilino> jCbInquilinos;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private com.toedter.calendar.JDateChooser jDateChooser2;
     private com.toedter.calendar.JDateChooser jDateChooser3;
@@ -481,7 +590,7 @@ public class BusquedaContrato extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTContratos;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }

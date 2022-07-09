@@ -32,6 +32,7 @@ public class ContratoData {
 
     public ContratoData(Conexion conexion) {
         con = conexion.getConexion();
+        this.inmuebleData = new InmuebleData(conexion);
         this.inquilinoData = new InquilinoData(conexion);
         this.empleadoData = new EmpleadoData(conexion);
         this.propietarioData = new PropietarioData(conexion);
@@ -146,7 +147,7 @@ public class ContratoData {
         int idPropiedad = in.getIdInmueble();
         try{
             Contrato contrato;
-            String sql = "SELECT * FROM contrato WHERE idPropiedad = ? ;";
+            String sql = "SELECT * FROM contrato WHERE idInmueble = ? ;";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, idPropiedad);
             ResultSet rs = ps.executeQuery();
@@ -199,7 +200,7 @@ public class ContratoData {
             }
             ps.close();
         }catch(SQLException ex){
-                  JOptionPane.showMessageDialog(null, "ocurrio un error");  
+                  JOptionPane.showMessageDialog(null, "ocurrio un error aca");  
             }
         return contratos;
     }

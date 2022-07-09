@@ -112,9 +112,7 @@ public List<Inmueble> obtenerInmuebles() {
     }
 
 public Inmueble obtenerInmuebleXId(int id){
-     
         Inmueble inmueble=null;
-
         try {
             String sql = "SELECT * FROM inmueble WHERE idInmueble = ? AND activo = 1;";
             PreparedStatement ps = con.prepareStatement(sql);
@@ -133,14 +131,11 @@ public Inmueble obtenerInmuebleXId(int id){
                 inmueble.setPropietario(i); 
                 inmueble.setCodigoInmueble(resultSet.getString("codigoInmueble"));
                 inmueble.setActivo(resultSet.getBoolean("activo"));
-
-
             }
             ps.close();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null,"Error al obtener alumnos");
+            JOptionPane.showMessageDialog(null,"Error al obtener Inmueble");
         }
-
         return inmueble;
      }
 

@@ -116,6 +116,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jButton3.setFont(new java.awt.Font("Microsoft JhengHei Light", 0, 18)); // NOI18N
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectoFinalG1/VistasImagenes/empleadoTam.png"))); // NOI18N
         jButton3.setText("Gestión Empleado");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jDesktopPane1.setLayer(jbInmueblesDisponibles, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jbPropietarios, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -316,6 +321,15 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jDesktopPane1.repaint(); 
         
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        jDesktopPane1.removeAll();
+        NuevoEmpleado ne = new NuevoEmpleado(conexion);
+        ne.setVisible(true);
+        jDesktopPane1.add(ne);
+        jDesktopPane1.moveToFront(ne);
+        jDesktopPane1.repaint();  
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments

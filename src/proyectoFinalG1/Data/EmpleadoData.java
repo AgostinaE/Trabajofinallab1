@@ -118,14 +118,14 @@ public boolean agregarEmpleado(Empleado empleado) {
         return empleado;
      }
      
-     public boolean borrarEmpleado(int id){
+     public boolean borrarEmpleado(int idEmpleado){
      
          boolean borrado=false;
          String sql= "UPDATE alumno SET activo = 0 WHERE idEmpleado = ?";
          try {
              
              PreparedStatement ps= con.prepareStatement(sql);
-             ps.setInt(1, id);
+             ps.setInt(1, idEmpleado);
              
              if(ps.executeUpdate()!=0){
              
@@ -133,7 +133,7 @@ public boolean agregarEmpleado(Empleado empleado) {
              }
              ps.close();
          } catch (SQLException ex) {
-             JOptionPane.showMessageDialog(null, "Error de sintaxis ");
+             JOptionPane.showMessageDialog(null, "Error de sintaxis Borrado ");
          }
          
          

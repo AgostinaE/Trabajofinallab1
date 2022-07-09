@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package proyectoFinalG1;
 
 import java.time.LocalDate;
@@ -20,7 +16,7 @@ import proyectoFinalG1.Modelos.Propietario;
 
 /**
  *
- * @author POSITIVO BGH
+ * @author Grupo 1
  */
 public class ProyectoFinalG1 {
 

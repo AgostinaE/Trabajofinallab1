@@ -1,8 +1,3 @@
-                     /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package proyectoFinalG1.Vistas;
 
 import java.time.LocalDate;
@@ -20,27 +15,27 @@ import proyectoFinalG1.Modelos.Propietario;
 
 /**
  *
- * @author fotin
+ * @author Grupo 1
  */
 public class NuevoInmueble extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form NuevoInmueble
      */
-     private InmuebleData id;
-     private PropietarioData pd;
-     private ArrayList<Propietario> listaPropietarios;
+    private InmuebleData id;
+    private PropietarioData pd;
+    private ArrayList<Propietario> listaPropietarios;
 
     public NuevoInmueble(Conexion conexion) {
         initComponents();
         limpiarCampos();
         id = new InmuebleData(conexion);
         pd = new PropietarioData(conexion);
-        listaPropietarios=(ArrayList<Propietario>) pd.obtenerPropietarios();
+        listaPropietarios = (ArrayList<Propietario>) pd.obtenerPropietarios();
         cargarPropietarios();
     }
-    
-    private void cargarPropietarios(){
+
+    private void cargarPropietarios() {
         Collections.sort(listaPropietarios, new Comparator<Propietario>() {
             @Override
             public int compare(Propietario t, Propietario t1) {
@@ -51,8 +46,6 @@ public class NuevoInmueble extends javax.swing.JInternalFrame {
             jCbPropietarios.addItem(aux);
         }
     }
-    
-   
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -276,64 +269,63 @@ public class NuevoInmueble extends javax.swing.JInternalFrame {
 
     private void jBtnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnNuevoActionPerformed
         String codigoPropiedad = (String) jTxtCodigoPropiedad.getText();
-        String tipo =(String) jTxtTipo.getText();
-        Propietario propietario =(Propietario) jCbPropietarios.getSelectedItem();
-        int zona =Integer.parseInt((String)jCbZona.getSelectedItem());
+        String tipo = (String) jTxtTipo.getText();
+        Propietario propietario = (Propietario) jCbPropietarios.getSelectedItem();
+        int zona = Integer.parseInt((String) jCbZona.getSelectedItem());
         float superficie = Float.parseFloat(jTxtSuperficie.getText());
         double precio = Double.parseDouble(jTxtPrecio.getText());
-        String direccion =(String) jTxtDireccion.getText();
+        String direccion = (String) jTxtDireccion.getText();
         String caracteristicas = (String) jTxtAreaCaracteristicas.getText();
-        
+
         boolean valido = true;
         Validacion vd = new Validacion();
-        if(vd.EstaVacio(codigoPropiedad)){
+        if (vd.EstaVacio(codigoPropiedad)) {
             JOptionPane.showMessageDialog(this, "No indico un codigo para la propiedad");
-            valido=false;
+            valido = false;
         }
-        if(!vd.EsPalabra(tipo)){
+        if (!vd.EsPalabra(tipo)) {
             JOptionPane.showMessageDialog(this, "No indico un tipo valido para la propiedad");
-            valido=false;
+            valido = false;
         }
-        if(propietario==null){
+        if (propietario == null) {
             JOptionPane.showMessageDialog(this, "No indico un propietario para la propiedad");
-            valido=false;
+            valido = false;
         }
-        if(zona<0){
+        if (zona < 0) {
             JOptionPane.showMessageDialog(this, "No indico una zona para la propiedad");
-            valido=false;
+            valido = false;
         }
-        if(superficie<0){
+        if (superficie < 0) {
             JOptionPane.showMessageDialog(this, "No indico una superficie para la propiedad");
-            valido=false;
+            valido = false;
         }
-        if(precio<0){
+        if (precio < 0) {
             JOptionPane.showMessageDialog(this, "No indico un precio para la propiedad");
-            valido=false;
+            valido = false;
         }
-        if(vd.EstaVacio(direccion)){
+        if (vd.EstaVacio(direccion)) {
             JOptionPane.showMessageDialog(this, "No indico una direccion para la propiedad");
-            valido=false;
+            valido = false;
         }
-        if(vd.EstaVacio(caracteristicas)){
+        if (vd.EstaVacio(caracteristicas)) {
             JOptionPane.showMessageDialog(this, "No indico caracteristicas para la propiedad");
-            valido=false;
+            valido = false;
         }
-        
-        if(valido){
+
+        if (valido) {
             Inmueble inmueble = new Inmueble(caracteristicas, direccion, precio, superficie, tipo, zona, propietario, codigoPropiedad, true);
-            if(id.agregarInmueble(inmueble)){
+            if (id.agregarInmueble(inmueble)) {
                 JOptionPane.showMessageDialog(this, "La propiedad se cargo con exito");
             }
             limpiarCampos();
         }
-        
+
         jBGuardar.setEnabled(true);
-        
+
     }//GEN-LAST:event_jBtnNuevoActionPerformed
 
     private void jBGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarActionPerformed
 
-               
         /*String direccion = jTDireccion.getText();
         String altura = jtApellidoAlumno.getText();        
         Long dni = Long.parseLong(jtDni.getText());
@@ -353,7 +345,7 @@ public class NuevoInmueble extends javax.swing.JInternalFrame {
             jbNuevo.setEnabled(true);
             
         }*/
-        
+
     }//GEN-LAST:event_jBGuardarActionPerformed
 
     private void jBtnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSalirActionPerformed
@@ -369,8 +361,8 @@ public class NuevoInmueble extends javax.swing.JInternalFrame {
         jTxtAreaCaracteristicas.setText("");
         jTxtDireccion.setText("");
     }
-    
-     private void activaCampos() {
+
+    private void activaCampos() {
         jTxtSuperficie.setEnabled(true);
         jTxtPrecio.setEnabled(true);
         jTxtCodigoPropiedad.setEnabled(true);
@@ -379,7 +371,7 @@ public class NuevoInmueble extends javax.swing.JInternalFrame {
         jCBTipo.setEnabled(true);
         jCbPropietarios.setEnabled(true);
     }
-     
+
     private void desactivaCampos() {
         jTxtSuperficie.setEnabled(false);
         jTxtPrecio.setEnabled(false);

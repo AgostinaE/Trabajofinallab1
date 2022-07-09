@@ -1,37 +1,40 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package proyectoFinalG1.Vistas;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import proyectoFinalG1.Data.Conexion;
 import proyectoFinalG1.Data.EmpleadoData;
 import proyectoFinalG1.Modelos.Empleado;
 
 /**
  *
- * @author fotin
+ * @author Grupo 1
  */
 public class NuevoEmpleado extends javax.swing.JInternalFrame {
 
-   private EmpleadoData ed;
-   private ArrayList<Empleado> listaEmpleados;
-   
+    private EmpleadoData ed;
+    private ArrayList<Empleado> listaEmpleados;
+    private DefaultTableModel modelo;
+
     public NuevoEmpleado(Conexion conexion) {
         initComponents();
         limpiarCampos();
         ed = new EmpleadoData(conexion);
         desactivaCampos();
-        listaEmpleados=(ArrayList<Empleado>) ed.obtenerEmpleados();
-        jCBEmpleado.enable(false);
+
+        listaEmpleados = (ArrayList<Empleado>) ed.obtenerEmpleados();
+        cargoCombo();
+        modelo = new DefaultTableModel();
+        cargaEmpleados();
+
+        jCBEmpleado.enable(true);
+
     }
-    
-    private void cargarPropietarios(){
+
+    private void cargarPropietarios() {
         limpiarCampos();
         Collections.sort(listaEmpleados, new Comparator<Empleado>() {
             @Override
@@ -42,10 +45,42 @@ public class NuevoEmpleado extends javax.swing.JInternalFrame {
         for (Empleado aux : listaEmpleados) {
             jCBEmpleado.addItem(aux);
         }
-        
-        
-        
-       
+
+    }
+
+    private void cargaEmpleados() {
+
+        Empleado selec = (Empleado) jCBEmpleado.getSelectedItem();
+        listaEmpleados = (ArrayList<Empleado>) ed.obtenerEmpleados();
+
+        for (Empleado a : listaEmpleados) {
+            modelo.addRow(new Object[]{a.getApellido(), a.getNombre(), a.getDni()});
+        }
+//        limpiarCampos();
+//        Collections.sort(listaEmpleados, new Comparator<Empleado>() {
+//            @Override
+//            public int compare(Empleado t, Empleado t1) {
+//                return t.getApellido().compareTo(t1.getApellido());
+//            }
+//        });
+//        for (Empleado aux : listaEmpleados) {
+//            jCBEmpleado.addItem(aux);
+//        }
+
+    }
+
+    public void cargoCombo() {
+        //Carga los Empleado al ComboBox
+//        Collections.sort(listaEmpleados, new Comparator<Empleado>() {
+//            @Override
+//            public int compare(Empleado t, Empleado t1) {
+//                return t.getNombre().compareTo(t1.getNombre());
+//            }
+//        });
+        for (Empleado aux : listaEmpleados) {
+            jCBEmpleado.addItem(aux);
+        }
+
     }
 
     /**
@@ -104,6 +139,12 @@ public class NuevoEmpleado extends javax.swing.JInternalFrame {
 
         jLabel5.setFont(new java.awt.Font("Microsoft JhengHei Light", 0, 24)); // NOI18N
         jLabel5.setText("Nuevo Empleado");
+
+        jCBEmpleado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCBEmpleadoActionPerformed(evt);
+            }
+        });
 
         jBEditarEmpleado.setText("Editar datos de empleado");
         jBEditarEmpleado.addActionListener(new java.awt.event.ActionListener() {
@@ -209,7 +250,7 @@ public class NuevoEmpleado extends javax.swing.JInternalFrame {
                     .addComponent(jLabel3)
                     .addComponent(jTDni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(8, 8, 8)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jcbActivo)
                     .addComponent(jLabel6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -236,21 +277,21 @@ public class NuevoEmpleado extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTNombreActionPerformed
 
     private void jBNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBNuevoActionPerformed
-         limpiarCampos();
-         activaCampos();
+        limpiarCampos();
+        activaCampos();
     }//GEN-LAST:event_jBNuevoActionPerformed
 
     private void jBGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarActionPerformed
-       
+
         String nombre = jTNombre.getText();
         String apellido = jTApellido.getText();
         int dni = Integer.parseInt(jTDni.getText());
         Boolean activo = jcbActivo.isSelected();
-        
-        Empleado empleado = new Empleado(nombre, apellido,dni,activo);
-        if(ed.agregarEmpleado(empleado)){
-            jTId.setText(empleado.getIdEmpleado()+"");
-            JOptionPane.showMessageDialog(this, "Empleado Agregado con Exito"); 
+
+        Empleado empleado = new Empleado(nombre, apellido, dni, activo);
+        if (ed.agregarEmpleado(empleado)) {
+            jTId.setText(empleado.getIdEmpleado() + "");
+            JOptionPane.showMessageDialog(this, "Empleado Agregado con Exito");
         }
     }//GEN-LAST:event_jBGuardarActionPerformed
 
@@ -260,84 +301,101 @@ public class NuevoEmpleado extends javax.swing.JInternalFrame {
 
     private void jBEditarEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEditarEmpleadoActionPerformed
         activaCampos();
-        int id = -1,dni=-1;
-       
-        id=Integer.parseInt(jTId.getText());
+        int id = -1, dni = -1;
+
+        id = Integer.parseInt(jTId.getText());
         String nombre = jTNombre.getText();
-        String apellido = jTApellido.getText();        
+        String apellido = jTApellido.getText();
         Boolean activo = jcbActivo.isSelected();
-       
-        try{
+
+        try {
             dni = Integer.parseInt(jTDni.getText());
-        }catch(Exception e){
-        
-             JOptionPane.showMessageDialog(this, "Usted debe ingresar un numero");
-             jTDni.requestFocus();
-            
+        } catch (Exception e) {
+
+            JOptionPane.showMessageDialog(this, "Usted debe ingresar un numero");
+            jTDni.requestFocus();
+
         }
-       
-        Empleado empleado=new Empleado(id,nombre,apellido,dni,activo);
-        if(ed.modificarEmpleado(empleado)){
-        
+
+        Empleado empleado = new Empleado(id, nombre, apellido, dni, activo);
+        if (ed.modificarEmpleado(empleado)) {
+
             JOptionPane.showMessageDialog(this, "Alumno modificado con Exito");
         }
     }//GEN-LAST:event_jBEditarEmpleadoActionPerformed
 
     private void jBBuscarEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarEmpleadoActionPerformed
-        jCBEmpleado.enable(true);
-        activaCampos();
-        cargarPropietarios();
-        Empleado em =(Empleado) jCBEmpleado.getSelectedItem();
-        long dni = em.getDni();
         
+        //jCBEmpleado.enable(true);
+        activaCampos();
+        Empleado em = (Empleado) jCBEmpleado.getSelectedItem();
+        long dni = em.getDni();
+
         //int id=Integer.parseInt(jTId.getText());
         Empleado empleado = ed.obtenerEmpleadoXDNI(dni);
         if (empleado != null) {
-            jTId.setText(empleado.getIdEmpleado()+"");
+            jTId.setText(empleado.getIdEmpleado() + "");
             jTDni.setText(empleado.getDni() + "");
             jTApellido.setText(empleado.getApellido() + "");
-            jTNombre.setText(empleado.getNombre() + "");           
+            jTNombre.setText(empleado.getNombre() + "");
             jcbActivo.enable(false);
 
-        }else{
-            JOptionPane.showMessageDialog(this, "No hay un alumno activo asociado a ese legajo");
+        } else {
+            JOptionPane.showMessageDialog(this, "No hay un empleado activo asociado a ese codigo");
         }
     }//GEN-LAST:event_jBBuscarEmpleadoActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         Empleado empleado = new Empleado();
         int id = -1;
-        id=Integer.parseInt(jTId.getText());
+        id = Integer.parseInt(jTId.getText());
         //ed.borrarEmpleado(id);
         if (ed.borrarEmpleado(id)) {
-            JOptionPane.showMessageDialog(null, "Materia borrada con Exito");
+            JOptionPane.showMessageDialog(null, "Empleado borrado con Exito");
             limpiarCampos();
             desactivaCampos();
-        }    
+        }
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    private void jCBEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBEmpleadoActionPerformed
+        // TODO add your handling code here:
+        borraFilasTabla();
+
+    }//GEN-LAST:event_jCBEmpleadoActionPerformed
+
     private void limpiarCampos() {
-        
+
         jTId.setText("");
         jTNombre.setText("");
         jTApellido.setText("");
         jTDni.setText("");
     }
-    
-     private void activaCampos() {
+
+    private void activaCampos() {
         jTId.setEnabled(true);
         jTNombre.setEnabled(true);
         jTApellido.setEnabled(true);
         jTDni.setEnabled(true);
-        
+
     }
-     
+
     private void desactivaCampos() {
         jTId.setEnabled(false);
         jTNombre.setEnabled(false);
         jTApellido.setEnabled(false);
         jTDni.setEnabled(false);
-        
+
+    }
+
+    private void borraFilasTabla() {
+        if (modelo != null) {
+            int a = modelo.getRowCount() - 1;
+
+            for (int i = a; i >= 0; i--) {
+
+                modelo.removeRow(i);
+            }
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

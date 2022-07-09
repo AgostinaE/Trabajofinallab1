@@ -26,7 +26,7 @@ public class Validacion {
     }
 
     public boolean ValidarDni(int x) {
-        if ((x == (int) x) && x > 0 && x < 999999999 ) {
+        if ((x == (int) x) && x > 0 && x < 999999999) {
             return true;
         } else {
             return false;
@@ -42,7 +42,7 @@ public class Validacion {
     }
 
     public boolean EsPalabra(String x) {
-        if (x == (String) x  && x!="") {
+        if (x == (String) x && x != "") {
             return true;
         } else {
             return false;

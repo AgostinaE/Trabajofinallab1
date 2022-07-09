@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package proyectoFinalG1.Vistas;
 
 import java.awt.Graphics;
@@ -14,14 +9,12 @@ import proyectoFinalG1.Data.Conexion;
 
 /**
  *
- * @author fotin
+ * @author Grupo 1
  */
-
-     
-
 public class MenuPrincipal extends javax.swing.JFrame {
 
     private Conexion conexion;
+
     /**
      * Creates new form MenuPrincipal
      */
@@ -266,7 +259,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         nc.setVisible(true);
         jDesktopPane1.add(nc);
         jDesktopPane1.moveToFront(nc);
-        jDesktopPane1.repaint();   
+        jDesktopPane1.repaint();
     }//GEN-LAST:event_jbContratosActionPerformed
 
     private void jbPropietariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbPropietariosActionPerformed
@@ -299,7 +292,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         ni.setVisible(true);
         jDesktopPane1.add(ni);
         jDesktopPane1.moveToFront(ni);
-        jDesktopPane1.repaint();   
+        jDesktopPane1.repaint();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jmiNuevoInmuebleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiNuevoInmuebleActionPerformed
@@ -318,8 +311,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
         bc.setVisible(true);
         jDesktopPane1.add(bc);
         jDesktopPane1.moveToFront(bc);
-        jDesktopPane1.repaint(); 
-        
+        jDesktopPane1.repaint();
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -328,7 +321,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         ne.setVisible(true);
         jDesktopPane1.add(ne);
         jDesktopPane1.moveToFront(ne);
-        jDesktopPane1.repaint();  
+        jDesktopPane1.repaint();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**

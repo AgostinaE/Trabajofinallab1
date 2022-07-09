@@ -17,7 +17,7 @@ public class Inquilino {
     private String garante;
 
     private int dniGarante;
-    
+
     private boolean activo;
 
     public Inquilino() {
@@ -122,10 +122,6 @@ public class Inquilino {
         return hash;
     }
 
-    
-
-    
-
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -146,8 +142,7 @@ public class Inquilino {
 
     @Override
     public String toString() {
-        return  apellido + ", " + nombre+ ", " + cuil;
+        return apellido + ", " + nombre + ", " + cuil;
     }
 
-    
 }

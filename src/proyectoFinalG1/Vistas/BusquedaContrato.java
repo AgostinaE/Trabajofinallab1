@@ -21,7 +21,7 @@ import proyectoFinalG1.Modelos.Inquilino;
 
 /**
  *
- * @author fotin
+ * @author Grupo 1
  */
 public class BusquedaContrato extends javax.swing.JInternalFrame {
 
@@ -37,7 +37,7 @@ public class BusquedaContrato extends javax.swing.JInternalFrame {
     private ArrayList<Inmueble> listaInmuebles;
     private ArrayList<Empleado> listaEmpleados;
     private ArrayList<Contrato> listaContratos;
-    
+
     public BusquedaContrato(Conexion conexion) {
         initComponents();
         cd = new ContratoData(conexion);
@@ -53,8 +53,8 @@ public class BusquedaContrato extends javax.swing.JInternalFrame {
         listaEmpleados = (ArrayList<Empleado>) ed.obtenerEmpleados();
         cargarEmpleados();
     }
-    
-    private void cargarEmpleados(){
+
+    private void cargarEmpleados() {
         Collections.sort(listaEmpleados, new Comparator<Empleado>() {
             @Override
             public int compare(Empleado t, Empleado t1) {
@@ -65,8 +65,8 @@ public class BusquedaContrato extends javax.swing.JInternalFrame {
             jCbEmpleados.addItem(aux);
         }
     }
-    
-    private void cargarInmuebles(){
+
+    private void cargarInmuebles() {
         Collections.sort(listaInmuebles, new Comparator<Inmueble>() {
             @Override
             public int compare(Inmueble t, Inmueble t1) {
@@ -77,8 +77,8 @@ public class BusquedaContrato extends javax.swing.JInternalFrame {
             jCbInmuebles.addItem(aux);
         }
     }
-    
-    private void cargarInquilinos(){
+
+    private void cargarInquilinos() {
         Collections.sort(listaInquilinos, new Comparator<Inquilino>() {
             @Override
             public int compare(Inquilino t, Inquilino t1) {
@@ -90,7 +90,7 @@ public class BusquedaContrato extends javax.swing.JInternalFrame {
         }
     }
 
-    private void armarTabla(){
+    private void armarTabla() {
         ArrayList<Object> columnas = new ArrayList<>();
         columnas.add("Codigo del Contrato");
         columnas.add("Inquilino");
@@ -106,38 +106,38 @@ public class BusquedaContrato extends javax.swing.JInternalFrame {
         }
         jTContratos.setModel(modelo);
     }
-    
-    public void cargarXInquilino(){
+
+    public void cargarXInquilino() {
         borrarFilas();
         Inquilino selected = (Inquilino) jCbInquilinos.getSelectedItem();
-        listaContratos = (ArrayList<Contrato>)cd.buscarContratosXInquilino(selected.getCuil());
+        listaContratos = (ArrayList<Contrato>) cd.buscarContratosXInquilino(selected.getCuil());
         for (Contrato c : listaContratos) {
             String estado;
-            if(c.isActivo()){
-                estado="Activo";
-            }else{
-                estado="Inactivo";
+            if (c.isActivo()) {
+                estado = "Activo";
+            } else {
+                estado = "Inactivo";
             }
-            modelo.addRow(new Object[]{c.getIdContrato(), c.getInquilino().toString(), c.getInmueble().getCodigoInmueble(), c.getInmueble().getPrecio(), c.getInicio(),c.getFinalizacion(),c.getEmpleado().toString(),estado});
+            modelo.addRow(new Object[]{c.getIdContrato(), c.getInquilino().toString(), c.getInmueble().getCodigoInmueble(), c.getInmueble().getPrecio(), c.getInicio(), c.getFinalizacion(), c.getEmpleado().toString(), estado});
         }
     }
-    
-    public void cargarXPropiedad(){
+
+    public void cargarXPropiedad() {
         borrarFilas();
         Inmueble selected = (Inmueble) jCbInmuebles.getSelectedItem();
-        listaContratos = (ArrayList<Contrato>)cd.buscarContratosXPropiedad(selected.getCodigoInmueble());
+        listaContratos = (ArrayList<Contrato>) cd.buscarContratosXPropiedad(selected.getCodigoInmueble());
         for (Contrato c : listaContratos) {
             String estado;
-            if(c.isActivo()){
-                estado="Activo";
-            }else{
-                estado="Inactivo";
+            if (c.isActivo()) {
+                estado = "Activo";
+            } else {
+                estado = "Inactivo";
             }
-            modelo.addRow(new Object[]{c.getIdContrato(), c.getInquilino().toString(), c.getInmueble().getCodigoInmueble(), c.getInmueble().getPrecio(), c.getInicio(),c.getFinalizacion(),c.getEmpleado().toString(),estado});
+            modelo.addRow(new Object[]{c.getIdContrato(), c.getInquilino().toString(), c.getInmueble().getCodigoInmueble(), c.getInmueble().getPrecio(), c.getInicio(), c.getFinalizacion(), c.getEmpleado().toString(), estado});
         }
     }
-    
-    public void borrarFilas(){
+
+    public void borrarFilas() {
         if (modelo != null) {
             int a = modelo.getRowCount() - 1;
 
@@ -147,6 +147,7 @@ public class BusquedaContrato extends javax.swing.JInternalFrame {
             }
         }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -197,7 +198,6 @@ public class BusquedaContrato extends javax.swing.JInternalFrame {
 
         jLabel1.setBackground(new java.awt.Color(153, 153, 153));
         jLabel1.setFont(new java.awt.Font("SansSerif", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Gestion de Contratos");
         jLabel1.setOpaque(true);
@@ -224,7 +224,6 @@ public class BusquedaContrato extends javax.swing.JInternalFrame {
 
         jButton1.setBackground(new java.awt.Color(153, 204, 255));
         jButton1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(0, 0, 0));
         jButton1.setText("Buscar Contratos Por Inquilino");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -234,7 +233,6 @@ public class BusquedaContrato extends javax.swing.JInternalFrame {
 
         jButton2.setBackground(new java.awt.Color(153, 204, 255));
         jButton2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(0, 0, 0));
         jButton2.setText("Buscar Contratos Por Propiedad");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -253,21 +251,17 @@ public class BusquedaContrato extends javax.swing.JInternalFrame {
 
         jLabel2.setBackground(new java.awt.Color(255, 255, 255));
         jLabel2.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Seleccionar Codigo de Propiedad");
 
         jCbInmuebles.setBackground(new java.awt.Color(204, 204, 204));
         jCbInmuebles.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jCbInmuebles.setForeground(new java.awt.Color(0, 0, 0));
 
         jLabel3.setBackground(new java.awt.Color(255, 255, 255));
         jLabel3.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Seleccionar Inquilino");
 
         jCbInquilinos.setBackground(new java.awt.Color(204, 204, 204));
         jCbInquilinos.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jCbInquilinos.setForeground(new java.awt.Color(0, 0, 0));
 
         jSeparator2.setBackground(new java.awt.Color(204, 204, 204));
         jSeparator2.setForeground(new java.awt.Color(204, 204, 204));
@@ -275,75 +269,58 @@ public class BusquedaContrato extends javax.swing.JInternalFrame {
 
         jLabel4.setBackground(new java.awt.Color(255, 255, 255));
         jLabel4.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Seleccionar Vendedor");
 
         jCbEmpleados.setBackground(new java.awt.Color(204, 204, 204));
         jCbEmpleados.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jCbEmpleados.setForeground(new java.awt.Color(0, 0, 0));
 
         jButton4.setBackground(new java.awt.Color(153, 204, 255));
         jButton4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(0, 0, 0));
         jButton4.setText("Buscar Contratos Por Vendedor");
 
         jButton5.setBackground(new java.awt.Color(255, 102, 102));
         jButton5.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jButton5.setForeground(new java.awt.Color(0, 0, 0));
         jButton5.setText("Buscar Contratos Vencidos");
 
         jButton6.setBackground(new java.awt.Color(204, 204, 204));
         jButton6.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jButton6.setForeground(new java.awt.Color(0, 0, 0));
         jButton6.setText("Salir");
 
         jLabel5.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("Codigo Del Contrato");
 
         jTextField1.setBackground(new java.awt.Color(204, 204, 204));
         jTextField1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jTextField1.setForeground(new java.awt.Color(0, 0, 0));
 
         jLabel6.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
         jLabel6.setText("Inicio del Contrato");
 
         jLabel7.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
         jLabel7.setText("Finalizacion del Contrato");
 
         jLabel8.setBackground(new java.awt.Color(255, 255, 255));
         jLabel8.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(0, 0, 0));
         jLabel8.setText("Cierre del Contrato");
 
         jLabel9.setBackground(new java.awt.Color(255, 255, 255));
         jLabel9.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(0, 0, 0));
         jLabel9.setText("DNI del Vendedor");
 
         jLabel10.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(0, 0, 0));
         jLabel10.setText("Inquilino");
 
         jLabel11.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(0, 0, 0));
         jLabel11.setText("Codigo del Inmueble");
 
         jLabel12.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(0, 0, 0));
         jLabel12.setText("Estado del contrato");
 
         jDateChooser1.setBackground(new java.awt.Color(204, 204, 204));
-        jDateChooser1.setForeground(new java.awt.Color(0, 0, 0));
 
         jDateChooser2.setBackground(new java.awt.Color(204, 204, 204));
-        jDateChooser2.setForeground(new java.awt.Color(0, 0, 0));
 
         jButton7.setBackground(new java.awt.Color(204, 204, 204));
         jButton7.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jButton7.setForeground(new java.awt.Color(0, 0, 0));
         jButton7.setText("Renovar Contrato");
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -352,33 +329,26 @@ public class BusquedaContrato extends javax.swing.JInternalFrame {
         });
 
         jLVendedor.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLVendedor.setForeground(new java.awt.Color(0, 0, 0));
         jLVendedor.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         jLInquilino.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLInquilino.setForeground(new java.awt.Color(0, 0, 0));
 
         jLCodigoPropiedad.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLCodigoPropiedad.setForeground(new java.awt.Color(0, 0, 0));
         jLCodigoPropiedad.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         jLEstado.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLEstado.setForeground(new java.awt.Color(0, 0, 0));
         jLEstado.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         jButton8.setBackground(new java.awt.Color(204, 204, 204));
         jButton8.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jButton8.setForeground(new java.awt.Color(0, 0, 0));
         jButton8.setText("Modificar contrato");
 
         jButton9.setBackground(new java.awt.Color(204, 204, 204));
         jButton9.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jButton9.setForeground(new java.awt.Color(0, 0, 0));
         jButton9.setText("Cancelar Contrato");
 
         jButton10.setBackground(new java.awt.Color(204, 204, 204));
         jButton10.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jButton10.setForeground(new java.awt.Color(0, 0, 0));
         jButton10.setText("Borrar Contrato");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -391,7 +361,7 @@ public class BusquedaContrato extends javax.swing.JInternalFrame {
                         .addGroup(layout.createSequentialGroup()
                             .addGap(79, 79, 79)
                             .addComponent(jButton6)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 165, Short.MAX_VALUE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(57, 57, 57))
                         .addGroup(layout.createSequentialGroup()
@@ -561,7 +531,7 @@ public class BusquedaContrato extends javax.swing.JInternalFrame {
                                             .addComponent(jLEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                     .addComponent(jButton8))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jButton9)
                                     .addComponent(jButton10))))
                         .addContainerGap(71, Short.MAX_VALUE))))

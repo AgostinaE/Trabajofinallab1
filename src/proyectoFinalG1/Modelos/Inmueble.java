@@ -21,7 +21,7 @@ public class Inmueble {
     private Propietario propietario;
 
     private String codigoInmueble;
-    
+
     private boolean activo;
 
     public Inmueble() {
@@ -171,5 +171,4 @@ public class Inmueble {
         return codigoInmueble;
     }
 
-    
 }

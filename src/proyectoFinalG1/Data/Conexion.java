@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package proyectoFinalG1.Data;
 
 import java.sql.Connection;
@@ -12,16 +7,18 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author POSITIVO BGH
+ * @author Grupo 1
  */
-    public class Conexion {
+public class Conexion {
 //Atributos drivers, usuarios y contraseña
+
     private String url = "jdbc:mysql://localhost/inmobiliariag1";
     private String usuario = "root";
     private String password = "";
 // atributo de tipo Conection
     private Connection conexion;
 //Constructor con el for name de la direccion de la clase
+
     public Conexion() {
         try {
 
@@ -35,6 +32,7 @@ import javax.swing.JOptionPane;
 //new Paquete. subpaquete. nombre de la clase
     }
 //metodo getConection 
+
     public Connection getConexion() {
 
         try {

@@ -16,7 +16,7 @@ public class Contrato {
     private Empleado empleado;
 
     private Inquilino inquilino;
-    
+
     private Inmueble inmueble;
 
     private boolean activo;
@@ -123,8 +123,6 @@ public class Contrato {
         return hash;
     }
 
-    
-
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -148,7 +146,4 @@ public class Contrato {
         return "Contrato{" + "idContrato=" + idContrato + ", inicio=" + inicio + ", finalizacion=" + finalizacion + ", firma=" + firma + ", empleado=" + empleado + ", inquilino=" + inquilino + ", inmueble=" + inmueble + ", activo=" + activo + '}';
     }
 
-    
-    
-    
 }

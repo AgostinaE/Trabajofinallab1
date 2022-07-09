@@ -1,11 +1,5 @@
 package proyectoFinalG1.Data;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 import proyectoFinalG1.Data.Conexion;
 import proyectoFinalG1.Modelos.Inmueble;
 import proyectoFinalG1.Modelos.Propietario;
@@ -21,28 +15,29 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 /**
  *
- * @author POSITIVO BGH
+ * @author Grupo 1
  */
 public class InmuebleData {
-    
+
     private Connection con = null;
     private PropietarioData propietarioData;
-    
-public InmuebleData(Conexion conexion){
-    
-    con = conexion.getConexion();
-    this.propietarioData = new PropietarioData(conexion);
-}
 
-public boolean agregarInmueble(Inmueble inmueble){
-    
-    boolean insertado = true;
-     String sql = "INSERT INTO inmueble (caracteristicas, direccion, precio, superficie, tipoLocal, zona, idPropietario, codigoInmueble, activo)  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";
+    public InmuebleData(Conexion conexion) {
+
+        con = conexion.getConexion();
+        this.propietarioData = new PropietarioData(conexion);
+    }
+
+    public boolean agregarInmueble(Inmueble inmueble) {
+
+        boolean insertado = true;
+        String sql = "INSERT INTO inmueble (caracteristicas, direccion, precio, superficie, tipoLocal, zona, idPropietario, codigoInmueble, activo)  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            
+
             ps.setString(1, inmueble.getCaracteristicas());
             ps.setString(2, inmueble.getDireccion());
             ps.setDouble(3, inmueble.getPrecio());
@@ -52,40 +47,39 @@ public boolean agregarInmueble(Inmueble inmueble){
             ps.setInt(7, inmueble.getPropietario().getIdPropietario());
             ps.setString(8, inmueble.getCodigoInmueble());
             ps.setBoolean(9, inmueble.isActivo());
-            
+
             ps.executeUpdate();
-            
+
             ResultSet rs = ps.getGeneratedKeys();
-     if (rs.next()) {
+            if (rs.next()) {
                 inmueble.setIdInmueble(rs.getInt(1));
             } else {
-               
+
                 insertado = false;
             }
 
             ps.close();
         } catch (SQLException ex) {
-            insertado=false;
-            if(ex instanceof java.sql.SQLIntegrityConstraintViolationException){
-                JOptionPane.showMessageDialog(null, "Ya existe un Inmueble con ese Codigo " );
-            }else {
-            
-                JOptionPane.showMessageDialog(null, "Error de sintaxis aca "+ex );
-                
+            insertado = false;
+            if (ex instanceof java.sql.SQLIntegrityConstraintViolationException) {
+                JOptionPane.showMessageDialog(null, "Ya existe un Inmueble con ese Codigo ");
+            } else {
+
+                JOptionPane.showMessageDialog(null, "Error de sintaxis aca " + ex);
+
             }
-            
 
         }
-   return insertado; 
-}
+        return insertado;
+    }
 
-public List<Inmueble> obtenerInmuebles() {
+    public List<Inmueble> obtenerInmuebles() {
         ArrayList<Inmueble> inmuebles = new ArrayList<Inmueble>();
 
         try {
             String sql = "SELECT * FROM inmueble WHERE activo = 1;";
             PreparedStatement ps = con.prepareStatement(sql);
-            
+
             ResultSet resultSet = ps.executeQuery();
             Inmueble inmueble;
             while (resultSet.next()) {
@@ -97,7 +91,7 @@ public List<Inmueble> obtenerInmuebles() {
                 inmueble.setSuperficie(resultSet.getFloat("superficie"));
                 inmueble.setTipoLocal(resultSet.getString("tipoLocal"));
                 Propietario i = propietarioData.obetenerPropietarioPorID(resultSet.getInt("idPropietario"));
-                inmueble.setPropietario(i); 
+                inmueble.setPropietario(i);
                 inmueble.setCodigoInmueble(resultSet.getString("codigoInmueble"));
                 inmueble.setActivo(resultSet.getBoolean("activo"));
 
@@ -105,20 +99,20 @@ public List<Inmueble> obtenerInmuebles() {
             }
             ps.close();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null," Error al obtener Inmuebles ");
+            JOptionPane.showMessageDialog(null, " Error al obtener Inmuebles ");
         }
 
         return inmuebles;
     }
 
-public Inmueble obtenerInmuebleXId(int id){
-        Inmueble inmueble=null;
+    public Inmueble obtenerInmuebleXId(int id) {
+        Inmueble inmueble = null;
         try {
             String sql = "SELECT * FROM inmueble WHERE idInmueble = ? AND activo = 1;";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, id);
             ResultSet resultSet = ps.executeQuery();
-            
+
             while (resultSet.next()) {
                 inmueble = new Inmueble();
                 inmueble.setIdInmueble(resultSet.getInt("idInmueble"));
@@ -128,27 +122,27 @@ public Inmueble obtenerInmuebleXId(int id){
                 inmueble.setSuperficie(resultSet.getFloat("superficie"));
                 inmueble.setTipoLocal(resultSet.getString("tipoLocal"));
                 Propietario i = propietarioData.obetenerPropietarioPorID(resultSet.getInt("idPropietario"));
-                inmueble.setPropietario(i); 
+                inmueble.setPropietario(i);
                 inmueble.setCodigoInmueble(resultSet.getString("codigoInmueble"));
                 inmueble.setActivo(resultSet.getBoolean("activo"));
             }
             ps.close();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null,"Error al obtener Inmueble");
+            JOptionPane.showMessageDialog(null, "Error al obtener Inmueble");
         }
         return inmueble;
-     }
+    }
 
-public Inmueble obtenerInmuebleXCodigoInmueble(String codigoInmueble){
-     
-        Inmueble inmueble=null;
+    public Inmueble obtenerInmuebleXCodigoInmueble(String codigoInmueble) {
+
+        Inmueble inmueble = null;
 
         try {
             String sql = "SELECT * FROM inmueble WHERE codigoInmueble = ? AND activo = 1;";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, codigoInmueble);
             ResultSet resultSet = ps.executeQuery();
-            
+
             while (resultSet.next()) {
                 inmueble = new Inmueble();
                 inmueble.setIdInmueble(resultSet.getInt("idInmueble"));
@@ -158,47 +152,46 @@ public Inmueble obtenerInmuebleXCodigoInmueble(String codigoInmueble){
                 inmueble.setSuperficie(resultSet.getFloat("superficie"));
                 inmueble.setTipoLocal(resultSet.getString("tipoLocal"));
                 Propietario i = propietarioData.obetenerPropietarioPorID(resultSet.getInt("idPropietario"));
-                inmueble.setPropietario(i); 
+                inmueble.setPropietario(i);
                 inmueble.setCodigoInmueble(resultSet.getString("codigoInmueble"));
                 inmueble.setActivo(resultSet.getBoolean("activo"));
-                
+
             }
             ps.close();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null,"Error al obtener Inmuebles por Codigo Inmueble");
+            JOptionPane.showMessageDialog(null, "Error al obtener Inmuebles por Codigo Inmueble");
         }
 
         return inmueble;
-     }
+    }
 
-public boolean borrarInmueble(int idInmueble){
-     
-         boolean borrado=false;
-         String sql= "UPDATE inmueble SET activo = 0 WHERE idInmueble = ?";
-         try {
-             
-             PreparedStatement ps= con.prepareStatement(sql);
-             ps.setInt(1, idInmueble);
-             
-             if(ps.executeUpdate()!=0){
-             
-                 borrado=true;
-             }
-             ps.close();
-         } catch (SQLException ex) {
-             JOptionPane.showMessageDialog(null, "Error de sintaxis ");
-         }
-         
-         
-         return borrado;
-     }
+    public boolean borrarInmueble(int idInmueble) {
 
-public boolean modificarInmueble(Inmueble inmueble){
-     
-         String sql="UPDATE inmueble SET caracteristica = ?, direccion = ?, precio = ?, superficie = ?, tipoLocal = ?, zona = ?, propietario = ?, codigoInmueble = ?, activo = ? WHERE idInmueble = ?";
-         boolean modificado=false;
-     try {
-            PreparedStatement ps= con.prepareStatement(sql);
+        boolean borrado = false;
+        String sql = "UPDATE inmueble SET activo = 0 WHERE idInmueble = ?";
+        try {
+
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, idInmueble);
+
+            if (ps.executeUpdate() != 0) {
+
+                borrado = true;
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error de sintaxis ");
+        }
+
+        return borrado;
+    }
+
+    public boolean modificarInmueble(Inmueble inmueble) {
+
+        String sql = "UPDATE inmueble SET caracteristica = ?, direccion = ?, precio = ?, superficie = ?, tipoLocal = ?, zona = ?, propietario = ?, codigoInmueble = ?, activo = ? WHERE idInmueble = ?";
+        boolean modificado = false;
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, inmueble.getCaracteristicas());
             ps.setString(2, inmueble.getDireccion());
             ps.setDouble(3, inmueble.getPrecio());
@@ -209,27 +202,26 @@ public boolean modificarInmueble(Inmueble inmueble){
             ps.setInt(8, inmueble.getPropietario().getIdPropietario());
             ps.setBoolean(9, inmueble.isActivo());
             ps.setInt(10, inmueble.getIdInmueble());
-             
-             if(ps.executeUpdate()!=0){
-             
-                 modificado=true;
-             }
-             ps.close();
-         } catch (SQLException ex) {
-             JOptionPane.showMessageDialog(null, "Error de sintaxis ");
-         }
-     return modificado;
-     }
-    
+
+            if (ps.executeUpdate() != 0) {
+
+                modificado = true;
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error de sintaxis ");
+        }
+        return modificado;
+    }
 
     //Listar los inmuebles que estén alquilados al día de hoy
-    public List<Inmueble> alquilados(){
+    public List<Inmueble> alquilados() {
         ArrayList<Inmueble> inmuebles = new ArrayList<Inmueble>();
 
         try {
             String sql = "SELECT inmueble.* FROM contrato , inmueble WHERE inmueble.idInmueble=contrato.idInmueble AND inmueble.activo = 1 AND contrato.finalizacion>'?'; ";
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setDate(1,Date.valueOf(LocalDate.now()));
+            ps.setDate(1, Date.valueOf(LocalDate.now()));
             ResultSet resultSet = ps.executeQuery();
             Inmueble inmueble;
             while (resultSet.next()) {
@@ -241,7 +233,7 @@ public boolean modificarInmueble(Inmueble inmueble){
                 inmueble.setSuperficie(resultSet.getFloat("superficie"));
                 inmueble.setTipoLocal(resultSet.getString("tipoLocal"));
                 Propietario i = propietarioData.obetenerPropietarioPorID(resultSet.getInt("idPropietario"));
-                inmueble.setPropietario(i); 
+                inmueble.setPropietario(i);
                 inmueble.setCodigoInmueble(resultSet.getString("codigoInmueble"));
                 inmueble.setActivo(resultSet.getBoolean("activo"));
 
@@ -249,19 +241,20 @@ public boolean modificarInmueble(Inmueble inmueble){
             }
             ps.close();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null," Error al obtener Inmuebles ");
+            JOptionPane.showMessageDialog(null, " Error al obtener Inmuebles ");
         }
 
         return inmuebles;
     }
+
     //Listar los inmuebles no alquilados al día de hoy
-    public List<Inmueble> NoAlquilados(){
+    public List<Inmueble> NoAlquilados() {
         ArrayList<Inmueble> inmuebles = new ArrayList<Inmueble>();
 
         try {
             String sql = "SELECT inmueble.* FROM contrato , inmueble WHERE inmueble.activo=1 AND inmueble.idInmueble NOT IN (SELECT inmueble.idInmueble FROM inmueble WHERE inmueble.idInmueble=contrato.idInmueble AND inmueble.activo = 1 AND contrato.finalizacion>'?'); ";
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setDate(1,Date.valueOf(LocalDate.now()));
+            ps.setDate(1, Date.valueOf(LocalDate.now()));
             ResultSet resultSet = ps.executeQuery();
             Inmueble inmueble;
             while (resultSet.next()) {
@@ -273,7 +266,7 @@ public boolean modificarInmueble(Inmueble inmueble){
                 inmueble.setSuperficie(resultSet.getFloat("superficie"));
                 inmueble.setTipoLocal(resultSet.getString("tipoLocal"));
                 Propietario i = propietarioData.obetenerPropietarioPorID(resultSet.getInt("idPropietario"));
-                inmueble.setPropietario(i); 
+                inmueble.setPropietario(i);
                 inmueble.setCodigoInmueble(resultSet.getString("codigoInmueble"));
                 inmueble.setActivo(resultSet.getBoolean("activo"));
 
@@ -281,20 +274,20 @@ public boolean modificarInmueble(Inmueble inmueble){
             }
             ps.close();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null," Error al obtener Inmuebles ");
+            JOptionPane.showMessageDialog(null, " Error al obtener Inmuebles ");
         }
 
         return inmuebles;
     }
-    
-    public List<Inmueble> obtenerDireccionYPrecioAlquileresXDueño(int idPropietario){
+
+    public List<Inmueble> obtenerDireccionYPrecioAlquileresXDueño(int idPropietario) {
         ArrayList<Inmueble> inmuebles = new ArrayList<Inmueble>();
 
         try {
             String sql = "SELECT inmueble.direccion, inmueble.precio FROM propietario , inmueble, contrato WHERE inmueble.idPropietario=propietario.idPropietario AND inmueble.activo = 1 AND ontrato.finalizacion>'?' AND propietario.idPropietario=? AND inmueble.idInmueble=contrato.idInmueble;";
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setDate(1,Date.valueOf(LocalDate.now()));
-            ps.setInt(2,idPropietario);
+            ps.setDate(1, Date.valueOf(LocalDate.now()));
+            ps.setInt(2, idPropietario);
             ResultSet resultSet = ps.executeQuery();
             Inmueble inmueble;
             while (resultSet.next()) {
@@ -306,7 +299,7 @@ public boolean modificarInmueble(Inmueble inmueble){
                 inmueble.setSuperficie(resultSet.getFloat("superficie"));
                 inmueble.setTipoLocal(resultSet.getString("tipoLocal"));
                 Propietario i = propietarioData.obetenerPropietarioPorID(resultSet.getInt("idPropietario"));
-                inmueble.setPropietario(i); 
+                inmueble.setPropietario(i);
                 inmueble.setCodigoInmueble(resultSet.getString("codigoInmueble"));
                 inmueble.setActivo(resultSet.getBoolean("activo"));
 
@@ -314,14 +307,14 @@ public boolean modificarInmueble(Inmueble inmueble){
             }
             ps.close();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null," Error al obtener Inmuebles ");
+            JOptionPane.showMessageDialog(null, " Error al obtener Inmuebles ");
         }
 
         return inmuebles;
     }
     //Listar dirección y precio de los inmuebles alquilados actualmente de un determinado propietario
-    
-    }
+
+}
 /*
 
 SELECT inmueble.direccion, inmueble.precio FROM propietario , inmueble, contrato WHERE inmueble.idPropietario=propietario.idPropietario AND inmueble.activo = 1 AND ontrato.finalizacion>'?' AND propietario.idPropietario=? AND inmueble.idInmueble=contrato.idInmueble;

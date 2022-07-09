@@ -1,17 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package proyectoFinalG1.Modelos;
 
 import java.util.Objects;
 
 /**
  *
- * @author Tincho
+ * @author Grupo 1
  */
 public class Empleado {
+
     private int idEmpleado;
     private String nombre;
     private String apellido;
@@ -110,5 +106,4 @@ public class Empleado {
         return apellido + " , " + nombre + " " + idEmpleado;
     }
 
-    
 }

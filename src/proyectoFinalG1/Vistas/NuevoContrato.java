@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package proyectoFinalG1.Vistas;
 
 import java.text.SimpleDateFormat;
@@ -24,7 +19,7 @@ import proyectoFinalG1.Modelos.Inquilino;
 
 /**
  *
- * @author fotin
+ * @author Grupo 1
  */
 public class NuevoContrato extends javax.swing.JInternalFrame {
 
@@ -37,25 +32,23 @@ public class NuevoContrato extends javax.swing.JInternalFrame {
     private InquilinoData id;
     private ArrayList<Empleado> listaEmpleados;
     private ArrayList<Inmueble> listaInmuebles;
-    
+
     ///// CONSTRUCTOR /////
-    
     public NuevoContrato(Conexion conexion) {
         initComponents();
         cd = new ContratoData(conexion);
         ed = new EmpleadoData(conexion);
         ind = new InmuebleData(conexion);
         id = new InquilinoData(conexion);
-        listaEmpleados =(ArrayList<Empleado>) ed.obtenerEmpleados();
+        listaEmpleados = (ArrayList<Empleado>) ed.obtenerEmpleados();
         cargarComboEmpleados();
         listaInmuebles = (ArrayList<Inmueble>) ind.obtenerInmuebles();
         cargarComboInmuebles();
-        
+
     }
 
     ///// METODOS /////
-    
-    private void cargarComboInmuebles(){
+    private void cargarComboInmuebles() {
         Collections.sort(listaInmuebles, new Comparator<Inmueble>() {
             @Override
             public int compare(Inmueble t, Inmueble t1) {
@@ -66,8 +59,8 @@ public class NuevoContrato extends javax.swing.JInternalFrame {
             jCbInmuebles.addItem(aux);
         }
     }
-    
-    private void cargarComboEmpleados(){
+
+    private void cargarComboEmpleados() {
         Collections.sort(listaEmpleados, new Comparator<Empleado>() {
             @Override
             public int compare(Empleado t, Empleado t1) {
@@ -78,9 +71,7 @@ public class NuevoContrato extends javax.swing.JInternalFrame {
             jCbEmpleados.addItem(aux);
         }
     }
-    
-    
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -304,7 +295,7 @@ public class NuevoContrato extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jBtnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSalirActionPerformed
@@ -313,23 +304,23 @@ public class NuevoContrato extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jBtnSalirActionPerformed
 
     private void jBtnFirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnFirmarActionPerformed
-        Inmueble inmueble =(Inmueble) jCbInmuebles.getSelectedItem();
-        Empleado empleado =(Empleado) jCbEmpleados.getSelectedItem();
-        long cuil =Long.parseLong(jTxtCuilInquilino.getText()) ;
+        Inmueble inmueble = (Inmueble) jCbInmuebles.getSelectedItem();
+        Empleado empleado = (Empleado) jCbEmpleados.getSelectedItem();
+        long cuil = Long.parseLong(jTxtCuilInquilino.getText());
         Inquilino inquilino = id.obetenerInquilinoPorCuil(cuil);
-        
-        SimpleDateFormat formatoFecha1 = new SimpleDateFormat("dd-MM-yyyy");        
+
+        SimpleDateFormat formatoFecha1 = new SimpleDateFormat("dd-MM-yyyy");
         String fecha = formatoFecha1.format(jDFinal.getDate());
         LocalDate fechFinal = LocalDate.parse(fecha, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
-        
-        SimpleDateFormat formatoFecha2 = new SimpleDateFormat("dd-MM-yyyy");        
+
+        SimpleDateFormat formatoFecha2 = new SimpleDateFormat("dd-MM-yyyy");
         String fecha2 = formatoFecha2.format(jDInicio.getDate());
         LocalDate fechInicio = LocalDate.parse(fecha, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
-        
+
         LocalDate firma = LocalDate.now();
-        
-        Contrato contrato = new Contrato(fechInicio,fechFinal,firma,empleado,inquilino,inmueble,true);
-        if( cd.crearContrato(contrato)){
+
+        Contrato contrato = new Contrato(fechInicio, fechFinal, firma, empleado, inquilino, inmueble, true);
+        if (cd.crearContrato(contrato)) {
             JOptionPane.showMessageDialog(this, "Se Firmo el contrato con exito");
         }
     }//GEN-LAST:event_jBtnFirmarActionPerformed

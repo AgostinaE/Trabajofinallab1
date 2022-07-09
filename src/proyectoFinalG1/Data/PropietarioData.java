@@ -146,6 +146,7 @@ public class PropietarioData {
         }
         return propietario;
     }
+
     //Metodo para obtener todos los propietarios de la base de datos
     public List<Propietario> obtenerPropietarios() {
         ArrayList<Propietario> propietarios = new ArrayList<Propietario>();
@@ -153,9 +154,9 @@ public class PropietarioData {
         try {
             String sql = "SELECT * FROM propietario WHERE activo = true;";
             PreparedStatement ps = con.prepareStatement(sql);
-            
+
             ResultSet resultSet = ps.executeQuery();
-           Propietario propietario;
+            Propietario propietario;
             while (resultSet.next()) {
                 propietario = new Propietario();
                 propietario.setIdPropietario(resultSet.getInt("idPropietario"));
@@ -165,33 +166,33 @@ public class PropietarioData {
                 propietario.setTelefono(resultSet.getInt("telefono"));
                 propietario.setDomicilio(resultSet.getString("domicilio"));
 
-
                 propietarios.add(propietario);
             }
             ps.close();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null,"Error al obtener propietarios");
+            JOptionPane.showMessageDialog(null, "Error al obtener propietarios");
         }
 
         return propietarios;
     }
+
     //Metodo para "Borrar" un elemneto Propietario
-     public boolean borrarPropietario(int id){ 
-         boolean borrado=false;
-         String sql= "UPDATE propietario SET activo = 0 WHERE idPropietario = ?";
-         try {
-             
-             PreparedStatement ps= con.prepareStatement(sql);
-             ps.setInt(1, id);
-             
-             if(ps.executeUpdate()!=0){
-             
-                 borrado=true;
-             }
-             ps.close();
-         } catch (SQLException ex) {
-             JOptionPane.showMessageDialog(null, "Error de sintaxis ");
-         }
-         return borrado;
-     }
+    public boolean borrarPropietario(int id) {
+        boolean borrado = false;
+        String sql = "UPDATE propietario SET activo = 0 WHERE idPropietario = ?";
+        try {
+
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+
+            if (ps.executeUpdate() != 0) {
+
+                borrado = true;
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error de sintaxis ");
+        }
+        return borrado;
+    }
 }

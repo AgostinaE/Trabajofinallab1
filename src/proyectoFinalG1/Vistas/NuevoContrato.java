@@ -42,7 +42,7 @@ public class NuevoContrato extends javax.swing.JInternalFrame {
         id = new InquilinoData(conexion);
         listaEmpleados = (ArrayList<Empleado>) ed.obtenerEmpleados();
         cargarComboEmpleados();
-        listaInmuebles = (ArrayList<Inmueble>) ind.obtenerInmuebles();
+        listaInmuebles = (ArrayList<Inmueble>) ind.NoAlquilados();
         cargarComboInmuebles();
 
     }

@@ -376,13 +376,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jbContratosActionPerformed
 
     private void jbPropietariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbPropietariosActionPerformed
-        /* jDesktopPane1.removeComponentListener(jInternalFrame);
-        jDesktopPane1.removeAll();
         NuevoPropietario np = new NuevoPropietario(conexion);
         np.setVisible(true);
         jDesktopPane1.add(np);
         jDesktopPane1.moveToFront(np);
-        jDesktopPane1.repaint();*/
+        jDesktopPane1.repaint();
     }//GEN-LAST:event_jbPropietariosActionPerformed
 
     private void jbInmueblesDisponiblesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbInmueblesDisponiblesActionPerformed

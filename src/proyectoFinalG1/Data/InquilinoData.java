@@ -86,6 +86,7 @@ public class InquilinoData {
             ps.setString(4, inquilino.getTrabajo());
             ps.setString(5, inquilino.getGarante());
             ps.setInt(6, inquilino.getDniGarante());
+            ps.setInt(7, inquilino.getIdInquilino());
             if (ps.executeUpdate() != 0) {
                 //Ejecuta lo modificado, si devuelve 0 significa que no hubo cambios;
                 modificado = true;

@@ -322,6 +322,11 @@ public class NuevoEmpleado extends javax.swing.JInternalFrame {
 
             JOptionPane.showMessageDialog(this, "empleado modificado con Exito");
         }
+        limpiarCampos();
+        borraFilasTabla();
+        //cargaEmpleados();
+        //cargoCombo();
+        
     }//GEN-LAST:event_jBEditarEmpleadoActionPerformed
 
     private void jBBuscarEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarEmpleadoActionPerformed
@@ -361,7 +366,7 @@ public class NuevoEmpleado extends javax.swing.JInternalFrame {
     private void jCBEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBEmpleadoActionPerformed
         // TODO add your handling code here:
         borraFilasTabla();
-
+        
     }//GEN-LAST:event_jCBEmpleadoActionPerformed
 
     private void limpiarCampos() {

@@ -117,7 +117,7 @@ public class EmpleadoData {
     public boolean borrarEmpleado(int idEmpleado) {
 
         boolean borrado = false;
-        String sql = "UPDATE alumno SET activo = 0 WHERE idEmpleado = ?";
+        String sql = "UPDATE empleado SET activo = 0 WHERE idEmpleado = ?";
         try {
 
             PreparedStatement ps = con.prepareStatement(sql);

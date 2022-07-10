@@ -71,12 +71,12 @@ public class NuevoEmpleado extends javax.swing.JInternalFrame {
 
     public void cargoCombo() {
         //Carga los Empleado al ComboBox
-//        Collections.sort(listaEmpleados, new Comparator<Empleado>() {
-//            @Override
-//            public int compare(Empleado t, Empleado t1) {
-//                return t.getNombre().compareTo(t1.getNombre());
-//            }
-//        });
+        Collections.sort(listaEmpleados, new Comparator<Empleado>() {
+            @Override
+            public int compare(Empleado t, Empleado t1) {
+                return t.getNombre().compareTo(t1.getNombre());
+            }
+        });
         for (Empleado aux : listaEmpleados) {
             jCBEmpleado.addItem(aux);
         }
@@ -103,7 +103,7 @@ public class NuevoEmpleado extends javax.swing.JInternalFrame {
         jLabel5 = new javax.swing.JLabel();
         jCBEmpleado = new javax.swing.JComboBox<>();
         jBEditarEmpleado = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        jBBorrarEmpleado = new javax.swing.JButton();
         jcbActivo = new javax.swing.JCheckBox();
         jLabel6 = new javax.swing.JLabel();
         jBSalir = new javax.swing.JButton();
@@ -153,10 +153,10 @@ public class NuevoEmpleado extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton4.setText("Borrar Empleado");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        jBBorrarEmpleado.setText("Borrar Empleado");
+        jBBorrarEmpleado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                jBBorrarEmpleadoActionPerformed(evt);
             }
         });
 
@@ -198,7 +198,7 @@ public class NuevoEmpleado extends javax.swing.JInternalFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jBEditarEmpleado)
                                 .addGap(70, 70, 70)
-                                .addComponent(jButton4)
+                                .addComponent(jBBorrarEmpleado)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jBSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap())))
@@ -264,7 +264,7 @@ public class NuevoEmpleado extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBEditarEmpleado)
-                    .addComponent(jButton4)
+                    .addComponent(jBBorrarEmpleado)
                     .addComponent(jBSalir))
                 .addContainerGap(52, Short.MAX_VALUE))
         );
@@ -320,12 +320,12 @@ public class NuevoEmpleado extends javax.swing.JInternalFrame {
         Empleado empleado = new Empleado(id, nombre, apellido, dni, activo);
         if (ed.modificarEmpleado(empleado)) {
 
-            JOptionPane.showMessageDialog(this, "Alumno modificado con Exito");
+            JOptionPane.showMessageDialog(this, "empleado modificado con Exito");
         }
     }//GEN-LAST:event_jBEditarEmpleadoActionPerformed
 
     private void jBBuscarEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarEmpleadoActionPerformed
-        
+
         //jCBEmpleado.enable(true);
         activaCampos();
         Empleado em = (Empleado) jCBEmpleado.getSelectedItem();
@@ -345,7 +345,8 @@ public class NuevoEmpleado extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jBBuscarEmpleadoActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void jBBorrarEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBorrarEmpleadoActionPerformed
+
         Empleado empleado = new Empleado();
         int id = -1;
         id = Integer.parseInt(jTId.getText());
@@ -355,7 +356,7 @@ public class NuevoEmpleado extends javax.swing.JInternalFrame {
             limpiarCampos();
             desactivaCampos();
         }
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_jBBorrarEmpleadoActionPerformed
 
     private void jCBEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBEmpleadoActionPerformed
         // TODO add your handling code here:
@@ -399,12 +400,12 @@ public class NuevoEmpleado extends javax.swing.JInternalFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBBorrarEmpleado;
     private javax.swing.JButton jBBuscarEmpleado;
     private javax.swing.JButton jBEditarEmpleado;
     private javax.swing.JButton jBGuardar;
     private javax.swing.JButton jBNuevo;
     private javax.swing.JButton jBSalir;
-    private javax.swing.JButton jButton4;
     private javax.swing.JComboBox<Empleado> jCBEmpleado;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

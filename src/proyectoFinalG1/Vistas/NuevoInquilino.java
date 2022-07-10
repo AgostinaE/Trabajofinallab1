@@ -451,7 +451,7 @@ private boolean validarCampos(){
         }
         
         }catch(Exception ex){
-            JOptionPane.showMessageDialog(this, "El Inquilino ya se encuentra en el sistema");
+            JOptionPane.showMessageDialog(this, "Error, un campo contiene datos invalidos o no los contiene");
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 

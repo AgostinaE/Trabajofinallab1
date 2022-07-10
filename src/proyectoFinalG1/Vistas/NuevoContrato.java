@@ -147,10 +147,8 @@ public class NuevoContrato extends javax.swing.JInternalFrame {
         jLabel11.setText("Buscar Inmueble ");
 
         jCalInicio.setBackground(new java.awt.Color(204, 204, 204));
-        jCalInicio.setForeground(new java.awt.Color(0, 0, 0));
 
         jCalFinalizacion.setBackground(new java.awt.Color(204, 204, 204));
-        jCalFinalizacion.setForeground(new java.awt.Color(0, 0, 0));
 
         setBackground(new java.awt.Color(255, 255, 255));
         setOpaque(false);
@@ -164,7 +162,6 @@ public class NuevoContrato extends javax.swing.JInternalFrame {
 
         jLabel10.setBackground(new java.awt.Color(255, 255, 255));
         jLabel10.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(0, 0, 0));
         jLabel10.setText("Seleccionar Inmueble por Codigo");
 
         jCbInmuebles.setBackground(new java.awt.Color(204, 204, 204));
@@ -172,31 +169,24 @@ public class NuevoContrato extends javax.swing.JInternalFrame {
 
         jLabel12.setBackground(new java.awt.Color(255, 255, 255));
         jLabel12.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(0, 0, 0));
         jLabel12.setText("Seleccionar Empleado Vendedor");
 
         jCbEmpleados.setBackground(new java.awt.Color(204, 204, 204));
         jCbEmpleados.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
 
         jLabel13.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabel13.setForeground(new java.awt.Color(0, 0, 0));
         jLabel13.setText("Introducir CUIL/CUIT del nuevo Inquilino");
 
-        jTxtCuilInquilino.setBackground(new java.awt.Color(255, 255, 255));
         jTxtCuilInquilino.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jTxtCuilInquilino.setForeground(new java.awt.Color(0, 0, 0));
 
         jLabel14.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabel14.setForeground(new java.awt.Color(0, 0, 0));
         jLabel14.setText("Fecha de Inicio del Contrato");
 
         jLabel15.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabel15.setForeground(new java.awt.Color(0, 0, 0));
         jLabel15.setText("Fecha de Finalizacion del Contrato");
 
         jBtnSalir.setBackground(new java.awt.Color(204, 204, 204));
         jBtnSalir.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jBtnSalir.setForeground(new java.awt.Color(0, 0, 0));
         jBtnSalir.setText("Salir");
         jBtnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -206,7 +196,6 @@ public class NuevoContrato extends javax.swing.JInternalFrame {
 
         jBtnFirmar.setBackground(new java.awt.Color(204, 204, 204));
         jBtnFirmar.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jBtnFirmar.setForeground(new java.awt.Color(0, 0, 0));
         jBtnFirmar.setText("Firmar Contrato");
         jBtnFirmar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -304,7 +293,8 @@ public class NuevoContrato extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jBtnSalirActionPerformed
 
     private void jBtnFirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnFirmarActionPerformed
-        Inmueble inmueble = (Inmueble) jCbInmuebles.getSelectedItem();
+        try{
+            Inmueble inmueble = (Inmueble) jCbInmuebles.getSelectedItem();
         Empleado empleado = (Empleado) jCbEmpleados.getSelectedItem();
         long cuil = Long.parseLong(jTxtCuilInquilino.getText());
         Inquilino inquilino = id.obetenerInquilinoPorCuil(cuil);
@@ -323,6 +313,10 @@ public class NuevoContrato extends javax.swing.JInternalFrame {
         if (cd.crearContrato(contrato)) {
             JOptionPane.showMessageDialog(this, "Se Firmo el contrato con exito");
         }
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(this, "Algun campo se encuentra vacio o con informacion erronea");
+        }
+        
     }//GEN-LAST:event_jBtnFirmarActionPerformed
 
 

@@ -188,7 +188,7 @@ public class InmuebleData {
 
     public boolean modificarInmueble(Inmueble inmueble) {
 
-        String sql = "UPDATE inmueble SET caracteristica = ?, direccion = ?, precio = ?, superficie = ?, tipoLocal = ?, zona = ?, propietario = ?, codigoInmueble = ?, activo = ? WHERE idInmueble = ?";
+        String sql = "UPDATE inmueble SET caracteristicas = ?, direccion = ?, precio = ?, superficie = ?, tipoLocal = ?, zona = ?, idPropietario = ?, codigoInmueble = ?, activo = ? WHERE idInmueble = ? AND activo=true;";
         boolean modificado = false;
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -198,8 +198,8 @@ public class InmuebleData {
             ps.setDouble(4, inmueble.getSuperficie());
             ps.setString(5, inmueble.getTipoLocal());
             ps.setInt(6, inmueble.getZona());
-            ps.setString(7, inmueble.getCodigoInmueble());
-            ps.setInt(8, inmueble.getPropietario().getIdPropietario());
+            ps.setString(8, inmueble.getCodigoInmueble());
+            ps.setInt(7, inmueble.getPropietario().getIdPropietario());
             ps.setBoolean(9, inmueble.isActivo());
             ps.setInt(10, inmueble.getIdInmueble());
 

@@ -1,5 +1,11 @@
 package proyectoFinalG1.Vistas;
 
+import javax.swing.JOptionPane;
+import proyectoFinalG1.Data.Conexion;
+import proyectoFinalG1.Data.PropietarioData;
+import proyectoFinalG1.Data.Validacion;
+import proyectoFinalG1.Modelos.Propietario;
+
 /**
  *
  * @author Grupo 1
@@ -9,8 +15,64 @@ public class NuevoPropietario extends javax.swing.JInternalFrame {
     /**
      * Creates new form PropietarioNuevo
      */
-    public NuevoPropietario() {
+    private PropietarioData pd;
+    private Validacion vd;
+
+    public NuevoPropietario(Conexion conexion) {
         initComponents();
+        inhabilitar();
+        pd = new PropietarioData(conexion);
+        vd = new Validacion();
+    }
+
+    private void habilitar() {
+        jTxtNombre.setEnabled(true);
+        jTxtApellido.setEnabled(true);
+        jTxtDomicilio.setEnabled(true);
+        jTxtTelefono.setEnabled(true);
+        //jTxtEmail.setEnabled(true);
+        jBtnBorrar.setEnabled(true);
+        jBtnGuardar.setEnabled(true);
+    }
+
+    private void inhabilitar() {
+        jTxtNombre.setEnabled(false);
+        jTxtApellido.setEnabled(false);
+        jTxtDomicilio.setEnabled(false);
+        jTxtTelefono.setEnabled(false);
+        //jTxtEmail.setEnabled(false);
+        jBtnBorrar.setEnabled(false);
+        jBtnGuardar.setEnabled(false);
+    }
+
+    private void limpiar() {
+        jTxtNombre.setText("");
+        jTxtApellido.setText("");
+        jTxtDomicilio.setText("");
+        jTxtTelefono.setText("");
+        jLId.setText(""); 
+        jTxtDni.setText("");
+    }
+    
+    private boolean validarCampos(){
+        boolean valido = true;
+        if(!vd.EsPalabra(jTxtNombre.getText())){
+            valido=false;
+        }
+        if(!vd.EsPalabra(jTxtApellido.getText())){
+            valido=false;
+        }
+        if(!vd.ValidarDni(Integer.parseInt(jTxtDni.getText()))){
+            valido=false;
+        }
+        if(vd.EstaVacio(jTxtDomicilio.getText())){
+            valido=false;
+        }
+        if(!vd.ValidarNumerosEnteros(Integer.parseInt(jTxtTelefono.getText()))){
+            valido=false;
+        }
+        
+        return valido;
     }
 
     /**
@@ -28,159 +90,358 @@ public class NuevoPropietario extends javax.swing.JInternalFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        jTxtNombre = new javax.swing.JTextField();
+        jTxtApellido = new javax.swing.JTextField();
+        jTxtDni = new javax.swing.JTextField();
+        jTxtDomicilio = new javax.swing.JTextField();
+        jBtnNuevo = new javax.swing.JButton();
+        jBtnGuardar = new javax.swing.JButton();
+        jBtnSalir = new javax.swing.JButton();
+        jBtnEditar = new javax.swing.JButton();
+        jBtnBorrar = new javax.swing.JButton();
+        jBtnBuscarXDni = new javax.swing.JButton();
+        jTxtTelefono = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
+        jLId = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel1.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Nombre");
 
+        jLabel2.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Apellido");
 
+        jLabel3.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("DNI");
 
+        jLabel4.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Domicilio Real");
 
-        jLabel5.setFont(new java.awt.Font("Microsoft JhengHei Light", 0, 24)); // NOI18N
-        jLabel5.setText("Nuevo Propietario");
+        jLabel5.setBackground(new java.awt.Color(255, 102, 102));
+        jLabel5.setFont(new java.awt.Font("SansSerif", 1, 24)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel5.setText("Gestion de Propietarios");
+        jLabel5.setOpaque(true);
 
+        jLabel6.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
         jLabel6.setText("Teléfono");
 
-        jLabel7.setText("Email");
-
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        jTxtNombre.setBackground(new java.awt.Color(204, 204, 204));
+        jTxtNombre.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jTxtNombre.setForeground(new java.awt.Color(0, 0, 0));
+        jTxtNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                jTxtNombreActionPerformed(evt);
             }
         });
 
-        jButton1.setText("Agregar Nuevo Propietario");
+        jTxtApellido.setBackground(new java.awt.Color(204, 204, 204));
+        jTxtApellido.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jTxtApellido.setForeground(new java.awt.Color(0, 0, 0));
+
+        jTxtDni.setBackground(new java.awt.Color(204, 204, 204));
+        jTxtDni.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jTxtDni.setForeground(new java.awt.Color(0, 0, 0));
+
+        jTxtDomicilio.setBackground(new java.awt.Color(204, 204, 204));
+        jTxtDomicilio.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jTxtDomicilio.setForeground(new java.awt.Color(0, 0, 0));
+
+        jBtnNuevo.setBackground(new java.awt.Color(255, 102, 102));
+        jBtnNuevo.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jBtnNuevo.setForeground(new java.awt.Color(0, 0, 0));
+        jBtnNuevo.setText("Nuevo Propietario");
+        jBtnNuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnNuevoActionPerformed(evt);
+            }
+        });
+
+        jBtnGuardar.setBackground(new java.awt.Color(255, 102, 102));
+        jBtnGuardar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jBtnGuardar.setForeground(new java.awt.Color(0, 0, 0));
+        jBtnGuardar.setText("Guardar");
+        jBtnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnGuardarActionPerformed(evt);
+            }
+        });
+
+        jBtnSalir.setBackground(new java.awt.Color(204, 204, 204));
+        jBtnSalir.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jBtnSalir.setForeground(new java.awt.Color(0, 0, 0));
+        jBtnSalir.setText("Salir");
+        jBtnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnSalirActionPerformed(evt);
+            }
+        });
+
+        jBtnEditar.setBackground(new java.awt.Color(255, 102, 102));
+        jBtnEditar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jBtnEditar.setForeground(new java.awt.Color(0, 0, 0));
+        jBtnEditar.setText("Editar Propietario");
+        jBtnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnEditarActionPerformed(evt);
+            }
+        });
+
+        jBtnBorrar.setBackground(new java.awt.Color(255, 102, 102));
+        jBtnBorrar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jBtnBorrar.setForeground(new java.awt.Color(0, 0, 0));
+        jBtnBorrar.setText("Borrar Propietario");
+        jBtnBorrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnBorrarActionPerformed(evt);
+            }
+        });
+
+        jBtnBuscarXDni.setBackground(new java.awt.Color(255, 102, 102));
+        jBtnBuscarXDni.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jBtnBuscarXDni.setForeground(new java.awt.Color(0, 0, 0));
+        jBtnBuscarXDni.setText("Buscar Propietario Por DNI");
+        jBtnBuscarXDni.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnBuscarXDniActionPerformed(evt);
+            }
+        });
+
+        jTxtTelefono.setBackground(new java.awt.Color(204, 204, 204));
+        jTxtTelefono.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jTxtTelefono.setForeground(new java.awt.Color(0, 0, 0));
+
+        jLabel7.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel7.setText("Codigo de propietario");
+
+        jLId.setBackground(new java.awt.Color(204, 204, 204));
+        jLId.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLId.setForeground(new java.awt.Color(0, 0, 0));
+
+        jButton1.setBackground(new java.awt.Color(255, 102, 102));
+        jButton1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(51, 51, 51));
+        jButton1.setText("Buscar por Codigo");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Guardar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-
-        jButton3.setText("Agregar Propiedad");
-
-        jButton4.setText("Editar datos de Propietario");
-
-        jButton5.setText("Borrar Propietario");
-
-        jButton6.setText("Buscar Propietario Por DNI");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(55, 55, 55)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField5)
-                    .addComponent(jTextField1)
-                    .addComponent(jTextField2)
-                    .addComponent(jTextField3)
-                    .addComponent(jTextField4)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.DEFAULT_SIZE, 217, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(70, 70, 70))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(236, Short.MAX_VALUE)
-                .addComponent(jLabel5)
-                .addGap(220, 220, 220))
+                .addGap(80, 80, 80)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel7))
+                        .addGap(44, 44, 44)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTxtDomicilio)
+                            .addComponent(jTxtDni, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jTxtApellido)
+                            .addComponent(jTxtNombre)
+                            .addComponent(jTxtTelefono)
+                            .addComponent(jLId, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(43, 43, 43)
+                        .addComponent(jBtnBorrar, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(39, 39, 39)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jBtnSalir)
+                    .addComponent(jBtnEditar)
+                    .addComponent(jBtnBuscarXDni)
+                    .addComponent(jBtnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBtnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(46, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(jLabel5)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(51, 51, 51)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jBtnNuevo, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jTxtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel1)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2))
+                    .addComponent(jBtnGuardar)
+                    .addComponent(jTxtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton6))
-                .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4))
+                    .addComponent(jBtnBuscarXDni)
+                    .addComponent(jTxtDni, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel4)
+                        .addComponent(jBtnEditar))
+                    .addComponent(jTxtDomicilio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton5))
-                .addGap(18, 18, 18)
+                    .addComponent(jTxtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(35, 35, 35)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLId, javax.swing.GroupLayout.Alignment.LEADING))
+                .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3))
-                .addContainerGap(34, Short.MAX_VALUE))
+                    .addComponent(jBtnBorrar)
+                    .addComponent(jBtnSalir))
+                .addContainerGap(106, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void jTxtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxtNombreActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_jTxtNombreActionPerformed
+
+    private void jBtnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnNuevoActionPerformed
+        // TODO add your handling code here:
+        limpiar();
+        habilitar();
+    }//GEN-LAST:event_jBtnNuevoActionPerformed
+
+    private void jBtnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnGuardarActionPerformed
+        // TODO add your handling code here:
+        try {
+            String nombre = jTxtNombre.getText();
+            String apellido = jTxtApellido.getText();
+            int dni = Integer.parseInt(jTxtDni.getText());
+            String domicilio = jTxtDomicilio.getText();
+            int telefono = Integer.parseInt(jTxtTelefono.getText());
+
+            if(validarCampos()){
+                Propietario p = new Propietario(nombre,apellido,dni,telefono,domicilio,true);
+                if(pd.agregarPropietario(p)){
+                    JOptionPane.showMessageDialog(this, "El propietario se cargo con exito");
+                    jLId.setText(p.getIdPropietario()+"");
+                }else{
+                    JOptionPane.showMessageDialog(this, "Error al cargar propietario");
+                }
+            }else{
+                JOptionPane.showMessageDialog(this, "Alguno de los campos llenados contiene informacion invalida o no contiene nada");
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Algunos de los campos introducidos son incorrectos");
+        }
+    }//GEN-LAST:event_jBtnGuardarActionPerformed
+
+    private void jBtnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSalirActionPerformed
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_jBtnSalirActionPerformed
+
+    private void jBtnBuscarXDniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnBuscarXDniActionPerformed
+        // TODO add your handling code here:
+        habilitar();
+        try{
+            int dni = Integer.parseInt(jTxtDni.getText());
+            Propietario p =pd.obetenerPropietarioPorDNI(dni);
+            jTxtNombre.setText(p.getNombre());
+            jTxtApellido.setText(p.getApellido());
+            jTxtDomicilio.setText(p.getDomicilio());
+            jTxtTelefono.setText(p.getTelefono()+"");
+            jLId.setText(p.getIdPropietario()+"");
+            //jTxtNombre  jTxtApellido  jTxtDni  jTxtDomicilio  jTxtTelefono  jTxtEmail
+        }catch(Exception ex){
+             JOptionPane.showMessageDialog(this, "El dni introducido no es valido");
+        }
+    }//GEN-LAST:event_jBtnBuscarXDniActionPerformed
+
+    private void jBtnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnEditarActionPerformed
+        // TODO add your handling code here:
+        try {
+            String nombre = jTxtNombre.getText();
+            String apellido = jTxtApellido.getText();
+            int dni = Integer.parseInt(jTxtDni.getText());
+            String domicilio = jTxtDomicilio.getText();
+            int telefono = Integer.parseInt(jTxtTelefono.getText());
+            int id = Integer.parseInt(jLId.getText());
+            if(validarCampos()){
+                Propietario p = new Propietario(id,nombre,apellido,dni,telefono,domicilio,true);
+                if(pd.modificarPropietario(p)){
+                    JOptionPane.showMessageDialog(this, "El propietario se actualizo con exito");
+                }else{
+                    JOptionPane.showMessageDialog(this, "Error al actualizar propietario");
+                }
+            }else{
+                JOptionPane.showMessageDialog(this, "Alguno de los campos llenados contiene informacion invalida o no contiene nada");
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Error al actualizar Propietario");
+        }
+    }//GEN-LAST:event_jBtnEditarActionPerformed
+
+    private void jBtnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnBorrarActionPerformed
+        // TODO add your handling code here:
+        try {
+            Propietario p = pd.obetenerPropietarioPorID(Integer.parseInt(jLId.getText()));
+            if(pd.borrarPropietario(p.getIdPropietario())){
+                JOptionPane.showMessageDialog(this, "El propietario se elimino");
+            }else{
+                JOptionPane.showMessageDialog(this, "Error al borrar propietario");
+            }
+            limpiar();
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Debe cargar datos validos");
+        }
+    }//GEN-LAST:event_jBtnBorrarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        habilitar();
+        try{
+            int id = Integer.parseInt(jLId.getText());
+            Propietario p =pd.obetenerPropietarioPorID(id);
+            jTxtNombre.setText(p.getNombre());
+            jTxtApellido.setText(p.getApellido());
+            jTxtDomicilio.setText(p.getDomicilio());
+            jTxtTelefono.setText(p.getTelefono()+"");
+            jTxtDni.setText(p.getDni()+"");
+            //jTxtNombre  jTxtApellido  jTxtDni  jTxtDomicilio  jTxtTelefono  jTxtEmail
+        }catch(Exception ex){
+             JOptionPane.showMessageDialog(this, "El codigo introducido no es valido");
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBtnBorrar;
+    private javax.swing.JButton jBtnBuscarXDni;
+    private javax.swing.JButton jBtnEditar;
+    private javax.swing.JButton jBtnGuardar;
+    private javax.swing.JButton jBtnNuevo;
+    private javax.swing.JButton jBtnSalir;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
+    private javax.swing.JTextField jLId;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -188,11 +449,10 @@ public class NuevoPropietario extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
+    private javax.swing.JTextField jTxtApellido;
+    private javax.swing.JTextField jTxtDni;
+    private javax.swing.JTextField jTxtDomicilio;
+    private javax.swing.JTextField jTxtNombre;
+    private javax.swing.JTextField jTxtTelefono;
     // End of variables declaration//GEN-END:variables
 }

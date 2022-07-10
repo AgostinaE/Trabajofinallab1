@@ -37,6 +37,8 @@ public class NuevoInquilino extends javax.swing.JInternalFrame {
         jTxtTrabajo.setEnabled(true);
         jTxtGaranteN.setEnabled(true);   
         jTxtGaranteDni.setEnabled(true);
+        jButton2.setEnabled(true);
+        jButton5.setEnabled(true);
     }
 
     private void inhabilitar(){
@@ -45,6 +47,8 @@ public class NuevoInquilino extends javax.swing.JInternalFrame {
         jTxtTrabajo.setEnabled(false);
         jTxtGaranteN.setEnabled(false);   
         jTxtGaranteDni.setEnabled(false);
+        jButton2.setEnabled(false);
+        jButton5.setEnabled(false);
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -319,6 +323,7 @@ public class NuevoInquilino extends javax.swing.JInternalFrame {
     private void jBtnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnNuevoActionPerformed
         // TODO add your handling code here:
         habilitar();
+        limpiar();
     }//GEN-LAST:event_jBtnNuevoActionPerformed
 
     private void jBtnBuscarXCuilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnBuscarXCuilActionPerformed
@@ -330,6 +335,7 @@ public class NuevoInquilino extends javax.swing.JInternalFrame {
         jTxtTrabajo.setText(in.getTrabajo()); 
         jTxtGaranteN.setText(in.getGarante()); 
         jTxtGaranteDni.setText(in.getApellido()); 
+        habilitar();
         }catch(Exception ex){
             JOptionPane.showMessageDialog(this, "Debe cargar un Cuit valido para buscar un Inquilino");
         }

@@ -315,7 +315,7 @@ public class NuevoContrato extends javax.swing.JInternalFrame {
 
         SimpleDateFormat formatoFecha2 = new SimpleDateFormat("dd-MM-yyyy");
         String fecha2 = formatoFecha2.format(jDInicio.getDate());
-        LocalDate fechInicio = LocalDate.parse(fecha, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+        LocalDate fechInicio = LocalDate.parse(fecha2, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
 
         LocalDate firma = LocalDate.now();
 

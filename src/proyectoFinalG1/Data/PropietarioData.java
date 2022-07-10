@@ -83,6 +83,7 @@ public class PropietarioData {
             ps.setInt(3, propietario.getDni());
             ps.setInt(4, propietario.getTelefono());
             ps.setString(5, propietario.getDomicilio());
+            ps.setInt(6, propietario.getIdPropietario());
 
             if (ps.executeUpdate() != 0) {
                 //Ejecuta lo modificado, si devuelve 0 significa que no hubo cambios;

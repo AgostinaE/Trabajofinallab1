@@ -95,7 +95,7 @@ public class ContratoData {
 
     public boolean renovarContrato(int idContrato, LocalDate renovacionI, LocalDate renovacionF) {
         boolean renovado = false;
-        String sql = "UPDATE contrato SET inicio = ? , finalizacion = ? , firma = ? WHERE idContrato = ?;";
+        String sql = "UPDATE contrato SET inicio = ? , finalizacion = ? , firma = ? , activo=true WHERE idContrato = ?;";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setDate(1, Date.valueOf(renovacionI));
@@ -107,7 +107,7 @@ public class ContratoData {
             }
             JOptionPane.showMessageDialog(null, "Se renovo");
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "se rompio");
+            JOptionPane.showMessageDialog(null, "Ocurrio un error");
         }
         return renovado;
     }
@@ -124,8 +124,8 @@ public class ContratoData {
                 contrato = new Contrato();
                 contrato.setIdContrato(rs.getInt("idContrato"));
                 contrato.setInicio(rs.getDate("inicio").toLocalDate());
-                contrato.setInicio(rs.getDate("finalizacion").toLocalDate());
-                contrato.setInicio(rs.getDate("firma").toLocalDate());
+                contrato.setFinalizacion(rs.getDate("finalizacion").toLocalDate());
+                contrato.setFirma(rs.getDate("firma").toLocalDate());
                 Empleado empleado = empleadoData.obtenerEmpleadoXDNI(rs.getInt("dniEmpleado"));
                 contrato.setDniEmpleado(empleado);
                 Inquilino inquilino = inquilinoData.obetenerInquilinoPorID(rs.getInt("idInquilino"));
@@ -155,8 +155,8 @@ public class ContratoData {
                 contrato = new Contrato();
                 contrato.setIdContrato(rs.getInt("idContrato"));
                 contrato.setInicio(rs.getDate("inicio").toLocalDate());
-                contrato.setInicio(rs.getDate("finalizacion").toLocalDate());
-                contrato.setInicio(rs.getDate("firma").toLocalDate());
+                contrato.setFinalizacion(rs.getDate("finalizacion").toLocalDate());
+                contrato.setFirma(rs.getDate("firma").toLocalDate());
                 Empleado empleado = empleadoData.obtenerEmpleadoXDNI(rs.getInt("dniEmpleado"));
                 contrato.setDniEmpleado(empleado);
                 Inquilino inquilino = inquilinoData.obetenerInquilinoPorID(rs.getInt("idInquilino"));
@@ -187,8 +187,8 @@ public class ContratoData {
                 contrato = new Contrato();
                 contrato.setIdContrato(rs.getInt("idContrato"));
                 contrato.setInicio(rs.getDate("inicio").toLocalDate());
-                contrato.setInicio(rs.getDate("finalizacion").toLocalDate());
-                contrato.setInicio(rs.getDate("firma").toLocalDate());
+                contrato.setFinalizacion(rs.getDate("finalizacion").toLocalDate());
+                contrato.setFirma(rs.getDate("firma").toLocalDate());
                 Empleado empleado = empleadoData.obtenerEmpleadoXDNI(rs.getInt("dniEmpleado"));
                 contrato.setDniEmpleado(empleado);
                 Inquilino inquilino = inquilinoData.obetenerInquilinoPorID(rs.getInt("idInquilino"));
@@ -207,20 +207,20 @@ public class ContratoData {
 
     public List<Contrato> buscarContratosXVendedor(int dniEmpleado) {
         ArrayList<Contrato> contratos = new ArrayList<Contrato>();
-        Empleado em = empleadoData.obtenerEmpleadoXDNI(dniEmpleado);
-        int idEmpleado = em.getIdEmpleado();
+        //Empleado em = empleadoData.obtenerEmpleadoXDNI(dniEmpleado);
+        //int idEmpleado = em.getIdEmpleado();
         try {
             Contrato contrato;
             String sql = "SELECT * FROM contrato WHERE dniEmpleado = ? ;";
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, idEmpleado);
+            ps.setInt(1, dniEmpleado);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 contrato = new Contrato();
                 contrato.setIdContrato(rs.getInt("idContrato"));
                 contrato.setInicio(rs.getDate("inicio").toLocalDate());
-                contrato.setInicio(rs.getDate("finalizacion").toLocalDate());
-                contrato.setInicio(rs.getDate("firma").toLocalDate());
+                contrato.setFinalizacion(rs.getDate("finalizacion").toLocalDate());
+                contrato.setFirma(rs.getDate("firma").toLocalDate());
                 Empleado empleado = empleadoData.obtenerEmpleadoXDNI(rs.getInt("dniEmpleado"));
                 contrato.setDniEmpleado(empleado);
                 Inquilino inquilino = inquilinoData.obetenerInquilinoPorID(rs.getInt("idInquilino"));
@@ -249,8 +249,8 @@ public class ContratoData {
                 contrato = new Contrato();
                 contrato.setIdContrato(rs.getInt("idContrato"));
                 contrato.setInicio(rs.getDate("inicio").toLocalDate());
-                contrato.setInicio(rs.getDate("finalizacion").toLocalDate());
-                contrato.setInicio(rs.getDate("firma").toLocalDate());
+                contrato.setFinalizacion(rs.getDate("finalizacion").toLocalDate());
+                contrato.setFirma(rs.getDate("firma").toLocalDate());
                 Empleado empleado = empleadoData.obtenerEmpleadoXDNI(rs.getInt("dniEmpleado"));
                 contrato.setDniEmpleado(empleado);
                 Inquilino inquilino = inquilinoData.obetenerInquilinoPorID(rs.getInt("idInquilino"));

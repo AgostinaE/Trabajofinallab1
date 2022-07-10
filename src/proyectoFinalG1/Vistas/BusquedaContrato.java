@@ -5,9 +5,14 @@
  */
 package proyectoFinalG1.Vistas;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import proyectoFinalG1.Data.Conexion;
 import proyectoFinalG1.Data.ContratoData;
@@ -21,7 +26,7 @@ import proyectoFinalG1.Modelos.Inquilino;
 
 /**
  *
- * @author Grupo 1
+ * @author fotin
  */
 public class BusquedaContrato extends javax.swing.JInternalFrame {
 
@@ -37,7 +42,7 @@ public class BusquedaContrato extends javax.swing.JInternalFrame {
     private ArrayList<Inmueble> listaInmuebles;
     private ArrayList<Empleado> listaEmpleados;
     private ArrayList<Contrato> listaContratos;
-
+    
     public BusquedaContrato(Conexion conexion) {
         initComponents();
         cd = new ContratoData(conexion);
@@ -52,9 +57,10 @@ public class BusquedaContrato extends javax.swing.JInternalFrame {
         cargarInmuebles();
         listaEmpleados = (ArrayList<Empleado>) ed.obtenerEmpleados();
         cargarEmpleados();
+        inhabilitar();
     }
-
-    private void cargarEmpleados() {
+    
+    private void cargarEmpleados(){
         Collections.sort(listaEmpleados, new Comparator<Empleado>() {
             @Override
             public int compare(Empleado t, Empleado t1) {
@@ -65,8 +71,8 @@ public class BusquedaContrato extends javax.swing.JInternalFrame {
             jCbEmpleados.addItem(aux);
         }
     }
-
-    private void cargarInmuebles() {
+    
+    private void cargarInmuebles(){
         Collections.sort(listaInmuebles, new Comparator<Inmueble>() {
             @Override
             public int compare(Inmueble t, Inmueble t1) {
@@ -77,8 +83,8 @@ public class BusquedaContrato extends javax.swing.JInternalFrame {
             jCbInmuebles.addItem(aux);
         }
     }
-
-    private void cargarInquilinos() {
+    
+    private void cargarInquilinos(){
         Collections.sort(listaInquilinos, new Comparator<Inquilino>() {
             @Override
             public int compare(Inquilino t, Inquilino t1) {
@@ -90,7 +96,7 @@ public class BusquedaContrato extends javax.swing.JInternalFrame {
         }
     }
 
-    private void armarTabla() {
+    private void armarTabla(){
         ArrayList<Object> columnas = new ArrayList<>();
         columnas.add("Codigo del Contrato");
         columnas.add("Inquilino");
@@ -106,38 +112,53 @@ public class BusquedaContrato extends javax.swing.JInternalFrame {
         }
         jTContratos.setModel(modelo);
     }
-
-    public void cargarXInquilino() {
+    
+    private void cargarXInquilino(){
         borrarFilas();
         Inquilino selected = (Inquilino) jCbInquilinos.getSelectedItem();
-        listaContratos = (ArrayList<Contrato>) cd.buscarContratosXInquilino(selected.getCuil());
+        listaContratos = (ArrayList<Contrato>)cd.buscarContratosXInquilino(selected.getCuil());
         for (Contrato c : listaContratos) {
             String estado;
-            if (c.isActivo()) {
-                estado = "Activo";
-            } else {
-                estado = "Inactivo";
+            if(c.isActivo()){
+                estado="Activo";
+            }else{
+                estado="Inactivo";
             }
-            modelo.addRow(new Object[]{c.getIdContrato(), c.getInquilino().toString(), c.getInmueble().getCodigoInmueble(), c.getInmueble().getPrecio(), c.getInicio(), c.getFinalizacion(), c.getEmpleado().toString(), estado});
+            modelo.addRow(new Object[]{c.getIdContrato(), c.getInquilino().toString(), c.getInmueble().getCodigoInmueble(), c.getInmueble().getPrecio(), c.getInicio(),c.getFinalizacion(),c.getEmpleado().toString(),estado});
         }
     }
-
-    public void cargarXPropiedad() {
+    
+    private void cargarXPropiedad(){
         borrarFilas();
         Inmueble selected = (Inmueble) jCbInmuebles.getSelectedItem();
-        listaContratos = (ArrayList<Contrato>) cd.buscarContratosXPropiedad(selected.getCodigoInmueble());
+        listaContratos = (ArrayList<Contrato>)cd.buscarContratosXPropiedad(selected.getCodigoInmueble());
         for (Contrato c : listaContratos) {
             String estado;
-            if (c.isActivo()) {
-                estado = "Activo";
-            } else {
-                estado = "Inactivo";
+            if(c.isActivo()){
+                estado="Activo";
+            }else{
+                estado="Inactivo";
             }
-            modelo.addRow(new Object[]{c.getIdContrato(), c.getInquilino().toString(), c.getInmueble().getCodigoInmueble(), c.getInmueble().getPrecio(), c.getInicio(), c.getFinalizacion(), c.getEmpleado().toString(), estado});
+            modelo.addRow(new Object[]{c.getIdContrato(), c.getInquilino().toString(), c.getInmueble().getCodigoInmueble(), c.getInmueble().getPrecio(), c.getInicio(),c.getFinalizacion(),c.getEmpleado().toString(),estado});
         }
     }
-
-    public void borrarFilas() {
+    
+    private void cargarXVendedor(){
+        borrarFilas();
+        Empleado selected = (Empleado) jCbEmpleados.getSelectedItem();
+        listaContratos = (ArrayList<Contrato>) cd.buscarContratosXVendedor(selected.getDni());
+        for (Contrato c : listaContratos) {
+            String estado;
+            if(c.isActivo()){
+                estado="Activo";
+            }else{
+                estado="Inactivo";
+            }
+            modelo.addRow(new Object[]{c.getIdContrato(), c.getInquilino().toString(), c.getInmueble().getCodigoInmueble(), c.getInmueble().getPrecio(), c.getInicio(),c.getFinalizacion(),c.getEmpleado().toString(),estado});
+        }
+    }
+    
+    private void borrarFilas(){
         if (modelo != null) {
             int a = modelo.getRowCount() - 1;
 
@@ -147,7 +168,80 @@ public class BusquedaContrato extends javax.swing.JInternalFrame {
             }
         }
     }
+    
+    private void vencidos(){
+        borrarFilas();
+        listaContratos = (ArrayList<Contrato>) cd.buscarContratosVencidos();
+        for (Contrato c : listaContratos) {
+            String estado;
+            if(c.isActivo()){
+                estado="Activo";
+            }else{
+                estado="Inactivo";
+            }
+            modelo.addRow(new Object[]{c.getIdContrato(), c.getInquilino().toString(), c.getInmueble().getCodigoInmueble(), c.getInmueble().getPrecio(), c.getInicio(),c.getFinalizacion(),c.getEmpleado().toString(),estado});
+        }
+    }
+    
+    private void cargarContrato(Contrato c){
+        borrarFilas();
+        String estado;
+            if(c.isActivo()){
+                estado="Activo";
+            }else{
+                estado="Inactivo";
+            }
+            modelo.addRow(new Object[]{c.getIdContrato(), c.getInquilino().toString(), c.getInmueble().getCodigoInmueble(), c.getInmueble().getPrecio(), c.getInicio(),c.getFinalizacion(),c.getEmpleado().toString(),estado});
+    }
+    
+    private void mostratContrato(){
+        int filaSeleccionada = jTContratos.getSelectedRow();
 
+        if (filaSeleccionada != -1) {
+            int idContrato = (Integer) modelo.getValueAt(filaSeleccionada, 0);
+            Contrato contrato = cd.buscarContratoXId(idContrato);
+            jTxtIdInmueble.setText(idContrato+"");
+            jDcInicio.setDate(Date.valueOf(contrato.getInicio()));
+            jDcFinalizacion.setDate(Date.valueOf(contrato.getFinalizacion()));
+            jDcFirma.setText(Date.valueOf(contrato.getFirma())+"");
+            jLVendedor.setText(contrato.getEmpleado().getDni()+"");
+            jLInquilino.setText(contrato.getInquilino().toString());
+            jLCodigoPropiedad.setText(contrato.getInmueble().getCodigoInmueble());
+            if(contrato.isActivo()){
+                jLEstado.setText("Activo");
+            }else{
+                jLEstado.setText("Inactivo");
+            }
+            
+
+        }
+    }
+    
+    private void mostrarContrato2(){
+        int idContrato = Integer.parseInt(jTxtIdInmueble.getText()) ;
+            Contrato contrato = cd.buscarContratoXId(idContrato);
+            jTxtIdInmueble.setText(idContrato+"");
+            jDcInicio.setDate(Date.valueOf(contrato.getInicio()));
+            jDcFinalizacion.setDate(Date.valueOf(contrato.getFinalizacion()));
+            jDcFirma.setText(Date.valueOf(contrato.getFirma())+"");
+            jLVendedor.setText(contrato.getEmpleado().getDni()+"");
+            jLInquilino.setText(contrato.getInquilino().toString());
+            jLCodigoPropiedad.setText(contrato.getInmueble().getCodigoInmueble());
+            if(contrato.isActivo()){
+                jLEstado.setText("Activo");
+            }else{
+                jLEstado.setText("Inactivo");
+            }
+    }
+    
+    private void inhabilitar(){
+        jDcInicio.setEnabled(false);
+        jDcFinalizacion.setEnabled(false);
+        jBtnRenovar.setEnabled(false);
+        jBtncancelar.setEnabled(false);
+        jBtnBorrar.setEnabled(false);
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -174,7 +268,7 @@ public class BusquedaContrato extends javax.swing.JInternalFrame {
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        jTxtIdInmueble = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -182,22 +276,24 @@ public class BusquedaContrato extends javax.swing.JInternalFrame {
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
-        jDateChooser2 = new com.toedter.calendar.JDateChooser();
+        jDcFinalizacion = new com.toedter.calendar.JDateChooser();
+        jDcInicio = new com.toedter.calendar.JDateChooser();
         jButton7 = new javax.swing.JButton();
-        jDateChooser3 = new com.toedter.calendar.JDateChooser();
         jLVendedor = new javax.swing.JLabel();
         jLInquilino = new javax.swing.JLabel();
         jLCodigoPropiedad = new javax.swing.JLabel();
         jLEstado = new javax.swing.JLabel();
         jButton8 = new javax.swing.JButton();
-        jButton9 = new javax.swing.JButton();
-        jButton10 = new javax.swing.JButton();
+        jBtncancelar = new javax.swing.JButton();
+        jBtnBorrar = new javax.swing.JButton();
+        jDcFirma = new javax.swing.JLabel();
+        jBtnRenovar = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setBackground(new java.awt.Color(153, 153, 153));
         jLabel1.setFont(new java.awt.Font("SansSerif", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Gestion de Contratos");
         jLabel1.setOpaque(true);
@@ -220,10 +316,16 @@ public class BusquedaContrato extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTContratos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTContratosMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTContratos);
 
         jButton1.setBackground(new java.awt.Color(153, 204, 255));
         jButton1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(0, 0, 0));
         jButton1.setText("Buscar Contratos Por Inquilino");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -233,6 +335,7 @@ public class BusquedaContrato extends javax.swing.JInternalFrame {
 
         jButton2.setBackground(new java.awt.Color(153, 204, 255));
         jButton2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(0, 0, 0));
         jButton2.setText("Buscar Contratos Por Propiedad");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -251,17 +354,31 @@ public class BusquedaContrato extends javax.swing.JInternalFrame {
 
         jLabel2.setBackground(new java.awt.Color(255, 255, 255));
         jLabel2.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Seleccionar Codigo de Propiedad");
 
         jCbInmuebles.setBackground(new java.awt.Color(204, 204, 204));
         jCbInmuebles.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jCbInmuebles.setForeground(new java.awt.Color(0, 0, 0));
+        jCbInmuebles.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCbInmueblesActionPerformed(evt);
+            }
+        });
 
         jLabel3.setBackground(new java.awt.Color(255, 255, 255));
         jLabel3.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Seleccionar Inquilino");
 
         jCbInquilinos.setBackground(new java.awt.Color(204, 204, 204));
         jCbInquilinos.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jCbInquilinos.setForeground(new java.awt.Color(0, 0, 0));
+        jCbInquilinos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCbInquilinosActionPerformed(evt);
+            }
+        });
 
         jSeparator2.setBackground(new java.awt.Color(204, 204, 204));
         jSeparator2.setForeground(new java.awt.Color(204, 204, 204));
@@ -269,58 +386,95 @@ public class BusquedaContrato extends javax.swing.JInternalFrame {
 
         jLabel4.setBackground(new java.awt.Color(255, 255, 255));
         jLabel4.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Seleccionar Vendedor");
 
         jCbEmpleados.setBackground(new java.awt.Color(204, 204, 204));
         jCbEmpleados.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jCbEmpleados.setForeground(new java.awt.Color(0, 0, 0));
+        jCbEmpleados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCbEmpleadosActionPerformed(evt);
+            }
+        });
 
         jButton4.setBackground(new java.awt.Color(153, 204, 255));
         jButton4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jButton4.setForeground(new java.awt.Color(0, 0, 0));
         jButton4.setText("Buscar Contratos Por Vendedor");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jButton5.setBackground(new java.awt.Color(255, 102, 102));
         jButton5.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jButton5.setForeground(new java.awt.Color(0, 0, 0));
         jButton5.setText("Buscar Contratos Vencidos");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         jButton6.setBackground(new java.awt.Color(204, 204, 204));
         jButton6.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jButton6.setForeground(new java.awt.Color(0, 0, 0));
         jButton6.setText("Salir");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
         jLabel5.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("Codigo Del Contrato");
 
-        jTextField1.setBackground(new java.awt.Color(204, 204, 204));
-        jTextField1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jTxtIdInmueble.setBackground(new java.awt.Color(204, 204, 204));
+        jTxtIdInmueble.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jTxtIdInmueble.setForeground(new java.awt.Color(0, 0, 0));
 
         jLabel6.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
         jLabel6.setText("Inicio del Contrato");
 
         jLabel7.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
         jLabel7.setText("Finalizacion del Contrato");
 
         jLabel8.setBackground(new java.awt.Color(255, 255, 255));
         jLabel8.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(0, 0, 0));
         jLabel8.setText("Cierre del Contrato");
 
         jLabel9.setBackground(new java.awt.Color(255, 255, 255));
         jLabel9.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(0, 0, 0));
         jLabel9.setText("DNI del Vendedor");
 
         jLabel10.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(0, 0, 0));
         jLabel10.setText("Inquilino");
 
         jLabel11.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(0, 0, 0));
         jLabel11.setText("Codigo del Inmueble");
 
         jLabel12.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(0, 0, 0));
         jLabel12.setText("Estado del contrato");
 
-        jDateChooser1.setBackground(new java.awt.Color(204, 204, 204));
+        jDcFinalizacion.setBackground(new java.awt.Color(204, 204, 204));
+        jDcFinalizacion.setForeground(new java.awt.Color(0, 0, 0));
 
-        jDateChooser2.setBackground(new java.awt.Color(204, 204, 204));
+        jDcInicio.setBackground(new java.awt.Color(204, 204, 204));
+        jDcInicio.setForeground(new java.awt.Color(0, 0, 0));
 
         jButton7.setBackground(new java.awt.Color(204, 204, 204));
         jButton7.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jButton7.setForeground(new java.awt.Color(0, 0, 0));
         jButton7.setText("Renovar Contrato");
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -329,27 +483,61 @@ public class BusquedaContrato extends javax.swing.JInternalFrame {
         });
 
         jLVendedor.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jLVendedor.setForeground(new java.awt.Color(0, 0, 0));
         jLVendedor.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         jLInquilino.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jLInquilino.setForeground(new java.awt.Color(0, 0, 0));
 
         jLCodigoPropiedad.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jLCodigoPropiedad.setForeground(new java.awt.Color(0, 0, 0));
         jLCodigoPropiedad.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         jLEstado.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jLEstado.setForeground(new java.awt.Color(0, 0, 0));
         jLEstado.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         jButton8.setBackground(new java.awt.Color(204, 204, 204));
         jButton8.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jButton8.setForeground(new java.awt.Color(0, 0, 0));
         jButton8.setText("Modificar contrato");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
 
-        jButton9.setBackground(new java.awt.Color(204, 204, 204));
-        jButton9.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jButton9.setText("Cancelar Contrato");
+        jBtncancelar.setBackground(new java.awt.Color(204, 204, 204));
+        jBtncancelar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jBtncancelar.setForeground(new java.awt.Color(0, 0, 0));
+        jBtncancelar.setText("Cancelar Contrato");
+        jBtncancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtncancelarActionPerformed(evt);
+            }
+        });
 
-        jButton10.setBackground(new java.awt.Color(204, 204, 204));
-        jButton10.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jButton10.setText("Borrar Contrato");
+        jBtnBorrar.setBackground(new java.awt.Color(204, 204, 204));
+        jBtnBorrar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jBtnBorrar.setForeground(new java.awt.Color(0, 0, 0));
+        jBtnBorrar.setText("Borrar Contrato");
+        jBtnBorrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnBorrarActionPerformed(evt);
+            }
+        });
+
+        jDcFirma.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+
+        jBtnRenovar.setBackground(new java.awt.Color(204, 204, 204));
+        jBtnRenovar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jBtnRenovar.setForeground(new java.awt.Color(0, 0, 0));
+        jBtnRenovar.setText("Confirmar Renovacion");
+        jBtnRenovar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnRenovarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -361,7 +549,7 @@ public class BusquedaContrato extends javax.swing.JInternalFrame {
                         .addGroup(layout.createSequentialGroup()
                             .addGap(79, 79, 79)
                             .addComponent(jButton6)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 165, Short.MAX_VALUE)
                             .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(57, 57, 57))
                         .addGroup(layout.createSequentialGroup()
@@ -397,59 +585,65 @@ public class BusquedaContrato extends javax.swing.JInternalFrame {
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(jLCodigoPropiedad, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(jButton9))
+                            .addComponent(jBtncancelar))
                         .addGap(102, 102, 102)
                         .addComponent(jButton8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(12, 12, 12)
-                                .addComponent(jButton10))
+                                .addComponent(jBtnBorrar))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLEstado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(503, 503, 503)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel7)
-                                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
                                 .addGap(88, 88, 88)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel5)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGap(67, 67, 67)
-                                                .addComponent(jButton7))
                                             .addGroup(layout.createSequentialGroup()
                                                 .addGap(160, 160, 160)
                                                 .addComponent(jLVendedor, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
                                             .addGroup(layout.createSequentialGroup()
                                                 .addGap(160, 160, 160)
-                                                .addComponent(jLInquilino, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                                .addComponent(jLInquilino, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGap(67, 67, 67)
+                                                .addComponent(jTxtIdInmueble, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(jButton3))))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(112, 112, 112)
+                                        .addComponent(jDcInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(29, 29, 29)
+                                        .addComponent(jBtnRenovar)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                                        .addComponent(jDcFinalizacion, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(layout.createSequentialGroup()
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                    .addComponent(jLabel9)
-                                                    .addComponent(jLabel8))
-                                                .addGap(59, 59, 59)
-                                                .addComponent(jDateChooser3, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addComponent(jLabel6)
+                                                .addGap(65, 65, 65)
+                                                .addComponent(jButton7))
                                             .addGroup(layout.createSequentialGroup()
-                                                .addGap(11, 11, 11)
-                                                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                                .addGap(112, 112, 112)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addGroup(layout.createSequentialGroup()
+                                                        .addGap(11, 11, 11)
+                                                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                    .addGroup(layout.createSequentialGroup()
+                                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                            .addComponent(jLabel9)
+                                                            .addComponent(jLabel8))
+                                                        .addGap(111, 111, 111)
+                                                        .addComponent(jDcFirma, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                        .addGap(0, 0, Short.MAX_VALUE))))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(336, 336, 336)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(57, 57, 57)
-                                .addComponent(jButton3)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                                .addGap(310, 310, 310)
+                                .addComponent(jLabel7)))
+                        .addGap(0, 15, Short.MAX_VALUE)))
                 .addContainerGap(70, Short.MAX_VALUE))
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jScrollPane1)
@@ -492,25 +686,25 @@ public class BusquedaContrato extends javax.swing.JInternalFrame {
                                     .addComponent(jButton6)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(39, 39, 39)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(jLabel5)
-                                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jButton3))
-                                        .addGap(37, 37, 37)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(jLabel7)
-                                            .addComponent(jLabel6))
-                                        .addGap(18, 18, 18)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jTxtIdInmueble, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButton3))
+                                .addGap(36, 36, 36)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel7)
+                                    .addComponent(jLabel6)
                                     .addComponent(jButton7))
-                                .addGap(30, 30, 30)
+                                .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jDateChooser3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel8))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jDcFinalizacion, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jDcInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jBtnRenovar))
+                                .addGap(38, 38, 38)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel8)
+                                    .addComponent(jDcFirma, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(31, 31, 31)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLVendedor, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -531,9 +725,9 @@ public class BusquedaContrato extends javax.swing.JInternalFrame {
                                             .addComponent(jLEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                     .addComponent(jButton8))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jButton9)
-                                    .addComponent(jButton10))))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jBtncancelar)
+                                    .addComponent(jBtnBorrar))))
                         .addContainerGap(71, Short.MAX_VALUE))))
         );
 
@@ -542,10 +736,22 @@ public class BusquedaContrato extends javax.swing.JInternalFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+        try{
+            Contrato contrato=cd.buscarContratoXId(Integer.parseInt(jTxtIdInmueble.getText()));
+            //cargarContrato(contrato);
+            mostrarContrato2();
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(this, "Debe cargar el campo del codigo con uno valido");
+        }
+        
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
+        inhabilitar();
+        jDcInicio.setEnabled(true);
+        jDcFinalizacion.setEnabled(true);
+        jBtnRenovar.setEnabled(true);
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -558,10 +764,96 @@ public class BusquedaContrato extends javax.swing.JInternalFrame {
         cargarXPropiedad();
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void jCbInquilinosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCbInquilinosActionPerformed
+        // TODO add your handling code here:
+        borrarFilas();
+    }//GEN-LAST:event_jCbInquilinosActionPerformed
+
+    private void jCbInmueblesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCbInmueblesActionPerformed
+        // TODO add your handling code here:
+        borrarFilas();
+    }//GEN-LAST:event_jCbInmueblesActionPerformed
+
+    private void jCbEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCbEmpleadosActionPerformed
+        // TODO add your handling code here:
+        borrarFilas();
+    }//GEN-LAST:event_jCbEmpleadosActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        cargarXVendedor();
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        vencidos();
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jTContratosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTContratosMouseClicked
+        // TODO add your handling code here:
+        mostratContrato();
+    }//GEN-LAST:event_jTContratosMouseClicked
+
+    private void jBtnRenovarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnRenovarActionPerformed
+        // TODO add your handling code here:
+        try{
+            SimpleDateFormat formatoFecha1 = new SimpleDateFormat("dd-MM-yyyy");
+        String fecha = formatoFecha1.format(jDcFinalizacion.getDate());
+        LocalDate fechFinal = LocalDate.parse(fecha, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+
+        SimpleDateFormat formatoFecha2 = new SimpleDateFormat("dd-MM-yyyy");
+        String fecha2 = formatoFecha2.format(jDcInicio.getDate());
+        LocalDate fechInicio = LocalDate.parse(fecha2, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+
+        cd.renovarContrato(Integer.parseInt(jTxtIdInmueble.getText()) , fechInicio, fechFinal);
+        inhabilitar();
+        mostrarContrato2();
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(this,"Error, debe cargar un contrato");
+        }
+        
+    }//GEN-LAST:event_jBtnRenovarActionPerformed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        // TODO add your handling code here:
+        inhabilitar();
+        jBtncancelar.setEnabled(true);
+        jBtnBorrar.setEnabled(true);
+    }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void jBtncancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtncancelarActionPerformed
+        // TODO add your handling code here:
+        try{
+        cd.cancelarContrato(Integer.parseInt(jTxtIdInmueble.getText()));
+        inhabilitar();
+        mostrarContrato2();
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(this,"Error, debe cargar un contrato");
+        }
+    }//GEN-LAST:event_jBtncancelarActionPerformed
+
+    private void jBtnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnBorrarActionPerformed
+        // TODO add your handling code here:
+        try{
+        cd.borrarContrato(Integer.parseInt(jTxtIdInmueble.getText()));
+        inhabilitar();
+        mostrarContrato2();
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(this,"Error, debe cargar un contrato");
+        }
+    }//GEN-LAST:event_jBtnBorrarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBtnBorrar;
+    private javax.swing.JButton jBtnRenovar;
+    private javax.swing.JButton jBtncancelar;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -569,13 +861,12 @@ public class BusquedaContrato extends javax.swing.JInternalFrame {
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
     private javax.swing.JComboBox<Empleado> jCbEmpleados;
     private javax.swing.JComboBox<Inmueble> jCbInmuebles;
     private javax.swing.JComboBox<Inquilino> jCbInquilinos;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
-    private com.toedter.calendar.JDateChooser jDateChooser2;
-    private com.toedter.calendar.JDateChooser jDateChooser3;
+    private com.toedter.calendar.JDateChooser jDcFinalizacion;
+    private javax.swing.JLabel jDcFirma;
+    private com.toedter.calendar.JDateChooser jDcInicio;
     private javax.swing.JLabel jLCodigoPropiedad;
     private javax.swing.JLabel jLEstado;
     private javax.swing.JLabel jLInquilino;
@@ -595,6 +886,6 @@ public class BusquedaContrato extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTable jTContratos;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTxtIdInmueble;
     // End of variables declaration//GEN-END:variables
 }

@@ -140,6 +140,35 @@ public class ContratoData {
         }
         return contrato;
     }
+    
+    public List<Contrato> obtenerContratos(){
+        ArrayList<Contrato> contratos = new ArrayList<Contrato>();
+        try {
+            Contrato contrato;
+            String sql = "SELECT * FROM contrato;";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                contrato = new Contrato();
+                contrato.setIdContrato(rs.getInt("idContrato"));
+                contrato.setInicio(rs.getDate("inicio").toLocalDate());
+                contrato.setFinalizacion(rs.getDate("finalizacion").toLocalDate());
+                contrato.setFirma(rs.getDate("firma").toLocalDate());
+                Empleado empleado = empleadoData.obtenerEmpleadoXDNI(rs.getInt("dniEmpleado"));
+                contrato.setDniEmpleado(empleado);
+                Inquilino inquilino = inquilinoData.obetenerInquilinoPorID(rs.getInt("idInquilino"));
+                contrato.setInquilino(inquilino);
+                Inmueble inmueble = inmuebleData.obtenerInmuebleXId(rs.getInt("idInmueble"));
+                contrato.setInmueble(inmueble);
+                contrato.setActivo(rs.getBoolean("activo"));
+                contratos.add(contrato);
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "ocurrio un error");
+        }
+        return contratos;
+    }
 
     public List<Contrato> buscarContratosXPropiedad(String codigoPropiedad) {
         ArrayList<Contrato> contratos = new ArrayList<Contrato>();

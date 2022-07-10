@@ -57,7 +57,27 @@ public class BusquedaContrato extends javax.swing.JInternalFrame {
         cargarInmuebles();
         listaEmpleados = (ArrayList<Empleado>) ed.obtenerEmpleados();
         cargarEmpleados();
+        listaContratos = (ArrayList<Contrato>) cd.obtenerContratos();
+        cargarContratos();
         inhabilitar();
+    }
+    
+    private void cargarContratos(){
+        Collections.sort(listaContratos, new Comparator<Contrato>() {
+            @Override
+            public int compare(Contrato t, Contrato t1) {
+                return t.getInquilino().getApellido().compareTo(t1.getInquilino().getApellido());
+            }
+        });
+        for (Contrato c : listaContratos) {
+            String estado;
+            if(c.isActivo()){
+                estado="Activo";
+            }else{
+                estado="Inactivo";
+            }
+            modelo.addRow(new Object[]{c.getIdContrato(), c.getInquilino().toString(), c.getInmueble().getCodigoInmueble(), c.getInmueble().getPrecio(), c.getInicio(),c.getFinalizacion(),c.getEmpleado().toString(),estado});
+        }
     }
     
     private void cargarEmpleados(){

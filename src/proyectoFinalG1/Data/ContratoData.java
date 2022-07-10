@@ -49,7 +49,7 @@ public class ContratoData {
             ps.setInt(4, contrato.getEmpleado().getDni());
             ps.setInt(5, contrato.getInquilino().getIdInquilino());
             ps.setInt(6, contrato.getInmueble().getIdInmueble());
-            ps.setBoolean(7, contrato.isActivo());
+            ps.setBoolean(7, true);
 
             ps.executeUpdate();
 
@@ -67,7 +67,7 @@ public class ContratoData {
             if (ex instanceof java.sql.SQLIntegrityConstraintViolationException) {
                 JOptionPane.showMessageDialog(null, "El contrato que esta queriendo cargar ya existe");
             } else {
-                JOptionPane.showMessageDialog(null, "Error de sintaxis " + ex);
+                JOptionPane.showMessageDialog(null, "El inquilino que esta cargando no existe ");
             }
         }
         return creado;

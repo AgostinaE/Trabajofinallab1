@@ -51,6 +51,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jmiNuevoContrato = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         jMIEmpleado = new javax.swing.JMenuItem();
+        jMSalir = new javax.swing.JMenu();
+        jMISalir = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(214, 2147483647));
@@ -245,6 +247,23 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
+        jMSalir.setText("Salir");
+        jMSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMSalirActionPerformed(evt);
+            }
+        });
+
+        jMISalir.setText("Salir");
+        jMISalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMISalirActionPerformed(evt);
+            }
+        });
+        jMSalir.add(jMISalir);
+
+        jMenuBar1.add(jMSalir);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -379,6 +398,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jDesktopPane1.repaint();
     }//GEN-LAST:event_jbInquilinosActionPerformed
 
+    private void jMSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMSalirActionPerformed
+      
+    }//GEN-LAST:event_jMSalirActionPerformed
+
+    private void jMISalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMISalirActionPerformed
+        dispose();
+    }//GEN-LAST:event_jMISalirActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -420,6 +447,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuItem jMIEmpleado;
+    private javax.swing.JMenuItem jMISalir;
+    private javax.swing.JMenu jMSalir;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JButton jbContratos;

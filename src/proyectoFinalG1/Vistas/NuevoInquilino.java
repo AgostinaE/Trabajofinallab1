@@ -40,8 +40,8 @@ public class NuevoInquilino extends javax.swing.JInternalFrame {
         jTxtApellido.setEnabled(true);  
         jTxtTrabajo.setEnabled(true);
         jTxtGaranteN.setEnabled(true);   
-        jTxtGaranteDni.setEnabled(true);
-        jButton2.setEnabled(true);
+        jTxtGaranteDni.setEnabled(true);        
+        jBGuardar.setEnabled(true);
         jButton5.setEnabled(true);
     }
 
@@ -51,7 +51,7 @@ public class NuevoInquilino extends javax.swing.JInternalFrame {
         jTxtTrabajo.setEnabled(false);
         jTxtGaranteN.setEnabled(false);   
         jTxtGaranteDni.setEnabled(false);
-        jButton2.setEnabled(false);
+        jBGuardar.setEnabled(false);
         jButton5.setEnabled(false);
     }
     /**
@@ -78,14 +78,14 @@ public class NuevoInquilino extends javax.swing.JInternalFrame {
         jTxtGaranteN = new javax.swing.JTextField();
         jTxtGaranteDni = new javax.swing.JTextField();
         jBtnNuevo = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jBGuardar = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jBtnBuscarXCuil = new javax.swing.JButton();
         jToggleButton1 = new javax.swing.JToggleButton();
         jLabel8 = new javax.swing.JLabel();
         jTxtId = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        jBBuscarXCodigo = new javax.swing.JButton();
 
         jButton3.setBackground(new java.awt.Color(204, 204, 255));
         jButton3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -179,13 +179,13 @@ public class NuevoInquilino extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(204, 204, 255));
-        jButton2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(0, 0, 0));
-        jButton2.setText("Guardar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jBGuardar.setBackground(new java.awt.Color(204, 204, 255));
+        jBGuardar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jBGuardar.setForeground(new java.awt.Color(0, 0, 0));
+        jBGuardar.setText("Guardar");
+        jBGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jBGuardarActionPerformed(evt);
             }
         });
 
@@ -237,13 +237,13 @@ public class NuevoInquilino extends javax.swing.JInternalFrame {
         jTxtId.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jTxtId.setForeground(new java.awt.Color(0, 0, 0));
 
-        jButton1.setBackground(new java.awt.Color(204, 204, 255));
-        jButton1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(0, 0, 0));
-        jButton1.setText("Buscar Por Codigo");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jBBuscarXCodigo.setBackground(new java.awt.Color(204, 204, 255));
+        jBBuscarXCodigo.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jBBuscarXCodigo.setForeground(new java.awt.Color(0, 0, 0));
+        jBBuscarXCodigo.setText("Buscar Por Codigo");
+        jBBuscarXCodigo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jBBuscarXCodigoActionPerformed(evt);
             }
         });
 
@@ -282,8 +282,8 @@ public class NuevoInquilino extends javax.swing.JInternalFrame {
                                 .addComponent(jBtnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE))))
+                                .addComponent(jBBuscarXCodigo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jBGuardar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(164, 164, 164)
                         .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -322,12 +322,12 @@ public class NuevoInquilino extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTxtGaranteDni, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7)
-                    .addComponent(jButton2))
+                    .addComponent(jBGuardar))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(jTxtId, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(jBBuscarXCodigo))
                 .addGap(38, 38, 38)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton5)
@@ -357,6 +357,7 @@ public class NuevoInquilino extends javax.swing.JInternalFrame {
     private void jBtnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnNuevoActionPerformed
         // TODO add your handling code here:
         habilitar();
+        jTxtId.setEnabled(false);
         limpiar();
     }//GEN-LAST:event_jBtnNuevoActionPerformed
 
@@ -425,7 +426,7 @@ private boolean validarCampos(){
         }
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void jBGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarActionPerformed
         // TODO add your handling code here:
         try{
             Inquilino in=new Inquilino();
@@ -453,7 +454,11 @@ private boolean validarCampos(){
         }catch(Exception ex){
             JOptionPane.showMessageDialog(this, "Error, un campo contiene datos invalidos o no los contiene");
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+        limpiar();
+        inhabilitar();
+        jTxtCuil.setEnabled(true);
+        jTxtId.setEnabled(true);
+    }//GEN-LAST:event_jBGuardarActionPerformed
 
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
         // TODO add your handling code here:
@@ -471,7 +476,7 @@ private boolean validarCampos(){
         }
     }//GEN-LAST:event_jButton5ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jBBuscarXCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarXCodigoActionPerformed
         // TODO add your handling code here:
         try{
             Inquilino in=id.obetenerInquilinoPorID(Integer.parseInt(jTxtId.getText()));
@@ -482,17 +487,18 @@ private boolean validarCampos(){
         jTxtGaranteDni.setText(in.getDniGarante()+""); 
         jTxtCuil.setText(in.getCuil()+"");
         habilitar();
+        jTxtId.setEnabled(true);
         }catch(Exception ex){
             JOptionPane.showMessageDialog(this, "Debe cargar un codigo valido para buscar un Inquilino");
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jBBuscarXCodigoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBBuscarXCodigo;
+    private javax.swing.JButton jBGuardar;
     private javax.swing.JButton jBtnBuscarXCuil;
     private javax.swing.JButton jBtnNuevo;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;

@@ -745,7 +745,7 @@ public class BusquedaContrato extends javax.swing.JInternalFrame {
                                             .addComponent(jLEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                     .addComponent(jButton8))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jBtncancelar)
                                     .addComponent(jBtnBorrar))))
                         .addContainerGap(71, Short.MAX_VALUE))))

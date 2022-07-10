@@ -37,7 +37,7 @@ public class EmpleadoData {
 
             ResultSet rs = ps.getGeneratedKeys();
 
-            JOptionPane.showMessageDialog(null, " Se agregó al empleado " + empleado + " correctamente");
+            //JOptionPane.showMessageDialog(null, " Se agregó al empleado " + empleado + " correctamente");
             if (rs.next()) {
                 empleado.setIdEmpleado(rs.getInt(1));
             } else {

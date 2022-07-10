@@ -320,7 +320,7 @@ public class NuevoEmpleado extends javax.swing.JInternalFrame {
         Empleado empleado = new Empleado(id, nombre, apellido, dni, activo);
         if (ed.modificarEmpleado(empleado)) {
 
-            JOptionPane.showMessageDialog(this, "empleado modificado con Exito");
+            JOptionPane.showMessageDialog(this, "Empleado modificado con Exito");
         }
         limpiarCampos();
         borraFilasTabla();

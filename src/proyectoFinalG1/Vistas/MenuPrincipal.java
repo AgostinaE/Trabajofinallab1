@@ -80,6 +80,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jbInquilinos.setFont(new java.awt.Font("Microsoft JhengHei Light", 0, 18)); // NOI18N
         jbInquilinos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectoFinalG1/VistasImagenes/inquilinoIconTam.png"))); // NOI18N
         jbInquilinos.setText("Inquilino nuevo");
+        jbInquilinos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbInquilinosActionPerformed(evt);
+            }
+        });
 
         jbContratos.setFont(new java.awt.Font("Microsoft YaHei Light", 0, 18)); // NOI18N
         jbContratos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectoFinalG1/VistasImagenes/contratoIconTam.png"))); // NOI18N
@@ -364,6 +369,15 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private void jbInmueblesDisponiblesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbInmueblesDisponiblesActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jbInmueblesDisponiblesActionPerformed
+
+    private void jbInquilinosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbInquilinosActionPerformed
+        // TODO add your handling code here:
+        NuevoInquilino ni = new NuevoInquilino(conexion);
+        ni.setVisible(true);
+        jDesktopPane1.add(ni);
+        jDesktopPane1.moveToFront(ni);
+        jDesktopPane1.repaint();
+    }//GEN-LAST:event_jbInquilinosActionPerformed
 
     /**
      * @param args the command line arguments

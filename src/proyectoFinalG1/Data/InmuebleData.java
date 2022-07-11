@@ -9,8 +9,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -250,16 +252,16 @@ public class InmuebleData {
     //Listar los inmuebles no alquilados al día de hoy
     public List<Inmueble> NoAlquilados() {
         ArrayList<Inmueble> inmuebles = new ArrayList<Inmueble>();
-        Date ahora = Date.valueOf(LocalDate.now());
-        try {
+        LocalDate fecha = LocalDate.now();
+       try {
             System.out.println("1");
             String sql = "SELECT inmueble.* FROM inmueble WHERE \n" +
 "inmueble.activo=1 AND inmueble.idInmueble NOT IN\n" +
-"(SELECT inmueble.idInmueble FROM contrato , inmueble WHERE inmueble.idInmueble=contrato.idInmueble AND inmueble.activo = 1 AND contrato.finalizacion>'?');";
+"(SELECT inmueble.idInmueble FROM contrato , inmueble WHERE inmueble.idInmueble=contrato.idInmueble AND inmueble.activo = 1 AND contrato.finalizacion>'"+Date.valueOf(fecha)+"');";
             System.out.println("2");
             PreparedStatement ps = con.prepareStatement(sql);
             System.out.println("3");
-            ps.setDate(1, ahora);
+            //ps.setDate(1, Date.valueOf(fecha));
             System.out.println("4");
             ResultSet resultSet = ps.executeQuery();
             System.out.println("5");

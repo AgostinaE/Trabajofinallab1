@@ -1,18 +1,62 @@
 package proyectoFinalG1.Vistas;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import javax.swing.table.DefaultTableModel;
+import proyectoFinalG1.Data.Conexion;
+import proyectoFinalG1.Data.ContratoData;
+import proyectoFinalG1.Data.InmuebleData;
+import proyectoFinalG1.Modelos.Inmueble;
+
 /**
  *
  * @author Grupo 1
  */
 public class PropiedadesDisponibles extends javax.swing.JInternalFrame {
 
+    InmuebleData id;
+    ContratoData cd;
+    private DefaultTableModel modelo;
+    private ArrayList<Inmueble> listaInmuebles;
     /**
      * Creates new form PropiedadesDisponibles
      */
-    public PropiedadesDisponibles() {
+    public PropiedadesDisponibles(Conexion conexion) {
         initComponents();
+        id = new InmuebleData(conexion); 
+        cd = new ContratoData(conexion);
+        listaInmuebles = (ArrayList<Inmueble>) id.obtenerInmuebles();
+        cargarInmuebles();
+        modelo = new DefaultTableModel();
     }
+private void cargarInmuebles(){
+        Collections.sort(listaInmuebles, new Comparator<Inmueble>() {
+            @Override
+            public int compare(Inmueble t, Inmueble t1) {
+                return t.getCodigoInmueble().compareTo(t1.getCodigoInmueble());
+            }
+        });
+        for (Inmueble aux : listaInmuebles) {
+            jCBZona.addItem(aux);
+        }
+    }
+private void armarTabla(){
+        ArrayList<Object> columnas = new ArrayList<>();
+        columnas.add("Numero de Inmueble");
+        columnas.add("Codigo de Propiedad");
+        columnas.add("Tipo de Propiedad");
+        columnas.add("Zona");
+        columnas.add("Superficie");
+        columnas.add("Precio");
+        
+        for (Object it : columnas) {
 
+            modelo.addColumn(it);
+        }
+        jTPropiedades.setModel(modelo);
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -24,12 +68,12 @@ public class PropiedadesDisponibles extends javax.swing.JInternalFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTPropiedades = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jCBZona = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
@@ -40,7 +84,7 @@ public class PropiedadesDisponibles extends javax.swing.JInternalFrame {
         jLabel1.setFont(new java.awt.Font("Microsoft JhengHei Light", 0, 24)); // NOI18N
         jLabel1.setText("Propiedades Disponibles");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTPropiedades.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -51,7 +95,7 @@ public class PropiedadesDisponibles extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTPropiedades);
 
         jButton1.setText("Buscar Propiedad");
 
@@ -109,7 +153,7 @@ public class PropiedadesDisponibles extends javax.swing.JInternalFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel2)
                                         .addGap(45, 45, 45)
-                                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jCBZona, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(66, 66, 66)
                                         .addComponent(jLabel5)))
                                 .addGap(18, 18, 18)
@@ -129,7 +173,7 @@ public class PropiedadesDisponibles extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCBZona, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5)
                     .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
@@ -166,14 +210,14 @@ public class PropiedadesDisponibles extends javax.swing.JInternalFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<Inmueble> jCBZona;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTPropiedades;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;

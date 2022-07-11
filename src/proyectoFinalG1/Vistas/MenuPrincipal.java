@@ -382,7 +382,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jbPropietariosActionPerformed
 
     private void jbInmueblesDisponiblesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbInmueblesDisponiblesActionPerformed
-        // TODO add your handling code here:
+       PropiedadesDisponibles pd = new PropiedadesDisponibles(conexion);
+        pd.setVisible(true);
+        jDesktopPane1.add(pd);
+        jDesktopPane1.moveToFront(pd);
+        jDesktopPane1.repaint();
     }//GEN-LAST:event_jbInmueblesDisponiblesActionPerformed
 
     private void jbInquilinosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbInquilinosActionPerformed

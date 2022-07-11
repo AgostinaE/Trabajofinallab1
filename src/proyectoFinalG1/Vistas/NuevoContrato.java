@@ -312,6 +312,9 @@ public class NuevoContrato extends javax.swing.JInternalFrame {
         Contrato contrato = new Contrato(fechInicio, fechFinal, firma, empleado, inquilino, inmueble, true);
         if (cd.crearContrato(contrato)) {
             JOptionPane.showMessageDialog(this, "Se Firmo el contrato con exito");
+            jCbInmuebles.removeAllItems();
+            listaInmuebles = (ArrayList<Inmueble>) ind.NoAlquilados();
+            cargarComboInmuebles();
         }
         }catch(Exception ex){
             JOptionPane.showMessageDialog(this, "Algun campo se encuentra vacio o con informacion erronea");

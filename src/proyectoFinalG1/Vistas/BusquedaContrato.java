@@ -53,7 +53,7 @@ public class BusquedaContrato extends javax.swing.JInternalFrame {
         armarTabla();
         listaInquilinos = (ArrayList<Inquilino>) ind.obtenerInquilino();
         cargarInquilinos();
-        listaInmuebles = (ArrayList<Inmueble>) id.obtenerInmuebles();
+        listaInmuebles = (ArrayList<Inmueble>) id.alquilados();
         cargarInmuebles();
         listaEmpleados = (ArrayList<Empleado>) ed.obtenerEmpleados();
         cargarEmpleados();

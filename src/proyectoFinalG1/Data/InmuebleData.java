@@ -250,27 +250,46 @@ public class InmuebleData {
     //Listar los inmuebles no alquilados al día de hoy
     public List<Inmueble> NoAlquilados() {
         ArrayList<Inmueble> inmuebles = new ArrayList<Inmueble>();
-
+        Date ahora = Date.valueOf(LocalDate.now());
         try {
-            String sql = "SELECT inmueble.* FROM contrato , inmueble WHERE inmueble.activo=1 AND inmueble.idInmueble NOT IN (SELECT inmueble.idInmueble FROM inmueble WHERE inmueble.idInmueble=contrato.idInmueble AND inmueble.activo = 1 AND contrato.finalizacion>'?'); ";
+            System.out.println("1");
+            String sql = "SELECT inmueble.* FROM inmueble WHERE \n" +
+"inmueble.activo=1 AND inmueble.idInmueble NOT IN\n" +
+"(SELECT inmueble.idInmueble FROM contrato , inmueble WHERE inmueble.idInmueble=contrato.idInmueble AND inmueble.activo = 1 AND contrato.finalizacion>'?');";
+            System.out.println("2");
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setDate(1, Date.valueOf(LocalDate.now()));
+            System.out.println("3");
+            ps.setDate(1, ahora);
+            System.out.println("4");
             ResultSet resultSet = ps.executeQuery();
+            System.out.println("5");
             Inmueble inmueble;
+            System.out.println("6");
             while (resultSet.next()) {
                 inmueble = new Inmueble();
+                System.out.println("1");
                 inmueble.setIdInmueble(resultSet.getInt("idInmueble"));
+                System.out.println("2");
                 inmueble.setCaracteristicas(resultSet.getString("caracteristicas"));
+                System.out.println("3");
                 inmueble.setDireccion(resultSet.getString("direccion"));
+                System.out.println("4");
                 inmueble.setPrecio(resultSet.getDouble("precio"));
+                System.out.println("5");
                 inmueble.setSuperficie(resultSet.getFloat("superficie"));
+                System.out.println("6");
                 inmueble.setTipoLocal(resultSet.getString("tipoLocal"));
+                System.out.println("7");
                 Propietario i = propietarioData.obetenerPropietarioPorID(resultSet.getInt("idPropietario"));
+                System.out.println("8");
                 inmueble.setPropietario(i);
+                System.out.println("9");
                 inmueble.setCodigoInmueble(resultSet.getString("codigoInmueble"));
+                System.out.println("10");
                 inmueble.setActivo(resultSet.getBoolean("activo"));
-
+                System.out.println("11");
                 inmuebles.add(inmueble);
+                System.out.println("12");
             }
             ps.close();
         } catch (SQLException ex) {

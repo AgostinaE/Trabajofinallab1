@@ -32,6 +32,7 @@ public class NuevoContrato extends javax.swing.JInternalFrame {
     private InquilinoData id;
     private ArrayList<Empleado> listaEmpleados;
     private ArrayList<Inmueble> listaInmuebles;
+    private ArrayList<Inquilino> listaInquilino;
 
     ///// CONSTRUCTOR /////
     public NuevoContrato(Conexion conexion) {
@@ -44,7 +45,8 @@ public class NuevoContrato extends javax.swing.JInternalFrame {
         cargarComboEmpleados();
         listaInmuebles = (ArrayList<Inmueble>) ind.NoAlquilados();
         cargarComboInmuebles();
-
+        listaInquilino = (ArrayList<Inquilino>) id.obtenerInquilino();
+        cargarComboInquilino();
     }
 
     ///// METODOS /////
@@ -69,6 +71,17 @@ public class NuevoContrato extends javax.swing.JInternalFrame {
         });
         for (Empleado aux : listaEmpleados) {
             jCbEmpleados.addItem(aux);
+        }
+    }
+    private void cargarComboInquilino() {
+        Collections.sort(listaInquilino, new Comparator<Inquilino>() {
+            @Override
+            public int compare(Inquilino t, Inquilino t1) {
+                return t.getApellido().compareTo(t1.getApellido());
+            }
+        });
+        for (Inquilino aux : listaInquilino) {
+            jCBInquilino.addItem(aux);
         }
     }
 
@@ -110,13 +123,13 @@ public class NuevoContrato extends javax.swing.JInternalFrame {
         jLabel12 = new javax.swing.JLabel();
         jCbEmpleados = new javax.swing.JComboBox<>();
         jLabel13 = new javax.swing.JLabel();
-        jTxtCuilInquilino = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jBtnSalir = new javax.swing.JButton();
         jBtnFirmar = new javax.swing.JButton();
         jDInicio = new com.toedter.calendar.JDateChooser();
         jDFinal = new com.toedter.calendar.JDateChooser();
+        jCBInquilino = new javax.swing.JComboBox<>();
 
         jLabel1.setFont(new java.awt.Font("Microsoft JhengHei Light", 0, 24)); // NOI18N
         jLabel1.setText("Nuevo Contrato");
@@ -177,8 +190,6 @@ public class NuevoContrato extends javax.swing.JInternalFrame {
         jLabel13.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel13.setText("Introducir CUIL/CUIT del nuevo Inquilino");
 
-        jTxtCuilInquilino.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-
         jLabel14.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel14.setText("Fecha de Inicio del Contrato");
 
@@ -211,6 +222,12 @@ public class NuevoContrato extends javax.swing.JInternalFrame {
         jDFinal.setForeground(new java.awt.Color(255, 255, 255));
         jDFinal.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
 
+        jCBInquilino.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCBInquilinoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -240,14 +257,15 @@ public class NuevoContrato extends javax.swing.JInternalFrame {
                                     .addComponent(jLabel13)
                                     .addComponent(jDInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(90, 90, 90)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTxtCuilInquilino, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(jCbInmuebles, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jCbEmpleados, 0, 308, Short.MAX_VALUE))
                             .addComponent(jLabel15)
-                            .addComponent(jDFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(47, Short.MAX_VALUE))
+                            .addComponent(jDFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jCBInquilino, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -261,11 +279,11 @@ public class NuevoContrato extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
                     .addComponent(jCbEmpleados, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(41, 41, 41)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGap(50, 50, 50)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
-                    .addComponent(jTxtCuilInquilino, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(82, 82, 82)
+                    .addComponent(jCBInquilino, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(80, 80, 80)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14)
                     .addComponent(jLabel15))
@@ -277,7 +295,7 @@ public class NuevoContrato extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBtnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jBtnFirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(91, Short.MAX_VALUE))
+                .addContainerGap(86, Short.MAX_VALUE))
         );
 
         pack();
@@ -296,8 +314,9 @@ public class NuevoContrato extends javax.swing.JInternalFrame {
         try{
             Inmueble inmueble = (Inmueble) jCbInmuebles.getSelectedItem();
         Empleado empleado = (Empleado) jCbEmpleados.getSelectedItem();
-        long cuil = Long.parseLong(jTxtCuilInquilino.getText());
-        Inquilino inquilino = id.obetenerInquilinoPorCuil(cuil);
+        Inquilino inquilino = (Inquilino)(jCBInquilino.getSelectedItem());
+        Long cuil= inquilino.getCuil();
+        inquilino = id.obetenerInquilinoPorCuil(cuil);
 
         SimpleDateFormat formatoFecha1 = new SimpleDateFormat("dd-MM-yyyy");
         String fecha = formatoFecha1.format(jDFinal.getDate());
@@ -322,6 +341,10 @@ public class NuevoContrato extends javax.swing.JInternalFrame {
         
     }//GEN-LAST:event_jBtnFirmarActionPerformed
 
+    private void jCBInquilinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBInquilinoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCBInquilinoActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
@@ -329,6 +352,7 @@ public class NuevoContrato extends javax.swing.JInternalFrame {
     private javax.swing.JButton jBtnSalir;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JComboBox<Inquilino> jCBInquilino;
     private com.toedter.calendar.JCalendar jCalFinalizacion;
     private com.toedter.calendar.JCalendar jCalInicio;
     private javax.swing.JComboBox<Empleado> jCbEmpleados;
@@ -357,7 +381,6 @@ public class NuevoContrato extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTxtCuilInquilino;
     private com.toedter.calendar.JDateChooser jdFechaNacimiento;
     private com.toedter.calendar.JDateChooser jdFechaNacimiento1;
     // End of variables declaration//GEN-END:variables

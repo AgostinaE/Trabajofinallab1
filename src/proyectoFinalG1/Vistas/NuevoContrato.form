@@ -187,18 +187,19 @@
                               <EmptySpace min="-2" pref="90" max="-2" attributes="0"/>
                           </Group>
                       </Group>
+                      <EmptySpace pref="68" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jTxtCuilInquilino" min="-2" pref="248" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="jCbInmuebles" max="32767" attributes="0"/>
                               <Component id="jCbEmpleados" pref="308" max="32767" attributes="0"/>
                           </Group>
                           <Component id="jLabel15" min="-2" max="-2" attributes="0"/>
                           <Component id="jDFinal" min="-2" pref="350" max="-2" attributes="0"/>
+                          <Component id="jCBInquilino" alignment="0" min="-2" pref="188" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace pref="47" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -216,12 +217,12 @@
                   <Component id="jLabel12" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jCbEmpleados" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="jLabel13" min="-2" max="-2" attributes="0"/>
-                  <Component id="jTxtCuilInquilino" min="-2" pref="37" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jLabel13" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jCBInquilino" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="82" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="80" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel14" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel15" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -236,7 +237,7 @@
                   <Component id="jBtnSalir" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
                   <Component id="jBtnFirmar" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="91" max="32767" attributes="0"/>
+              <EmptySpace pref="86" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -318,13 +319,6 @@
         <Property name="text" type="java.lang.String" value="Introducir CUIL/CUIT del nuevo Inquilino"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTxtCuilInquilino">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Arial" size="14" style="0"/>
-        </Property>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JLabel" name="jLabel14">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -394,6 +388,19 @@
           <Font name="Arial" size="18" style="0"/>
         </Property>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="jCBInquilino">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="0"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCBInquilinoActionPerformed"/>
+      </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Inquilino&gt;"/>
+      </AuxValues>
     </Component>
   </SubComponents>
 </Form>

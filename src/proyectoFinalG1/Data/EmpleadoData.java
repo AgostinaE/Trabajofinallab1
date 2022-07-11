@@ -140,22 +140,14 @@ public class EmpleadoData {
         String sql = "UPDATE empleado SET nombre=?,apellido=?,dni=?,activo=? WHERE idEmpleado = ? ";
         boolean modificado = false;
         try {
-            System.out.println("paso");
             PreparedStatement ps = con.prepareStatement(sql);
-            System.out.println("paso");
             ps.setString(1, empleado.getNombre());
-            System.out.println("paso");
             ps.setString(2, empleado.getApellido());
-            System.out.println("paso");
             ps.setInt(3, empleado.getDni());
-            System.out.println("paso");
             ps.setBoolean(4, empleado.isActivo());
-            System.out.println("paso");
             ps.setInt(5, empleado.getIdEmpleado());
-            System.out.println("paso");
 
             if (ps.executeUpdate() != 0) {
-                System.out.println("Entro");
                 modificado = true;
             }
             ps.close();

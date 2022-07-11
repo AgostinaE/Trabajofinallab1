@@ -289,15 +289,17 @@ public class NuevoEmpleado extends javax.swing.JInternalFrame {
 
     private void jBEditarEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEditarEmpleadoActionPerformed
         activaCampos();
-        int id = -1, dni = -1;
-
-        id = Integer.parseInt(jTId.getText());
-        String nombre = jTNombre.getText();
-        String apellido = jTApellido.getText();
-        Boolean activo = jcbActivo.isSelected();
-
         try {
-            dni = Integer.parseInt(jTDni.getText());
+            int id = Integer.parseInt(jTId.getText());
+            String nombre = jTNombre.getText();
+            String apellido = jTApellido.getText();
+            boolean activo = jcbActivo.isSelected();
+            int dni = Integer.parseInt(jTDni.getText());
+            Empleado empleado = new Empleado(id, nombre, apellido, dni, activo);
+            if (ed.modificarEmpleado(empleado)) {
+
+            JOptionPane.showMessageDialog(this, "Empleado modificado con Exito");
+        }
         } catch (Exception e) {
 
             JOptionPane.showMessageDialog(this, "Usted debe ingresar un numero");
@@ -305,11 +307,8 @@ public class NuevoEmpleado extends javax.swing.JInternalFrame {
 
         }
 
-        Empleado empleado = new Empleado(id, nombre, apellido, dni, activo);
-        if (ed.modificarEmpleado(empleado)) {
-
-            JOptionPane.showMessageDialog(this, "Empleado modificado con Exito");
-        }
+        
+        
         limpiarCampos();
         borraFilasTabla();
         

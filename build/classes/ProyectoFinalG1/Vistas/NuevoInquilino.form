@@ -10,9 +10,6 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Arial" size="14" style="0"/>
         </Property>
-        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="0" green="0" red="0" type="rgb"/>
-        </Property>
         <Property name="text" type="java.lang.String" value="Buscar Propiedad"/>
       </Properties>
       <Events>
@@ -45,53 +42,58 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Component id="jLabel1" alignment="0" max="32767" attributes="0"/>
           <Group type="102" alignment="1" attributes="0">
+              <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="jTxtGaranteN" max="32767" attributes="0"/>
+                  <Component id="jTxtApellido" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jTxtNombre" alignment="0" pref="267" max="32767" attributes="0"/>
+                  <Component id="jTxtCuil" max="32767" attributes="0"/>
+                  <Component id="jTxtTrabajo" max="32767" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
+                  <Component id="jBtnBuscarXCuil" min="-2" max="-2" attributes="0"/>
+                  <Component id="jBtnNuevo" min="-2" pref="170" max="-2" attributes="0"/>
+                  <Component id="jBtnNuevo1" min="-2" pref="170" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="43" max="32767" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="1" attributes="0">
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                      <Component id="jBGuardar" min="-2" pref="170" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="jBGuardarCambios" min="-2" pref="189" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
+                      <Component id="jButton5" min="-2" pref="174" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="jToggleButton1" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <EmptySpace max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel7" alignment="1" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel8" alignment="1" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="jTxtGaranteN" max="32767" attributes="0"/>
-                              <Component id="jTxtApellido" alignment="0" max="32767" attributes="0"/>
-                              <Component id="jTxtNombre" alignment="0" pref="267" max="32767" attributes="0"/>
-                              <Component id="jTxtCuil" max="32767" attributes="0"/>
-                              <Component id="jTxtTrabajo" max="32767" attributes="0"/>
-                          </Group>
-                          <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="jTxtId" alignment="0" max="32767" attributes="0"/>
-                              <Component id="jTxtGaranteDni" alignment="0" pref="268" max="32767" attributes="0"/>
-                          </Group>
+                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                          <Component id="jTxtId" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jTxtGaranteDni" alignment="0" min="-2" pref="268" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="jBtnBuscarXCuil" max="32767" attributes="0"/>
-                              <Component id="jBtnNuevo" min="-2" pref="170" max="-2" attributes="0"/>
-                              <Component id="jButton4" alignment="0" max="32767" attributes="0"/>
-                          </Group>
-                          <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="jBBuscarXCodigo" alignment="0" max="32767" attributes="0"/>
-                              <Component id="jBGuardar" alignment="0" pref="170" max="32767" attributes="0"/>
-                          </Group>
-                      </Group>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="164" max="-2" attributes="0"/>
-                      <Component id="jButton5" min="-2" pref="174" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="169" max="-2" attributes="0"/>
-                      <Component id="jToggleButton1" min="-2" max="-2" attributes="0"/>
+                      <Component id="jBBuscarXCodigo" min="-2" pref="170" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="43" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -105,12 +107,20 @@
                   <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jBtnNuevo" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jTxtApellido" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                  <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jTxtApellido" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="jBtnNuevo1" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
-              <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jTxtCuil" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
@@ -121,17 +131,15 @@
                   <Component id="jTxtTrabajo" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                   <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jTxtGaranteN" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                   <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButton4" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jTxtGaranteDni" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                   <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jBGuardar" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -139,12 +147,14 @@
                   <Component id="jTxtId" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                   <Component id="jBBuscarXCodigo" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jToggleButton1" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
                   <Component id="jButton5" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jToggleButton1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jBGuardar" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jBGuardarCambios" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="90" max="32767" attributes="0"/>
+              <EmptySpace pref="22" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -158,9 +168,6 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="SansSerif" size="24" style="1"/>
         </Property>
-        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="0" green="0" red="0" type="rgb"/>
-        </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
         <Property name="text" type="java.lang.String" value="Gestion de Inquilinos"/>
         <Property name="opaque" type="boolean" value="true"/>
@@ -171,9 +178,6 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Arial" size="18" style="0"/>
         </Property>
-        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="0" green="0" red="0" type="rgb"/>
-        </Property>
         <Property name="text" type="java.lang.String" value="Nombre"/>
       </Properties>
     </Component>
@@ -181,9 +185,6 @@
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Arial" size="18" style="0"/>
-        </Property>
-        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="0" green="0" red="0" type="rgb"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Apellido"/>
       </Properties>
@@ -193,9 +194,6 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Arial" size="18" style="0"/>
         </Property>
-        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="0" green="0" red="0" type="rgb"/>
-        </Property>
         <Property name="text" type="java.lang.String" value="CUIT"/>
       </Properties>
     </Component>
@@ -203,9 +201,6 @@
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Arial" size="18" style="0"/>
-        </Property>
-        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="0" green="0" red="0" type="rgb"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Lugar de Trabajo"/>
       </Properties>
@@ -215,9 +210,6 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Arial" size="18" style="0"/>
         </Property>
-        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="0" green="0" red="0" type="rgb"/>
-        </Property>
         <Property name="text" type="java.lang.String" value="Nombre del Garante"/>
       </Properties>
     </Component>
@@ -225,9 +217,6 @@
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Arial" size="18" style="0"/>
-        </Property>
-        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="0" green="0" red="0" type="rgb"/>
         </Property>
         <Property name="text" type="java.lang.String" value="DNI del Garante"/>
       </Properties>
@@ -240,9 +229,6 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Arial" size="14" style="0"/>
         </Property>
-        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="0" green="0" red="0" type="rgb"/>
-        </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTxtApellido">
@@ -253,9 +239,6 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Arial" size="14" style="0"/>
         </Property>
-        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="0" green="0" red="0" type="rgb"/>
-        </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTxtCuil">
@@ -265,9 +248,6 @@
         </Property>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Arial" size="14" style="0"/>
-        </Property>
-        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="0" green="0" red="0" type="rgb"/>
         </Property>
       </Properties>
       <Events>
@@ -282,9 +262,6 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Arial" size="14" style="0"/>
         </Property>
-        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="0" green="0" red="0" type="rgb"/>
-        </Property>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTxtTrabajoActionPerformed"/>
@@ -297,9 +274,6 @@
         </Property>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Arial" size="14" style="0"/>
-        </Property>
-        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="0" green="0" red="0" type="rgb"/>
         </Property>
       </Properties>
       <Events>
@@ -314,9 +288,6 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Arial" size="14" style="0"/>
         </Property>
-        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="0" green="0" red="0" type="rgb"/>
-        </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="jBtnNuevo">
@@ -326,9 +297,6 @@
         </Property>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Arial" size="14" style="0"/>
-        </Property>
-        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="0" green="0" red="0" type="rgb"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Nuevo Inquilino"/>
       </Properties>
@@ -344,16 +312,13 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Arial" size="14" style="0"/>
         </Property>
-        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="0" green="0" red="0" type="rgb"/>
-        </Property>
         <Property name="text" type="java.lang.String" value="Guardar"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBGuardarActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton4">
+    <Component class="javax.swing.JButton" name="jBGuardarCambios">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="ff" green="cc" red="cc" type="rgb"/>
@@ -361,13 +326,10 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Arial" size="14" style="0"/>
         </Property>
-        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="0" green="0" red="0" type="rgb"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Editar datos de Inquilino"/>
+        <Property name="text" type="java.lang.String" value="Guardar cambios"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton4ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBGuardarCambiosActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButton5">
@@ -377,9 +339,6 @@
         </Property>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Arial" size="14" style="0"/>
-        </Property>
-        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="0" green="0" red="0" type="rgb"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Borrar Inquilino"/>
       </Properties>
@@ -395,9 +354,6 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Arial" size="14" style="0"/>
         </Property>
-        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="0" green="0" red="0" type="rgb"/>
-        </Property>
         <Property name="text" type="java.lang.String" value="Buscar Inquilino Por CUIT"/>
       </Properties>
       <Events>
@@ -412,9 +368,6 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Arial" size="14" style="0"/>
         </Property>
-        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="0" green="0" red="0" type="rgb"/>
-        </Property>
         <Property name="text" type="java.lang.String" value="Salir"/>
       </Properties>
       <Events>
@@ -425,9 +378,6 @@
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Arial" size="18" style="0"/>
-        </Property>
-        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="0" green="0" red="0" type="rgb"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Codigo del Inquilino"/>
       </Properties>
@@ -440,9 +390,6 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Arial" size="14" style="0"/>
         </Property>
-        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="0" green="0" red="0" type="rgb"/>
-        </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="jBBuscarXCodigo">
@@ -453,13 +400,24 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Arial" size="14" style="0"/>
         </Property>
-        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="0" green="0" red="0" type="rgb"/>
-        </Property>
         <Property name="text" type="java.lang.String" value="Buscar Por Codigo"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBBuscarXCodigoActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="jBtnNuevo1">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="cc" red="cc" type="rgb"/>
+        </Property>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Arial" size="14" style="0"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Editar datos de Inquilino"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBtnNuevo1ActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

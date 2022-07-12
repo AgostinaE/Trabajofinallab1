@@ -21,6 +21,7 @@ public class NuevoInquilino extends javax.swing.JInternalFrame {
     public NuevoInquilino(Conexion conexion) {
         initComponents();
         inhabilitar();
+        jBGuardarCambios.setEnabled(false);
         id = new InquilinoData(conexion);
         vd = new Validacion();
     }
@@ -79,17 +80,17 @@ public class NuevoInquilino extends javax.swing.JInternalFrame {
         jTxtGaranteDni = new javax.swing.JTextField();
         jBtnNuevo = new javax.swing.JButton();
         jBGuardar = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        jBGuardarCambios = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jBtnBuscarXCuil = new javax.swing.JButton();
         jToggleButton1 = new javax.swing.JToggleButton();
         jLabel8 = new javax.swing.JLabel();
         jTxtId = new javax.swing.JTextField();
         jBBuscarXCodigo = new javax.swing.JButton();
+        jBtnNuevo1 = new javax.swing.JButton();
 
         jButton3.setBackground(new java.awt.Color(204, 204, 255));
         jButton3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(0, 0, 0));
         jButton3.setText("Buscar Propiedad");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -101,46 +102,36 @@ public class NuevoInquilino extends javax.swing.JInternalFrame {
 
         jLabel1.setBackground(new java.awt.Color(204, 204, 255));
         jLabel1.setFont(new java.awt.Font("SansSerif", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Gestion de Inquilinos");
         jLabel1.setOpaque(true);
 
         jLabel2.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Nombre");
 
         jLabel3.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Apellido");
 
         jLabel4.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("CUIT");
 
         jLabel5.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("Lugar de Trabajo");
 
         jLabel6.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
         jLabel6.setText("Nombre del Garante");
 
         jLabel7.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
         jLabel7.setText("DNI del Garante");
 
         jTxtNombre.setBackground(new java.awt.Color(204, 204, 204));
         jTxtNombre.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jTxtNombre.setForeground(new java.awt.Color(0, 0, 0));
 
         jTxtApellido.setBackground(new java.awt.Color(204, 204, 204));
         jTxtApellido.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jTxtApellido.setForeground(new java.awt.Color(0, 0, 0));
 
         jTxtCuil.setBackground(new java.awt.Color(204, 204, 204));
         jTxtCuil.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jTxtCuil.setForeground(new java.awt.Color(0, 0, 0));
         jTxtCuil.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTxtCuilActionPerformed(evt);
@@ -149,7 +140,6 @@ public class NuevoInquilino extends javax.swing.JInternalFrame {
 
         jTxtTrabajo.setBackground(new java.awt.Color(204, 204, 204));
         jTxtTrabajo.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jTxtTrabajo.setForeground(new java.awt.Color(0, 0, 0));
         jTxtTrabajo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTxtTrabajoActionPerformed(evt);
@@ -158,7 +148,6 @@ public class NuevoInquilino extends javax.swing.JInternalFrame {
 
         jTxtGaranteN.setBackground(new java.awt.Color(204, 204, 204));
         jTxtGaranteN.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jTxtGaranteN.setForeground(new java.awt.Color(0, 0, 0));
         jTxtGaranteN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTxtGaranteNActionPerformed(evt);
@@ -167,11 +156,9 @@ public class NuevoInquilino extends javax.swing.JInternalFrame {
 
         jTxtGaranteDni.setBackground(new java.awt.Color(204, 204, 204));
         jTxtGaranteDni.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jTxtGaranteDni.setForeground(new java.awt.Color(0, 0, 0));
 
         jBtnNuevo.setBackground(new java.awt.Color(204, 204, 255));
         jBtnNuevo.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jBtnNuevo.setForeground(new java.awt.Color(0, 0, 0));
         jBtnNuevo.setText("Nuevo Inquilino");
         jBtnNuevo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -181,7 +168,6 @@ public class NuevoInquilino extends javax.swing.JInternalFrame {
 
         jBGuardar.setBackground(new java.awt.Color(204, 204, 255));
         jBGuardar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jBGuardar.setForeground(new java.awt.Color(0, 0, 0));
         jBGuardar.setText("Guardar");
         jBGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -189,19 +175,17 @@ public class NuevoInquilino extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton4.setBackground(new java.awt.Color(204, 204, 255));
-        jButton4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(0, 0, 0));
-        jButton4.setText("Editar datos de Inquilino");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        jBGuardarCambios.setBackground(new java.awt.Color(204, 204, 255));
+        jBGuardarCambios.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jBGuardarCambios.setText("Guardar cambios");
+        jBGuardarCambios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                jBGuardarCambiosActionPerformed(evt);
             }
         });
 
         jButton5.setBackground(new java.awt.Color(204, 204, 255));
         jButton5.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jButton5.setForeground(new java.awt.Color(0, 0, 0));
         jButton5.setText("Borrar Inquilino");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -211,7 +195,6 @@ public class NuevoInquilino extends javax.swing.JInternalFrame {
 
         jBtnBuscarXCuil.setBackground(new java.awt.Color(204, 204, 255));
         jBtnBuscarXCuil.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jBtnBuscarXCuil.setForeground(new java.awt.Color(0, 0, 0));
         jBtnBuscarXCuil.setText("Buscar Inquilino Por CUIT");
         jBtnBuscarXCuil.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -221,7 +204,6 @@ public class NuevoInquilino extends javax.swing.JInternalFrame {
 
         jToggleButton1.setBackground(new java.awt.Color(204, 204, 204));
         jToggleButton1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jToggleButton1.setForeground(new java.awt.Color(0, 0, 0));
         jToggleButton1.setText("Salir");
         jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -230,20 +212,26 @@ public class NuevoInquilino extends javax.swing.JInternalFrame {
         });
 
         jLabel8.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(0, 0, 0));
         jLabel8.setText("Codigo del Inquilino");
 
         jTxtId.setBackground(new java.awt.Color(204, 204, 204));
         jTxtId.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jTxtId.setForeground(new java.awt.Color(0, 0, 0));
 
         jBBuscarXCodigo.setBackground(new java.awt.Color(204, 204, 255));
         jBBuscarXCodigo.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jBBuscarXCodigo.setForeground(new java.awt.Color(0, 0, 0));
         jBBuscarXCodigo.setText("Buscar Por Codigo");
         jBBuscarXCodigo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBBuscarXCodigoActionPerformed(evt);
+            }
+        });
+
+        jBtnNuevo1.setBackground(new java.awt.Color(204, 204, 255));
+        jBtnNuevo1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jBtnNuevo1.setText("Editar datos de Inquilino");
+        jBtnNuevo1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnNuevo1ActionPerformed(evt);
             }
         });
 
@@ -253,43 +241,49 @@ public class NuevoInquilino extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(59, 59, 59)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel6))
+                .addGap(39, 39, 39)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jTxtGaranteN)
+                    .addComponent(jTxtApellido)
+                    .addComponent(jTxtNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 267, Short.MAX_VALUE)
+                    .addComponent(jTxtCuil)
+                    .addComponent(jTxtTrabajo))
+                .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jBtnBuscarXCuil)
+                    .addComponent(jBtnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBtnNuevo1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(43, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(59, 59, 59)
+                        .addGap(24, 24, 24)
+                        .addComponent(jBGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jBGuardarCambios, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(47, 47, 47)
+                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jToggleButton1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel6)
                             .addComponent(jLabel7)
                             .addComponent(jLabel8))
                         .addGap(39, 39, 39)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jTxtGaranteN)
-                                .addComponent(jTxtApellido)
-                                .addComponent(jTxtNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 267, Short.MAX_VALUE)
-                                .addComponent(jTxtCuil)
-                                .addComponent(jTxtTrabajo))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jTxtId, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jTxtGaranteDni, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 268, Short.MAX_VALUE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jTxtId, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTxtGaranteDni, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(27, 27, 27)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jBtnBuscarXCuil, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jBtnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jBBuscarXCodigo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jBGuardar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(164, 164, 164)
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(169, 169, 169)
-                        .addComponent(jToggleButton1)))
-                .addContainerGap(43, Short.MAX_VALUE))
+                        .addComponent(jBBuscarXCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(57, 57, 57))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -300,11 +294,16 @@ public class NuevoInquilino extends javax.swing.JInternalFrame {
                     .addComponent(jTxtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
                     .addComponent(jBtnNuevo))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(13, 13, 13)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTxtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jBtnNuevo1)))
                 .addGap(13, 13, 13)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTxtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addGap(17, 17, 17)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jTxtCuil, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -313,26 +312,26 @@ public class NuevoInquilino extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTxtTrabajo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTxtGaranteN, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6)
-                    .addComponent(jButton4))
+                    .addComponent(jLabel6))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTxtGaranteDni, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7)
-                    .addComponent(jBGuardar))
+                    .addComponent(jLabel7))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(jTxtId, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jBBuscarXCodigo))
-                .addGap(38, 38, 38)
+                .addGap(48, 48, 48)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton5)
-                    .addComponent(jToggleButton1))
-                .addContainerGap(90, Short.MAX_VALUE))
+                    .addComponent(jBGuardar)
+                    .addComponent(jBGuardarCambios))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         pack();
@@ -357,7 +356,11 @@ public class NuevoInquilino extends javax.swing.JInternalFrame {
     private void jBtnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnNuevoActionPerformed
         // TODO add your handling code here:
         habilitar();
+        jBtnNuevo1.setEnabled(false);
+        jBtnBuscarXCuil.setEnabled(false);
         jTxtId.setEnabled(false);
+        jBBuscarXCodigo.setEnabled(false);
+        jButton5.setEnabled(false);jBGuardarCambios.setEnabled(false);
         limpiar();
     }//GEN-LAST:event_jBtnNuevoActionPerformed
 
@@ -372,6 +375,7 @@ public class NuevoInquilino extends javax.swing.JInternalFrame {
         jTxtGaranteDni.setText(in.getDniGarante()+""); 
         jTxtId.setText(in.getIdInquilino()+"");
         habilitar();
+        jBGuardar.setEnabled(false);jBGuardarCambios.setEnabled(true);
         }catch(Exception ex){
             JOptionPane.showMessageDialog(this, "Debe cargar un Cuit valido para buscar un Inquilino");
         }
@@ -400,7 +404,7 @@ private boolean validarCampos(){
         
         return valido;
     }
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void jBGuardarCambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarCambiosActionPerformed
         // TODO add your handling code here:
         habilitar();
         try {
@@ -424,7 +428,7 @@ private boolean validarCampos(){
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Error al actualizar Inquilino");
         }
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_jBGuardarCambiosActionPerformed
 
     private void jBGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarActionPerformed
         // TODO add your handling code here:
@@ -488,19 +492,34 @@ private boolean validarCampos(){
         jTxtCuil.setText(in.getCuil()+"");
         habilitar();
         jTxtId.setEnabled(true);
+        jBGuardarCambios.setEnabled(true);jBGuardar.setEnabled(false);
         }catch(Exception ex){
             JOptionPane.showMessageDialog(this, "Debe cargar un codigo valido para buscar un Inquilino");
         }
     }//GEN-LAST:event_jBBuscarXCodigoActionPerformed
 
+    private void jBtnNuevo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnNuevo1ActionPerformed
+        // TODO add your handling code here:
+         habilitar();
+        jBtnNuevo1.setEnabled(false);
+        jBtnBuscarXCuil.setEnabled(false);
+        jTxtId.setEnabled(false);
+        jBBuscarXCodigo.setEnabled(false);
+        jButton5.setEnabled(true);
+        jBGuardarCambios.setEnabled(true);
+        jBGuardar.setEnabled(false);
+        limpiar();
+    }//GEN-LAST:event_jBtnNuevo1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBBuscarXCodigo;
     private javax.swing.JButton jBGuardar;
+    private javax.swing.JButton jBGuardarCambios;
     private javax.swing.JButton jBtnBuscarXCuil;
     private javax.swing.JButton jBtnNuevo;
+    private javax.swing.JButton jBtnNuevo1;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

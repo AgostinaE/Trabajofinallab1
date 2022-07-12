@@ -363,6 +363,7 @@ public class PropiedadesDisponibles extends javax.swing.JInternalFrame {
 
     private void jBBuscarPropiedad4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarPropiedad4ActionPerformed
         // TODO add your handling code here:
+        borraFilasTabla();
         activaCampos();
         jBBuscarPropiedad3.setEnabled(false);
         jBBuscarPropiedad5.setEnabled(true);
@@ -384,8 +385,12 @@ public class PropiedadesDisponibles extends javax.swing.JInternalFrame {
         for (Inmueble m : lista) {
             modelo.addRow(new Object[]{m.getIdInmueble(), m.getCodigoInmueble(), m.getTipoLocal(), m.getZona(), m.getSuperficie(), m.getPrecio()});
         }
+        if (lista.isEmpty()) {
+            JOptionPane.showMessageDialog(null, " NO se encontro inmuebles con esas caracteristicas");
+        }
         limpiarCampos();
         desactivaCampos();
+
 
     }//GEN-LAST:event_jBBuscarPropiedad5ActionPerformed
 

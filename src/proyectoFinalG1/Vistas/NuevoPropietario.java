@@ -21,6 +21,7 @@ public class NuevoPropietario extends javax.swing.JInternalFrame {
     public NuevoPropietario(Conexion conexion) {
         initComponents();
         inhabilitar();
+        jBtnEditar.setEnabled(false);
         pd = new PropietarioData(conexion);
         vd = new Validacion();
     }
@@ -50,28 +51,28 @@ public class NuevoPropietario extends javax.swing.JInternalFrame {
         jTxtApellido.setText("");
         jTxtDomicilio.setText("");
         jTxtTelefono.setText("");
-        jLId.setText(""); 
+        jLId.setText("");
         jTxtDni.setText("");
     }
-    
-    private boolean validarCampos(){
+
+    private boolean validarCampos() {
         boolean valido = true;
-        if(!vd.EsPalabra(jTxtNombre.getText())){
-            valido=false;
+        if (!vd.EsPalabra(jTxtNombre.getText())) {
+            valido = false;
         }
-        if(!vd.EsPalabra(jTxtApellido.getText())){
-            valido=false;
+        if (!vd.EsPalabra(jTxtApellido.getText())) {
+            valido = false;
         }
-        if(!vd.ValidarDni(Integer.parseInt(jTxtDni.getText()))){
-            valido=false;
+        if (!vd.ValidarDni(Integer.parseInt(jTxtDni.getText()))) {
+            valido = false;
         }
-        if(vd.EstaVacio(jTxtDomicilio.getText())){
-            valido=false;
+        if (vd.EstaVacio(jTxtDomicilio.getText())) {
+            valido = false;
         }
-        if(!vd.ValidarNumerosEnteros(Integer.parseInt(jTxtTelefono.getText()))){
-            valido=false;
+        if (!vd.ValidarNumerosEnteros(Integer.parseInt(jTxtTelefono.getText()))) {
+            valido = false;
         }
-        
+
         return valido;
     }
 
@@ -327,6 +328,10 @@ public class NuevoPropietario extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         limpiar();
         habilitar();
+        jBtnBuscarXDni.setEnabled(false);
+        jButton1.setEnabled(false);
+        jBtnBorrar.setEnabled(false);
+        jLId.setEnabled(false);
     }//GEN-LAST:event_jBtnNuevoActionPerformed
 
     private void jBtnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnGuardarActionPerformed
@@ -338,20 +343,21 @@ public class NuevoPropietario extends javax.swing.JInternalFrame {
             String domicilio = jTxtDomicilio.getText();
             int telefono = Integer.parseInt(jTxtTelefono.getText());
 
-            if(validarCampos()){
-                Propietario p = new Propietario(nombre,apellido,dni,telefono,domicilio,true);
-                if(pd.agregarPropietario(p)){
+            if (validarCampos()) {
+                Propietario p = new Propietario(nombre, apellido, dni, telefono, domicilio, true);
+                if (pd.agregarPropietario(p)) {
                     JOptionPane.showMessageDialog(this, "El propietario se cargo con exito");
-                    jLId.setText(p.getIdPropietario()+"");
-                }else{
+                    jLId.setText(p.getIdPropietario() + "");
+                } else {
                     JOptionPane.showMessageDialog(this, "Error al cargar propietario");
                 }
-            }else{
+            } else {
                 JOptionPane.showMessageDialog(this, "Alguno de los campos llenados contiene informacion invalida o no contiene nada");
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Algunos de los campos introducidos son incorrectos");
         }
+        limpiar();
     }//GEN-LAST:event_jBtnGuardarActionPerformed
 
     private void jBtnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSalirActionPerformed
@@ -361,18 +367,18 @@ public class NuevoPropietario extends javax.swing.JInternalFrame {
 
     private void jBtnBuscarXDniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnBuscarXDniActionPerformed
         // TODO add your handling code here:
-        habilitar();
-        try{
+        habilitar();jBtnEditar.setEnabled(true);jBtnGuardar.setEnabled(false);jButton1.setEnabled(false);
+        try {
             int dni = Integer.parseInt(jTxtDni.getText());
-            Propietario p =pd.obetenerPropietarioPorDNI(dni);
+            Propietario p = pd.obetenerPropietarioPorDNI(dni);
             jTxtNombre.setText(p.getNombre());
             jTxtApellido.setText(p.getApellido());
             jTxtDomicilio.setText(p.getDomicilio());
-            jTxtTelefono.setText(p.getTelefono()+"");
-            jLId.setText(p.getIdPropietario()+"");
+            jTxtTelefono.setText(p.getTelefono() + "");
+            jLId.setText(p.getIdPropietario() + "");
             //jTxtNombre  jTxtApellido  jTxtDni  jTxtDomicilio  jTxtTelefono  jTxtEmail
-        }catch(Exception ex){
-             JOptionPane.showMessageDialog(this, "El dni introducido no es valido");
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "El dni introducido no es valido");
         }
     }//GEN-LAST:event_jBtnBuscarXDniActionPerformed
 
@@ -385,50 +391,53 @@ public class NuevoPropietario extends javax.swing.JInternalFrame {
             String domicilio = jTxtDomicilio.getText();
             int telefono = Integer.parseInt(jTxtTelefono.getText());
             int id = Integer.parseInt(jLId.getText());
-            if(validarCampos()){
-                Propietario p = new Propietario(id,nombre,apellido,dni,telefono,domicilio,true);
-                if(pd.modificarPropietario(p)){
+            if (validarCampos()) {
+                Propietario p = new Propietario(id, nombre, apellido, dni, telefono, domicilio, true);
+                if (pd.modificarPropietario(p)) {
                     JOptionPane.showMessageDialog(this, "El propietario se actualizo con exito");
-                }else{
+                } else {
                     JOptionPane.showMessageDialog(this, "Error al actualizar propietario");
                 }
-            }else{
+            } else {
                 JOptionPane.showMessageDialog(this, "Alguno de los campos llenados contiene informacion invalida o no contiene nada");
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Error al actualizar Propietario");
         }
+        limpiar();
+
     }//GEN-LAST:event_jBtnEditarActionPerformed
 
     private void jBtnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnBorrarActionPerformed
         // TODO add your handling code here:
         try {
             Propietario p = pd.obetenerPropietarioPorID(Integer.parseInt(jLId.getText()));
-            if(pd.borrarPropietario(p.getIdPropietario())){
+            if (pd.borrarPropietario(p.getIdPropietario())) {
                 JOptionPane.showMessageDialog(this, "El propietario se elimino");
-            }else{
+            } else {
                 JOptionPane.showMessageDialog(this, "Error al borrar propietario");
             }
             limpiar();
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Debe cargar datos validos");
         }
+        limpiar();
     }//GEN-LAST:event_jBtnBorrarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        habilitar();
-        try{
+        habilitar();jBtnEditar.setEnabled(true);jBtnGuardar.setEnabled(false);jBtnBuscarXDni.setEnabled(false);
+        try {
             int id = Integer.parseInt(jLId.getText());
-            Propietario p =pd.obetenerPropietarioPorID(id);
+            Propietario p = pd.obetenerPropietarioPorID(id);
             jTxtNombre.setText(p.getNombre());
             jTxtApellido.setText(p.getApellido());
             jTxtDomicilio.setText(p.getDomicilio());
-            jTxtTelefono.setText(p.getTelefono()+"");
-            jTxtDni.setText(p.getDni()+"");
+            jTxtTelefono.setText(p.getTelefono() + "");
+            jTxtDni.setText(p.getDni() + "");
             //jTxtNombre  jTxtApellido  jTxtDni  jTxtDomicilio  jTxtTelefono  jTxtEmail
-        }catch(Exception ex){
-             JOptionPane.showMessageDialog(this, "El codigo introducido no es valido");
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "El codigo introducido no es valido");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

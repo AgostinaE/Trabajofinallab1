@@ -1,8 +1,11 @@
 package proyectoFinalG1.Vistas;
 
+import java.awt.event.ComponentListener;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import javax.swing.JOptionPane;
+import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableModel;
 import proyectoFinalG1.Data.Conexion;
 import proyectoFinalG1.Data.ContratoData;
@@ -19,29 +22,62 @@ public class PropiedadesDisponibles extends javax.swing.JInternalFrame {
     ContratoData cd;
     private DefaultTableModel modelo;
     private ArrayList<Inmueble> listaInmuebles;
+    private ArrayList<Inmueble> listaInmueblesDisponibles;
+
+    private Conexion conexion;
+    private ComponentListener jInternalFrame;
+
     /**
      * Creates new form PropiedadesDisponibles
      */
     public PropiedadesDisponibles(Conexion conexion) {
         initComponents();
-        id = new InmuebleData(conexion); 
+        id = new InmuebleData(conexion);
         cd = new ContratoData(conexion);
         listaInmuebles = (ArrayList<Inmueble>) id.obtenerInmuebles();
-        cargarInmuebles();
+        listaInmueblesDisponibles = (ArrayList<Inmueble>) id.NoAlquilados();
         modelo = new DefaultTableModel();
+        armarTabla();
+        desactivaCampos();
+        jBBuscarPropiedad5.setEnabled(false);
+        jBCrearContrato.setEnabled(false);
+
     }
-private void cargarInmuebles(){
-        Collections.sort(listaInmuebles, new Comparator<Inmueble>() {
-            @Override
-            public int compare(Inmueble t, Inmueble t1) {
-                return t.getCodigoInmueble().compareTo(t1.getCodigoInmueble());
-            }
-        });
-        for (Inmueble aux : listaInmuebles) {
-            jCBZona.addItem(aux);
+
+//    private void cargarInmuebles() {
+//
+//        Collections.sort(listaInmuebles, new Comparator<Inmueble>() {
+//            @Override
+//            public int compare(Inmueble t, Inmueble t1) {
+//                return t.getCodigoInmueble().compareTo(t1.getCodigoInmueble());
+//            }
+//        });
+//        for (Inmueble aux : listaInmuebles) {
+//            jCBZona.addItem(aux);
+//        }
+//    }
+    private void cargarInmueblesDisponibles() {
+//        Collections.sort(listaInmueblesDisponibles, new Comparator<Inmueble>() {
+//            @Override
+//            public int compare(Inmueble t, Inmueble t1) {
+//                return t.getCodigoInmueble().compareTo(t1.getCodigoInmueble());
+//            }
+//        });
+//        for (Inmueble aux : listaInmueblesDisponibles) {
+//            jCBZona.addItem(aux);
+//        }
+//        
+
+        // Inmueble seleccionado = (Inmueble) jComboBoxAlumnos.getSelectedItem();
+        borraFilasTabla();
+        ArrayList<Inmueble> lista = (ArrayList) id.NoAlquilados();
+
+        for (Inmueble m : lista) {
+            modelo.addRow(new Object[]{m.getIdInmueble(), m.getCodigoInmueble(), m.getTipoLocal(), m.getZona(), m.getSuperficie(), m.getPrecio()});
         }
     }
-private void armarTabla(){
+
+    private void armarTabla() {
         ArrayList<Object> columnas = new ArrayList<>();
         columnas.add("Numero de Inmueble");
         columnas.add("Codigo de Propiedad");
@@ -49,14 +85,14 @@ private void armarTabla(){
         columnas.add("Zona");
         columnas.add("Superficie");
         columnas.add("Precio");
-        
+
         for (Object it : columnas) {
 
             modelo.addColumn(it);
         }
         jTPropiedades.setModel(modelo);
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -69,17 +105,20 @@ private void armarTabla(){
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTPropiedades = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jCBZona = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        jTPrecio = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jButton3 = new javax.swing.JButton();
+        jTSuperficie = new javax.swing.JTextField();
+        jTUsoLocal = new javax.swing.JTextField();
+        jTZona = new javax.swing.JTextField();
+        jBSalir = new javax.swing.JButton();
+        jBBuscarPropiedad3 = new javax.swing.JButton();
+        jBBuscarPropiedad4 = new javax.swing.JButton();
+        jBBuscarPropiedad5 = new javax.swing.JButton();
+        jBCrearContrato = new javax.swing.JButton();
+        jBNuevo = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Microsoft JhengHei Light", 0, 24)); // NOI18N
         jLabel1.setText("Propiedades Disponibles");
@@ -97,28 +136,65 @@ private void armarTabla(){
         ));
         jScrollPane1.setViewportView(jTPropiedades);
 
-        jButton1.setText("Buscar Propiedad");
-
-        jButton2.setText("Crear contrato");
-
         jLabel2.setText("Zona");
 
         jLabel3.setText("Superficie mínima");
 
-        jLabel4.setText("Precio");
+        jLabel4.setText("Precio Minimo");
 
         jLabel5.setText("Uso del Local");
 
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        jTSuperficie.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                jTSuperficieActionPerformed(evt);
             }
         });
 
-        jButton3.setText("Borrar Propiedad");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        jTZona.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                jTZonaActionPerformed(evt);
+            }
+        });
+
+        jBSalir.setText("Salir");
+        jBSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBSalirActionPerformed(evt);
+            }
+        });
+
+        jBBuscarPropiedad3.setText("Mostrar todas las propiedades disponibles");
+        jBBuscarPropiedad3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBBuscarPropiedad3ActionPerformed(evt);
+            }
+        });
+
+        jBBuscarPropiedad4.setText("Mostrar todas las propiedades disponibles segun caracteristicas");
+        jBBuscarPropiedad4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBBuscarPropiedad4ActionPerformed(evt);
+            }
+        });
+
+        jBBuscarPropiedad5.setText("Buscar");
+        jBBuscarPropiedad5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBBuscarPropiedad5ActionPerformed(evt);
+            }
+        });
+
+        jBCrearContrato.setText("Crear Contrato De Alquiler");
+        jBCrearContrato.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBCrearContratoActionPerformed(evt);
+            }
+        });
+
+        jBNuevo.setText("Limpio Tabla");
+        jBNuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBNuevoActionPerformed(evt);
             }
         });
 
@@ -126,100 +202,232 @@ private void armarTabla(){
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(181, 181, 181))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
+                        .addGap(28, 28, 28)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jBBuscarPropiedad4)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel3)
                                         .addGap(18, 18, 18)
-                                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jButton1)
-                                        .addGap(84, 84, 84)
-                                        .addComponent(jButton3)))
-                                .addGap(117, 117, 117)
-                                .addComponent(jButton2))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel4)
+                                        .addComponent(jTSuperficie, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel2)
-                                        .addGap(45, 45, 45)
-                                        .addComponent(jCBZona, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(66, 66, 66)
-                                        .addComponent(jLabel5)))
+                                        .addGap(69, 69, 69)
+                                        .addComponent(jTZona, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel5))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                    .addComponent(jTUsoLocal, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(45, 45, 45)
+                        .addComponent(jBBuscarPropiedad5))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 635, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(16, 16, 16)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jBNuevo)
+                                .addGap(52, 52, 52)
+                                .addComponent(jBSalir))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 635, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jBBuscarPropiedad3)
+                                    .addGap(190, 190, 190)
+                                    .addComponent(jBCrearContrato))))))
+                .addContainerGap(17, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(181, 181, 181))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jCBZona, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(49, 49, 49)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel3)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel4)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jBBuscarPropiedad4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jTZona, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(14, 14, 14)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jTSuperficie, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jTUsoLocal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jTPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(64, 64, 64)
+                        .addComponent(jBBuscarPropiedad5)))
+                .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
-                .addGap(43, 43, 43)
+                    .addComponent(jBBuscarPropiedad3)
+                    .addComponent(jBCrearContrato))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(47, 47, 47))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jBSalir)
+                    .addComponent(jBNuevo))
+                .addGap(66, 66, 66))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void jTSuperficieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTSuperficieActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_jTSuperficieActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void jTZonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTZonaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_jTZonaActionPerformed
 
+    private void jBSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalirActionPerformed
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_jBSalirActionPerformed
+
+    private void jBBuscarPropiedad3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarPropiedad3ActionPerformed
+        // TODO add your handling code here:
+        cargarInmueblesDisponibles();
+        jBCrearContrato.setEnabled(true);
+
+
+    }//GEN-LAST:event_jBBuscarPropiedad3ActionPerformed
+
+    private void jBBuscarPropiedad4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarPropiedad4ActionPerformed
+        // TODO add your handling code here:
+        borraFilasTabla();
+        activaCampos();
+        jBBuscarPropiedad3.setEnabled(false);
+        jBBuscarPropiedad5.setEnabled(true);
+
+
+    }//GEN-LAST:event_jBBuscarPropiedad4ActionPerformed
+
+    private void jBBuscarPropiedad5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarPropiedad5ActionPerformed
+        // TODO add your handling code here:
+
+        String tipo = jTUsoLocal.getText();
+        float superficie = Float.parseFloat(jTSuperficie.getText());
+        int zona = Integer.parseInt(jTZona.getText());
+        double precio = Double.parseDouble(jTPrecio.getText());
+
+        borraFilasTabla();
+        ArrayList<Inmueble> lista = (ArrayList) id.PropiedadesConEstasCaracteristicas(zona, superficie, tipo, precio);
+
+        for (Inmueble m : lista) {
+            modelo.addRow(new Object[]{m.getIdInmueble(), m.getCodigoInmueble(), m.getTipoLocal(), m.getZona(), m.getSuperficie(), m.getPrecio()});
+        }
+        if (lista.isEmpty()) {
+            JOptionPane.showMessageDialog(null, " NO se encontro inmuebles con esas caracteristicas");
+        } else {
+            jBCrearContrato.setEnabled(true);
+        }
+        limpiarCampos();
+        desactivaCampos();
+        jBBuscarPropiedad3.setEnabled(true);
+
+
+    }//GEN-LAST:event_jBBuscarPropiedad5ActionPerformed
+
+    private void jBCrearContratoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCrearContratoActionPerformed
+        // TODO add your handling code here:
+        jScrollPane1.removeComponentListener(jInternalFrame);
+        NuevoContrato nc = new NuevoContrato(conexion);
+        nc.setVisible(true);
+        jScrollPane1.add(nc);
+        //jScrollPane1.moveToFront(nc);
+        jScrollPane1.repaint();
+    }//GEN-LAST:event_jBCrearContratoActionPerformed
+
+    private void jBNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBNuevoActionPerformed
+        // TODO add your handling code here:
+        desactivaCampos();
+        jBBuscarPropiedad5.setEnabled(false);
+        jBCrearContrato.setEnabled(false);
+        borraFilasTabla();
+        limpiarCampos();
+    }//GEN-LAST:event_jBNuevoActionPerformed
+
+    private void limpiarCampos() {
+
+        jTZona.setText("");
+        jTPrecio.setText("");
+        //jTPropiedades.setText("");
+        jTSuperficie.setText("");
+        jTUsoLocal.setText("");
+
+    }
+
+    private void activaCampos() {
+        //jTIDInmueble.setEnabled(true);
+        jTZona.setEnabled(true);
+        jTPrecio.setEnabled(true);
+        //jTPropiedades.setEnabled(true);
+        jTSuperficie.setEnabled(true);
+        jTUsoLocal.setEnabled(true);
+
+    }
+
+    private void desactivaCampos() {
+        //jTIDInmueble.setEnabled(false);
+        //jTCodigo.setEnabled(false);
+        jTPrecio.setEnabled(false);
+        //jTPropiedades.setEnabled(false);
+        jTSuperficie.setEnabled(false);
+        jTUsoLocal.setEnabled(false);
+        jTZona.setEnabled(false);
+
+    }
+
+    private void borraFilasTabla() {
+        if (modelo != null) {
+            int a = modelo.getRowCount() - 1;
+
+            for (int i = a; i >= 0; i--) {
+
+                modelo.removeRow(i);
+            }
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JComboBox<Inmueble> jCBZona;
+    private javax.swing.JButton jBBuscarPropiedad3;
+    private javax.swing.JButton jBBuscarPropiedad4;
+    private javax.swing.JButton jBBuscarPropiedad5;
+    private javax.swing.JButton jBCrearContrato;
+    private javax.swing.JButton jBNuevo;
+    private javax.swing.JButton jBSalir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField jTPrecio;
     private javax.swing.JTable jTPropiedades;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jTSuperficie;
+    private javax.swing.JTextField jTUsoLocal;
+    private javax.swing.JTextField jTZona;
     // End of variables declaration//GEN-END:variables
 }

@@ -26,11 +26,14 @@ public class NuevoInmueble extends javax.swing.JInternalFrame {
     private PropietarioData pd;
     private ArrayList<Propietario> listaPropietarios;
     private Validacion vd;
+
     public NuevoInmueble(Conexion conexion) {
         initComponents();
         limpiarCampos();
         desactivaCampos();
-        jBtnNuevo.setEnabled(false);jButton1.setEnabled(false);jTxtCodigoPropiedad.setEnabled(true);
+        jBtnNuevo.setEnabled(false);
+        jButton1.setEnabled(false);
+        jTxtCodigoPropiedad.setEnabled(true);
         id = new InmuebleData(conexion);
         vd = new Validacion();
         pd = new PropietarioData(conexion);
@@ -49,8 +52,8 @@ public class NuevoInmueble extends javax.swing.JInternalFrame {
             jCbPropietarios.addItem(aux);
         }
     }
-    
-    private boolean validarCampos(){
+
+    private boolean validarCampos() {
         boolean valido = true;
         if (vd.EstaVacio(jTxtCodigoPropiedad.getText())) {
             JOptionPane.showMessageDialog(this, "No indico un codigo para la propiedad");
@@ -64,7 +67,7 @@ public class NuevoInmueble extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "No indico un propietario para la propiedad");
             valido = false;
         }
-        if (Integer.parseInt((String)jCbZona.getSelectedItem()) < 0) {
+        if (Integer.parseInt((String) jCbZona.getSelectedItem()) < 0) {
             JOptionPane.showMessageDialog(this, "No indico una zona para la propiedad");
             valido = false;
         }
@@ -80,7 +83,7 @@ public class NuevoInmueble extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "No indico una direccion para la propiedad");
             valido = false;
         }
-        if (vd.EstaVacio( jTxtAreaCaracteristicas.getText())) {
+        if (vd.EstaVacio(jTxtAreaCaracteristicas.getText())) {
             JOptionPane.showMessageDialog(this, "No indico caracteristicas para la propiedad");
             valido = false;
         }
@@ -229,7 +232,7 @@ public class NuevoInmueble extends javax.swing.JInternalFrame {
         });
 
         jLabel10.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabel10.setText("Numero de Inmueble");
+        jLabel10.setText("Numero de Inmueble (ID)");
 
         jTxtId.setBackground(new java.awt.Color(204, 204, 204));
         jTxtId.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -285,7 +288,7 @@ public class NuevoInmueble extends javax.swing.JInternalFrame {
                             .addComponent(jCbZona, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jTxtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(14, Short.MAX_VALUE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTxtSuperficie, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -365,32 +368,31 @@ public class NuevoInmueble extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBtnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnNuevoActionPerformed
-        try{
+        try {
             String codigoPropiedad = (String) jTxtCodigoPropiedad.getText();
-        String tipo = (String) jTxtTipo.getText();
-        Propietario propietario = (Propietario) jCbPropietarios.getSelectedItem();
-        int zona = Integer.parseInt((String) jCbZona.getSelectedItem());
-        float superficie = Float.parseFloat(jTxtSuperficie.getText());
-        double precio = Double.parseDouble(jTxtPrecio.getText());
-        String direccion = (String) jTxtDireccion.getText();
-        String caracteristicas = (String) jTxtAreaCaracteristicas.getText();
+            String tipo = (String) jTxtTipo.getText();
+            Propietario propietario = (Propietario) jCbPropietarios.getSelectedItem();
+            int zona = Integer.parseInt((String) jCbZona.getSelectedItem());
+            float superficie = Float.parseFloat(jTxtSuperficie.getText());
+            double precio = Double.parseDouble(jTxtPrecio.getText());
+            String direccion = (String) jTxtDireccion.getText();
+            String caracteristicas = (String) jTxtAreaCaracteristicas.getText();
 
-        if (validarCampos()) {
-            Inmueble inmueble = new Inmueble(caracteristicas, direccion, precio, superficie, tipo, zona, propietario, codigoPropiedad, true);
-            if (id.agregarInmueble(inmueble)) {
-                JOptionPane.showMessageDialog(this, "La propiedad se cargo con exito");
-                limpiarCampos();
-            }else{
-                JOptionPane.showMessageDialog(this, "No se pudo cargar la propiedad");
+            if (validarCampos()) {
+                Inmueble inmueble = new Inmueble(caracteristicas, direccion, precio, superficie, tipo, zona, propietario, codigoPropiedad, true);
+                if (id.agregarInmueble(inmueble)) {
+                    JOptionPane.showMessageDialog(this, "La propiedad se cargo con exito");
+                    limpiarCampos();
+                } else {
+                    JOptionPane.showMessageDialog(this, "No se pudo cargar la propiedad");
+                }
+
+            } else {
+                JOptionPane.showMessageDialog(this, "Faltan datos en el formulario o son incorrectos");
             }
-            
-        }else{
+        } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Faltan datos en el formulario o son incorrectos");
         }
-        }catch(Exception ex){
-            JOptionPane.showMessageDialog(this, "Faltan datos en el formulario o son incorrectos");
-        }
-        
 
         jBGuardar.setEnabled(true);
 
@@ -426,66 +428,70 @@ public class NuevoInmueble extends javax.swing.JInternalFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        try{
+        try {
             String codigoPropiedad = (String) jTxtCodigoPropiedad.getText();
-        String tipo = (String) jTxtTipo.getText();
-        Propietario propietario = (Propietario) jCbPropietarios.getSelectedItem();
-        int zona = Integer.parseInt((String) jCbZona.getSelectedItem());
-        float superficie = Float.parseFloat(jTxtSuperficie.getText());
-        double precio = Double.parseDouble(jTxtPrecio.getText());
-        String direccion = (String) jTxtDireccion.getText();
-        String caracteristicas = (String) jTxtAreaCaracteristicas.getText();
-        int iD = Integer.parseInt(jTxtId.getText());
+            String tipo = (String) jTxtTipo.getText();
+            Propietario propietario = (Propietario) jCbPropietarios.getSelectedItem();
+            int zona = Integer.parseInt((String) jCbZona.getSelectedItem());
+            float superficie = Float.parseFloat(jTxtSuperficie.getText());
+            double precio = Double.parseDouble(jTxtPrecio.getText());
+            String direccion = (String) jTxtDireccion.getText();
+            String caracteristicas = (String) jTxtAreaCaracteristicas.getText();
+            int iD = Integer.parseInt(jTxtId.getText());
 
-        if (validarCampos()) {
-            Inmueble inmueble = new Inmueble(iD,caracteristicas, direccion, precio, superficie, tipo, zona, propietario, codigoPropiedad, true);
-            if (id.modificarInmueble(inmueble)) {
-                JOptionPane.showMessageDialog(this, "La propiedad se cargo con exito");
-                limpiarCampos();
-            }else{
-                JOptionPane.showMessageDialog(this, "No se pudo cargar la propiedad");
+            if (validarCampos()) {
+                Inmueble inmueble = new Inmueble(iD, caracteristicas, direccion, precio, superficie, tipo, zona, propietario, codigoPropiedad, true);
+                if (id.modificarInmueble(inmueble)) {
+                    JOptionPane.showMessageDialog(this, "La propiedad se cargo con exito");
+                    limpiarCampos();
+                } else {
+                    JOptionPane.showMessageDialog(this, "No se pudo cargar la propiedad");
+                }
+
+            } else {
+                JOptionPane.showMessageDialog(this, "Faltan datos en el formulario o son incorrectos");
             }
-            
-        }else{
-            JOptionPane.showMessageDialog(this, "Faltan datos en el formulario o son incorrectos");
-        }
-        }catch(Exception ex){
+        } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Faltan datos en el formulario o son incorrectos");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-        try{
+        try {
+            activaCampos();
+            jButton1.setEnabled(true);
             String codigo = jTxtCodigoPropiedad.getText();
-            Inmueble in=id.obtenerInmuebleXCodigoInmueble(codigo);
-            jTxtId.setText(in.getIdInmueble()+"");
+            Inmueble in = id.obtenerInmuebleXCodigoInmueble(codigo);
+            jTxtId.setText(in.getIdInmueble() + "");
             jTxtTipo.setText(in.getTipoLocal());
             jCbPropietarios.setSelectedItem(in.getPropietario().toString());
             jCbZona.setSelectedItem(in.getZona());
-            jTxtSuperficie.setText(in.getSuperficie()+"");
-            jTxtPrecio.setText(in.getPrecio()+"");
+            jTxtSuperficie.setText(in.getSuperficie() + "");
+            jTxtPrecio.setText(in.getPrecio() + "");
             jTxtDireccion.setText(in.getDireccion());
             jTxtAreaCaracteristicas.setText(in.getCaracteristicas());
-        }catch(Exception ex){
+        } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Codigo de Inmueble incorrecto");
         }
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        try{
+        try {
+            activaCampos();
+            jButton1.setEnabled(true);
             int iD = Integer.parseInt(jTxtId.getText());
-            Inmueble in=id.obtenerInmuebleXId(iD);
+            Inmueble in = id.obtenerInmuebleXId(iD);
             jTxtCodigoPropiedad.setText(in.getCodigoInmueble());
             jTxtTipo.setText(in.getTipoLocal());
             jCbPropietarios.setSelectedItem(in.getPropietario().toString());
             jCbZona.setSelectedItem(in.getZona());
-            jTxtSuperficie.setText(in.getSuperficie()+"");
-            jTxtPrecio.setText(in.getPrecio()+"");
+            jTxtSuperficie.setText(in.getSuperficie() + "");
+            jTxtPrecio.setText(in.getPrecio() + "");
             jTxtDireccion.setText(in.getDireccion());
             jTxtAreaCaracteristicas.setText(in.getCaracteristicas());
-        }catch(Exception ex){
+        } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Numero de Inmueble incorrecto");
         }
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -494,8 +500,11 @@ public class NuevoInmueble extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         limpiarCampos();
         activaCampos();
-        jButton4.setEnabled(false);jButton2.setEnabled(false);
-        jBtnNuevo.setEnabled(true);jButton1.setEnabled(true);
+        jButton4.setEnabled(false);
+        jButton2.setEnabled(false);
+        jBtnNuevo.setEnabled(true);
+        jButton1.setEnabled(false);  
+        jTxtId.setEnabled(false);
     }//GEN-LAST:event_jBtNuevaPropiedadActionPerformed
 
     private void limpiarCampos() {

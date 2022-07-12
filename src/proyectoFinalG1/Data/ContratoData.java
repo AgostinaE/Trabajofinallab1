@@ -302,7 +302,6 @@ public class ContratoData {
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, idContrato);
-            System.out.println(idContrato);
             int rs = ps.executeUpdate();
             JOptionPane.showMessageDialog(null, "Cancelacion exitosa");
             if (rs == 0) {

@@ -1,6 +1,9 @@
 package proyectoFinalG1.Vistas;
 
 import java.awt.event.ComponentListener;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -9,21 +12,28 @@ import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableModel;
 import proyectoFinalG1.Data.Conexion;
 import proyectoFinalG1.Data.ContratoData;
+import proyectoFinalG1.Data.EmpleadoData;
 import proyectoFinalG1.Data.InmuebleData;
+import proyectoFinalG1.Data.InquilinoData;
+import proyectoFinalG1.Modelos.Contrato;
+import proyectoFinalG1.Modelos.Empleado;
 import proyectoFinalG1.Modelos.Inmueble;
+import proyectoFinalG1.Modelos.Inquilino;
 
 /**
  *
  * @author Grupo 1
  */
 public class PropiedadesDisponibles extends javax.swing.JInternalFrame {
-
-    InmuebleData id;
-    ContratoData cd;
+    private EmpleadoData ed;
+    private InmuebleData id;
+    private ContratoData cd;
+    private InquilinoData ind;
     private DefaultTableModel modelo;
     private ArrayList<Inmueble> listaInmuebles;
     private ArrayList<Inmueble> listaInmueblesDisponibles;
-
+    private ArrayList<Empleado> listaEmpleados;
+    
     private Conexion conexion;
     private ComponentListener jInternalFrame;
 
@@ -34,16 +44,34 @@ public class PropiedadesDisponibles extends javax.swing.JInternalFrame {
         initComponents();
         id = new InmuebleData(conexion);
         cd = new ContratoData(conexion);
+        ed = new EmpleadoData(conexion);
+        ind = new InquilinoData(conexion);
         listaInmuebles = (ArrayList<Inmueble>) id.obtenerInmuebles();
         listaInmueblesDisponibles = (ArrayList<Inmueble>) id.NoAlquilados();
         modelo = new DefaultTableModel();
         armarTabla();
         desactivaCampos();
         jBBuscarPropiedad5.setEnabled(false);
-        jBCrearContrato.setEnabled(false);
+        
+        listaEmpleados = (ArrayList<Empleado>) ed.obtenerEmpleados();
+        cargarComboEmpleados();
+        
+        
 
     }
 
+    private void cargarComboEmpleados() {
+        Collections.sort(listaEmpleados, new Comparator<Empleado>() {
+            @Override
+            public int compare(Empleado t, Empleado t1) {
+                return t.getApellido().compareTo(t1.getApellido());
+            }
+        });
+        for (Empleado aux : listaEmpleados) {
+            jCbEmpleados.addItem(aux);
+        }
+    }
+    
 //    private void cargarInmuebles() {
 //
 //        Collections.sort(listaInmuebles, new Comparator<Inmueble>() {
@@ -102,6 +130,7 @@ public class PropiedadesDisponibles extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jBCrearContrato = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTPropiedades = new javax.swing.JTable();
@@ -117,8 +146,23 @@ public class PropiedadesDisponibles extends javax.swing.JInternalFrame {
         jBBuscarPropiedad3 = new javax.swing.JButton();
         jBBuscarPropiedad4 = new javax.swing.JButton();
         jBBuscarPropiedad5 = new javax.swing.JButton();
-        jBCrearContrato = new javax.swing.JButton();
         jBNuevo = new javax.swing.JButton();
+        jLabel12 = new javax.swing.JLabel();
+        jCbEmpleados = new javax.swing.JComboBox<>();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jDInicio = new com.toedter.calendar.JDateChooser();
+        jDFinal = new com.toedter.calendar.JDateChooser();
+        jBtnFirmar = new javax.swing.JButton();
+        jTxtCuil = new javax.swing.JTextField();
+
+        jBCrearContrato.setText("Crear Contrato De Alquiler");
+        jBCrearContrato.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBCrearContratoActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Microsoft JhengHei Light", 0, 24)); // NOI18N
         jLabel1.setText("Propiedades Disponibles");
@@ -184,13 +228,6 @@ public class PropiedadesDisponibles extends javax.swing.JInternalFrame {
             }
         });
 
-        jBCrearContrato.setText("Crear Contrato De Alquiler");
-        jBCrearContrato.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBCrearContratoActionPerformed(evt);
-            }
-        });
-
         jBNuevo.setText("Limpio Tabla");
         jBNuevo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -198,54 +235,106 @@ public class PropiedadesDisponibles extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel12.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel12.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jLabel12.setText("Seleccionar Empleado Vendedor");
+
+        jCbEmpleados.setBackground(new java.awt.Color(204, 204, 204));
+        jCbEmpleados.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+
+        jLabel13.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jLabel13.setText("Cuit del Nuevo Inquilino");
+
+        jLabel14.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jLabel14.setText("Fecha de Inicio del Contrato");
+
+        jLabel15.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jLabel15.setText("Fecha de Finalizacion del Contrato");
+
+        jDInicio.setBackground(new java.awt.Color(204, 204, 204));
+        jDInicio.setForeground(new java.awt.Color(255, 255, 255));
+        jDInicio.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+
+        jDFinal.setBackground(new java.awt.Color(204, 204, 204));
+        jDFinal.setForeground(new java.awt.Color(255, 255, 255));
+        jDFinal.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+
+        jBtnFirmar.setBackground(new java.awt.Color(204, 204, 204));
+        jBtnFirmar.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jBtnFirmar.setText("Firmar Contrato");
+        jBtnFirmar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnFirmarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jBBuscarPropiedad4)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel3)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jTSuperficie, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel2)
-                                        .addGap(69, 69, 69)
-                                        .addComponent(jTZona, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel5))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTUsoLocal, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(45, 45, 45)
-                        .addComponent(jBBuscarPropiedad5))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jBNuevo)
-                                .addGap(52, 52, 52)
-                                .addComponent(jBSalir))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 635, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jBBuscarPropiedad3)
-                                    .addGap(190, 190, 190)
-                                    .addComponent(jBCrearContrato))))))
-                .addContainerGap(17, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(181, 181, 181))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(28, 28, 28)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jBBuscarPropiedad4)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(jLabel3)
+                                            .addGap(18, 18, 18)
+                                            .addComponent(jTSuperficie, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(jLabel2)
+                                            .addGap(69, 69, 69)
+                                            .addComponent(jTZona, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGap(18, 18, 18)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jLabel4)
+                                        .addComponent(jLabel5))
+                                    .addGap(18, 18, 18)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jTUsoLocal, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jTPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGap(45, 45, 45)
+                            .addComponent(jBBuscarPropiedad5))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(16, 16, 16)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 635, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jBBuscarPropiedad3)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jBNuevo))))
+                        .addGroup(layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabel13)
+                                .addComponent(jLabel12))
+                            .addGap(46, 46, 46)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jCbEmpleados, 0, 308, Short.MAX_VALUE)
+                                .addComponent(jTxtCuil)))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addGap(98, 98, 98)
+                            .addComponent(jBtnFirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jBSalir)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jDInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel14))
+                        .addGap(68, 68, 68)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel15)
+                            .addComponent(jDFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -280,14 +369,30 @@ public class PropiedadesDisponibles extends javax.swing.JInternalFrame {
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBBuscarPropiedad3)
-                    .addComponent(jBCrearContrato))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jBSalir)
                     .addComponent(jBNuevo))
-                .addGap(66, 66, 66))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(25, 25, 25)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel12)
+                    .addComponent(jCbEmpleados, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel13)
+                    .addComponent(jTxtCuil, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel15)
+                    .addComponent(jLabel14))
+                .addGap(31, 31, 31)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jDInicio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jDFinal, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jBSalir, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jBtnFirmar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30))
         );
 
         pack();
@@ -369,6 +474,36 @@ public class PropiedadesDisponibles extends javax.swing.JInternalFrame {
         limpiarCampos();
     }//GEN-LAST:event_jBNuevoActionPerformed
 
+    private void jBtnFirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnFirmarActionPerformed
+        try{
+            int filaSeleccionada = jTPropiedades.getSelectedRow();
+            int idInmueble = (Integer) modelo.getValueAt(filaSeleccionada, 0);
+            Inmueble inmueble = id.obtenerInmuebleXId(idInmueble);
+            Empleado empleado = (Empleado) jCbEmpleados.getSelectedItem();
+            Inquilino inquilino = ind.obetenerInquilinoPorCuil(Long.parseLong(jTxtCuil.getText()));
+
+            SimpleDateFormat formatoFecha1 = new SimpleDateFormat("dd-MM-yyyy");
+            String fecha = formatoFecha1.format(jDFinal.getDate());
+            LocalDate fechFinal = LocalDate.parse(fecha, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+
+            SimpleDateFormat formatoFecha2 = new SimpleDateFormat("dd-MM-yyyy");
+            String fecha2 = formatoFecha2.format(jDInicio.getDate());
+            LocalDate fechInicio = LocalDate.parse(fecha2, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+
+            LocalDate firma = LocalDate.now();
+
+            Contrato contrato = new Contrato(fechInicio, fechFinal, firma, empleado, inquilino, inmueble, true);
+            if (cd.crearContrato(contrato)) {
+                JOptionPane.showMessageDialog(this, "Se Firmo el contrato con exito");
+                borraFilasTabla();
+                limpiarCampos();
+            }
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(this, "Algun campo se encuentra vacio o con informacion erronea");
+        }
+
+    }//GEN-LAST:event_jBtnFirmarActionPerformed
+
     private void limpiarCampos() {
 
         jTZona.setText("");
@@ -376,6 +511,7 @@ public class PropiedadesDisponibles extends javax.swing.JInternalFrame {
         //jTPropiedades.setText("");
         jTSuperficie.setText("");
         jTUsoLocal.setText("");
+        jTxtCuil.setText("");
 
     }
 
@@ -418,7 +554,15 @@ public class PropiedadesDisponibles extends javax.swing.JInternalFrame {
     private javax.swing.JButton jBCrearContrato;
     private javax.swing.JButton jBNuevo;
     private javax.swing.JButton jBSalir;
+    private javax.swing.JButton jBtnFirmar;
+    private javax.swing.JComboBox<Empleado> jCbEmpleados;
+    private com.toedter.calendar.JDateChooser jDFinal;
+    private com.toedter.calendar.JDateChooser jDInicio;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -429,5 +573,6 @@ public class PropiedadesDisponibles extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jTSuperficie;
     private javax.swing.JTextField jTUsoLocal;
     private javax.swing.JTextField jTZona;
+    private javax.swing.JTextField jTxtCuil;
     // End of variables declaration//GEN-END:variables
 }

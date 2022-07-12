@@ -40,6 +40,8 @@ public class PropiedadesDisponibles extends javax.swing.JInternalFrame {
         armarTabla();
         desactivaCampos();
         jBBuscarPropiedad5.setEnabled(false);
+        jBCrearContrato.setEnabled(false);
+
     }
 
 //    private void cargarInmuebles() {
@@ -103,8 +105,6 @@ public class PropiedadesDisponibles extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTPropiedades = new javax.swing.JTable();
-        jBBuscarPropiedad = new javax.swing.JButton();
-        jBCrearContrato = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -112,12 +112,12 @@ public class PropiedadesDisponibles extends javax.swing.JInternalFrame {
         jLabel5 = new javax.swing.JLabel();
         jTSuperficie = new javax.swing.JTextField();
         jTUsoLocal = new javax.swing.JTextField();
-        jBBorrarPropiedad = new javax.swing.JButton();
         jTZona = new javax.swing.JTextField();
         jBSalir = new javax.swing.JButton();
         jBBuscarPropiedad3 = new javax.swing.JButton();
         jBBuscarPropiedad4 = new javax.swing.JButton();
         jBBuscarPropiedad5 = new javax.swing.JButton();
+        jBCrearContrato = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Microsoft JhengHei Light", 0, 24)); // NOI18N
         jLabel1.setText("Propiedades Disponibles");
@@ -135,20 +135,6 @@ public class PropiedadesDisponibles extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(jTPropiedades);
 
-        jBBuscarPropiedad.setText("Buscar Propiedad");
-        jBBuscarPropiedad.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBBuscarPropiedadActionPerformed(evt);
-            }
-        });
-
-        jBCrearContrato.setText("Crear contrato");
-        jBCrearContrato.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBCrearContratoActionPerformed(evt);
-            }
-        });
-
         jLabel2.setText("Zona");
 
         jLabel3.setText("Superficie mínima");
@@ -160,13 +146,6 @@ public class PropiedadesDisponibles extends javax.swing.JInternalFrame {
         jTSuperficie.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTSuperficieActionPerformed(evt);
-            }
-        });
-
-        jBBorrarPropiedad.setText("Borrar Propiedad");
-        jBBorrarPropiedad.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBBorrarPropiedadActionPerformed(evt);
             }
         });
 
@@ -204,20 +183,17 @@ public class PropiedadesDisponibles extends javax.swing.JInternalFrame {
             }
         });
 
+        jBCrearContrato.setText("Crear Contrato De Alquiler");
+        jBCrearContrato.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBCrearContratoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jBBuscarPropiedad)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jBBorrarPropiedad)
-                .addGap(44, 44, 44)
-                .addComponent(jBCrearContrato)
-                .addGap(31, 31, 31)
-                .addComponent(jBSalir)
-                .addGap(24, 24, 24))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -246,10 +222,15 @@ public class PropiedadesDisponibles extends javax.swing.JInternalFrame {
                         .addComponent(jBBuscarPropiedad5))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(16, 16, 16)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 635, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jBBuscarPropiedad3))))
-                .addContainerGap(154, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jBSalir)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 635, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jBBuscarPropiedad3)
+                                    .addGap(190, 190, 190)
+                                    .addComponent(jBCrearContrato))))))
+                .addContainerGap(17, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
@@ -284,19 +265,16 @@ public class PropiedadesDisponibles extends javax.swing.JInternalFrame {
                                     .addComponent(jTPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(64, 64, 64)
-                        .addComponent(jBBuscarPropiedad5)
-                        .addGap(22, 22, 22)))
+                        .addComponent(jBBuscarPropiedad5)))
                 .addGap(30, 30, 30)
-                .addComponent(jBBuscarPropiedad3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(77, 77, 77)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jBSalir)
-                    .addComponent(jBCrearContrato)
-                    .addComponent(jBBorrarPropiedad)
-                    .addComponent(jBBuscarPropiedad))
-                .addGap(7, 7, 7))
+                    .addComponent(jBBuscarPropiedad3)
+                    .addComponent(jBCrearContrato))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
+                .addComponent(jBSalir)
+                .addGap(57, 57, 57))
         );
 
         pack();
@@ -305,42 +283,6 @@ public class PropiedadesDisponibles extends javax.swing.JInternalFrame {
     private void jTSuperficieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTSuperficieActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTSuperficieActionPerformed
-
-    private void jBBorrarPropiedadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBorrarPropiedadActionPerformed
-        // TODO add your handling code here:
-//        Inmueble inmueble = new Inmueble();
-//        int ide = -1;
-//        ide = Integer.parseInt(jTIDInmueble.getText());
-//
-//        if (id.borrarInmueble(ide)) {
-//            JOptionPane.showMessageDialog(null, "Empleado borrado con Exito");
-//            limpiarCampos();
-//            desactivaCampos();
-//        }
-//
-//        //Actualiza el jComboBox imnueble para que muestre los datos Actualizados.
-//        jCBZona.removeAllItems();
-//        listaInmuebles = (ArrayList<Inmueble>) id.obtenerInmuebles();
-//        cargarInmuebles();
-//        modelo = new DefaultTableModel();
-//        cargarInmuebles();
-    }//GEN-LAST:event_jBBorrarPropiedadActionPerformed
-
-    private void jBCrearContratoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCrearContratoActionPerformed
-        // TODO add your handling code here:
-        jScrollPane1.removeComponentListener(jInternalFrame);
-        NuevoContrato nc = new NuevoContrato(conexion);
-        nc.setVisible(true);
-        jScrollPane1.add(nc);
-        //jScrollPane1.moveToFront(nc);
-        jScrollPane1.repaint();
-
-//        NuevoContrato contrato = new NuevoContrato(conexion);
-//        contrato.setVisible(true);
-//        jScrollPane1.add(contrato);
-//        //jScrollPane1.moveToFront(menu);
-//        jScrollPane1.repaint();
-    }//GEN-LAST:event_jBCrearContratoActionPerformed
 
     private void jTZonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTZonaActionPerformed
         // TODO add your handling code here:
@@ -351,13 +293,11 @@ public class PropiedadesDisponibles extends javax.swing.JInternalFrame {
         dispose();
     }//GEN-LAST:event_jBSalirActionPerformed
 
-    private void jBBuscarPropiedadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarPropiedadActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jBBuscarPropiedadActionPerformed
-
     private void jBBuscarPropiedad3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarPropiedad3ActionPerformed
         // TODO add your handling code here:
         cargarInmueblesDisponibles();
+        jBCrearContrato.setEnabled(true);
+
 
     }//GEN-LAST:event_jBBuscarPropiedad3ActionPerformed
 
@@ -387,12 +327,24 @@ public class PropiedadesDisponibles extends javax.swing.JInternalFrame {
         }
         if (lista.isEmpty()) {
             JOptionPane.showMessageDialog(null, " NO se encontro inmuebles con esas caracteristicas");
+        } else {
+            jBCrearContrato.setEnabled(true);
         }
         limpiarCampos();
         desactivaCampos();
 
 
     }//GEN-LAST:event_jBBuscarPropiedad5ActionPerformed
+
+    private void jBCrearContratoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCrearContratoActionPerformed
+        // TODO add your handling code here:
+        jScrollPane1.removeComponentListener(jInternalFrame);
+        NuevoContrato nc = new NuevoContrato(conexion);
+        nc.setVisible(true);
+        jScrollPane1.add(nc);
+        //jScrollPane1.moveToFront(nc);
+        jScrollPane1.repaint();
+    }//GEN-LAST:event_jBCrearContratoActionPerformed
 
     private void limpiarCampos() {
 
@@ -437,8 +389,6 @@ public class PropiedadesDisponibles extends javax.swing.JInternalFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jBBorrarPropiedad;
-    private javax.swing.JButton jBBuscarPropiedad;
     private javax.swing.JButton jBBuscarPropiedad3;
     private javax.swing.JButton jBBuscarPropiedad4;
     private javax.swing.JButton jBBuscarPropiedad5;

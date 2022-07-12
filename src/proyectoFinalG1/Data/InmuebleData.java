@@ -221,7 +221,7 @@ public class InmuebleData {
         ArrayList<Inmueble> inmuebles = new ArrayList<Inmueble>();
         LocalDate fecha = LocalDate.now();
         try {
-            String sql = "SELECT inmueble.* FROM contrato , inmueble WHERE inmueble.idInmueble=contrato.idInmueble AND inmueble.activo = 1 AND contrato.finalizacion>'"+Date.valueOf(fecha)+"'; ";
+            String sql = "SELECT inmueble.* FROM contrato , inmueble WHERE inmueble.idInmueble=contrato.idInmueble AND inmueble.activo = 1 AND contrato.finalizacion>'" + Date.valueOf(fecha) + "'; ";
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet resultSet = ps.executeQuery();
             Inmueble inmueble;
@@ -252,10 +252,10 @@ public class InmuebleData {
     public List<Inmueble> NoAlquilados() {
         ArrayList<Inmueble> inmuebles = new ArrayList<Inmueble>();
         LocalDate fecha = LocalDate.now();
-       try {
-            String sql = "SELECT inmueble.* FROM inmueble WHERE \n" +
-"inmueble.activo=1 AND inmueble.idInmueble NOT IN\n" +
-"(SELECT inmueble.idInmueble FROM contrato , inmueble WHERE inmueble.idInmueble=contrato.idInmueble AND inmueble.activo = 1 AND contrato.finalizacion>'"+Date.valueOf(fecha)+"');";
+        try {
+            String sql = "SELECT inmueble.* FROM inmueble WHERE \n"
+                    + "inmueble.activo=1 AND inmueble.idInmueble NOT IN\n"
+                    + "(SELECT inmueble.idInmueble FROM contrato , inmueble WHERE inmueble.idInmueble=contrato.idInmueble AND inmueble.activo = 1 AND contrato.finalizacion>'" + Date.valueOf(fecha) + "');";
             PreparedStatement ps = con.prepareStatement(sql);
             //ps.setDate(1, Date.valueOf(fecha));
             ResultSet resultSet = ps.executeQuery();
@@ -314,10 +314,45 @@ public class InmuebleData {
 
         return inmuebles;
     }
+
+    public List<Inmueble> PropiedadesConEstasCaracteristicas(int zona,Float superficie,String tipo,Double precio) {
+        ArrayList<Inmueble> inmuebles = new ArrayList<Inmueble>();
+
+        try {
+            String sql = "SELECT  inmueble.*  FROM inmueble WHERE inmueble.activo = 1 AND inmueble.zona =? AND inmueble.superficie > ?  AND inmueble.tipoLocal =? AND inmueble.precio >? ";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1,zona);
+            ps.setFloat(2, superficie);
+            ps.setString(3,tipo );
+            ps.setDouble(4, precio);
+            ResultSet resultSet = ps.executeQuery();
+            Inmueble caracteristica;
+            while (resultSet.next()) {
+                caracteristica = new Inmueble();
+                caracteristica.setIdInmueble(resultSet.getInt("idInmueble"));
+                caracteristica.setCaracteristicas(resultSet.getString("caracteristicas"));
+                caracteristica.setDireccion(resultSet.getString("direccion"));
+                caracteristica.setPrecio(resultSet.getDouble("precio"));
+                caracteristica.setSuperficie(resultSet.getFloat("superficie"));
+                caracteristica.setTipoLocal(resultSet.getString("tipoLocal"));
+                Propietario i = propietarioData.obetenerPropietarioPorID(resultSet.getInt("idPropietario"));
+                caracteristica.setPropietario(i);
+                caracteristica.setCodigoInmueble(resultSet.getString("codigoInmueble"));
+                caracteristica.setActivo(resultSet.getBoolean("activo"));
+
+                inmuebles.add(caracteristica);
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, " Error al obtener datos de caracteristicas ");
+        }
+
+        return inmuebles;
+    }
     //Listar dirección y precio de los inmuebles alquilados actualmente de un determinado propietario
 
 }
 /*
 
 SELECT inmueble.direccion, inmueble.precio FROM propietario , inmueble, contrato WHERE inmueble.idPropietario=propietario.idPropietario AND inmueble.activo = 1 AND ontrato.finalizacion>'?' AND propietario.idPropietario=? AND inmueble.idInmueble=contrato.idInmueble;
-*/
+ */

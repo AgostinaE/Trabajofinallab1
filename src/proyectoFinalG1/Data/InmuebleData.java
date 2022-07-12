@@ -272,6 +272,7 @@ public class InmuebleData {
                 inmueble.setPropietario(i);
                 inmueble.setCodigoInmueble(resultSet.getString("codigoInmueble"));
                 inmueble.setActivo(resultSet.getBoolean("activo"));
+                inmueble.setZona(resultSet.getInt("zona"));
                 inmuebles.add(inmueble);
             }
             ps.close();
@@ -315,15 +316,15 @@ public class InmuebleData {
         return inmuebles;
     }
 
-    public List<Inmueble> PropiedadesConEstasCaracteristicas(int zona,Float superficie,String tipo,Double precio) {
+    public List<Inmueble> PropiedadesConEstasCaracteristicas(int zona, Float superficie, String tipo, Double precio) {
         ArrayList<Inmueble> inmuebles = new ArrayList<Inmueble>();
 
         try {
             String sql = "SELECT  inmueble.*  FROM inmueble WHERE inmueble.activo = 1 AND inmueble.zona =? AND inmueble.superficie > ?  AND inmueble.tipoLocal =? AND inmueble.precio >? ";
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1,zona);
+            ps.setInt(1, zona);
             ps.setFloat(2, superficie);
-            ps.setString(3,tipo );
+            ps.setString(3, tipo);
             ps.setDouble(4, precio);
             ResultSet resultSet = ps.executeQuery();
             Inmueble caracteristica;
@@ -339,6 +340,7 @@ public class InmuebleData {
                 caracteristica.setPropietario(i);
                 caracteristica.setCodigoInmueble(resultSet.getString("codigoInmueble"));
                 caracteristica.setActivo(resultSet.getBoolean("activo"));
+                caracteristica.setZona(resultSet.getInt("zona")); 
 
                 inmuebles.add(caracteristica);
             }

@@ -188,7 +188,7 @@ public class NuevoContrato extends javax.swing.JInternalFrame {
         jCbEmpleados.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
 
         jLabel13.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabel13.setText("Introducir CUIL/CUIT del nuevo Inquilino");
+        jLabel13.setText("Seleccionar Nuevo Inquilino");
 
         jLabel14.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel14.setText("Fecha de Inicio del Contrato");
@@ -222,6 +222,9 @@ public class NuevoContrato extends javax.swing.JInternalFrame {
         jDFinal.setForeground(new java.awt.Color(255, 255, 255));
         jDFinal.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
 
+        jCBInquilino.setBackground(new java.awt.Color(204, 204, 204));
+        jCBInquilino.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jCBInquilino.setForeground(new java.awt.Color(0, 0, 0));
         jCBInquilino.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCBInquilinoActionPerformed(evt);
@@ -259,12 +262,12 @@ public class NuevoContrato extends javax.swing.JInternalFrame {
                                 .addGap(90, 90, 90)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jCbInmuebles, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jCbEmpleados, 0, 308, Short.MAX_VALUE))
                             .addComponent(jLabel15)
                             .addComponent(jDFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jCBInquilino, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jCBInquilino, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jCbInmuebles, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jCbEmpleados, javax.swing.GroupLayout.Alignment.LEADING, 0, 308, Short.MAX_VALUE)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(

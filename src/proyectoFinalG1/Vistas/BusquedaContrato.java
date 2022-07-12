@@ -238,7 +238,8 @@ public class BusquedaContrato extends javax.swing.JInternalFrame {
     }
     
     private void mostrarContrato2(){
-        int idContrato = Integer.parseInt(jTxtIdInmueble.getText()) ;
+        int select = jTContratos.getSelectedRow();
+        int idContrato = (Integer) modelo.getValueAt(select, 0) ;
             Contrato contrato = cd.buscarContratoXId(idContrato);
             jTxtIdInmueble.setText(idContrato+"");
             jDcInicio.setDate(Date.valueOf(contrato.getInicio()));
@@ -829,7 +830,7 @@ public class BusquedaContrato extends javax.swing.JInternalFrame {
         try{
         cd.borrarContrato(Integer.parseInt(jTxtIdInmueble.getText()));
         inhabilitar();
-        mostrarContrato2();
+        //mostrarContrato2();
         }catch(Exception ex){
             JOptionPane.showMessageDialog(this,"Error, debe cargar un contrato");
         }

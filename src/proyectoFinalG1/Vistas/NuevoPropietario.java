@@ -328,7 +328,7 @@ public class NuevoPropietario extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         limpiar();
         habilitar();
-        jBtnBuscarXDni.setEnabled(false);
+        //jBtnBuscarXDni.setEnabled(false);
         jButton1.setEnabled(false);
         jBtnBorrar.setEnabled(false);
         jLId.setEnabled(false);

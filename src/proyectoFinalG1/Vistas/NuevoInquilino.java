@@ -357,9 +357,9 @@ public class NuevoInquilino extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         habilitar();
         jBtnNuevo1.setEnabled(false);
-        jBtnBuscarXCuil.setEnabled(false);
+        //jBtnBuscarXCuil.setEnabled(false);
         jTxtId.setEnabled(false);
-        jBBuscarXCodigo.setEnabled(false);
+        //jBBuscarXCodigo.setEnabled(false);
         jButton5.setEnabled(false);jBGuardarCambios.setEnabled(false);
         limpiar();
     }//GEN-LAST:event_jBtnNuevoActionPerformed

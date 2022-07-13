@@ -238,8 +238,7 @@ public class BusquedaContrato extends javax.swing.JInternalFrame {
     }
     
     private void mostrarContrato2(){
-        int select = jTContratos.getSelectedRow();
-        int idContrato = (Integer) modelo.getValueAt(select, 0) ;
+        int idContrato = Integer.parseInt(jTxtIdInmueble.getText()) ;
             Contrato contrato = cd.buscarContratoXId(idContrato);
             jTxtIdInmueble.setText(idContrato+"");
             jDcInicio.setDate(Date.valueOf(contrato.getInicio()));

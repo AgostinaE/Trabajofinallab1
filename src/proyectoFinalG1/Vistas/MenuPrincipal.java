@@ -34,78 +34,71 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jbInmueblesDisponibles = new javax.swing.JButton();
         jbPropietarios = new javax.swing.JButton();
         jbInquilinos = new javax.swing.JButton();
-        jbContratos = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jBEmpleado = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jmPropietarios = new javax.swing.JMenu();
-        jmiPropietarioNuevo = new javax.swing.JMenuItem();
-        jmiNuevoInmueble = new javax.swing.JMenuItem();
+        jMIEmpleado = new javax.swing.JMenuItem();
+        jmiBuscarContrato = new javax.swing.JMenuItem();
+        jmiInmueblesDisponibles = new javax.swing.JMenuItem();
         jmInquilinos = new javax.swing.JMenu();
         jmiNuevoInquilino = new javax.swing.JMenuItem();
-        jmiInmueblesDisponibles = new javax.swing.JMenuItem();
-        jmContratos = new javax.swing.JMenu();
-        jmiBuscarContrato = new javax.swing.JMenuItem();
-        jmiNuevoContrato = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
-        jMIEmpleado = new javax.swing.JMenuItem();
+        jmiPropietarioNuevo = new javax.swing.JMenuItem();
+        jmContratos = new javax.swing.JMenu();
+        jmiNuevoInmueble = new javax.swing.JMenuItem();
         jMSalir = new javax.swing.JMenu();
         jMISalir = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(214, 2147483647));
 
+        jDesktopPane1.setBackground(new java.awt.Color(40, 45, 50));
         jDesktopPane1.setMaximumSize(new java.awt.Dimension(2147483647, 913));
 
-        jbInmueblesDisponibles.setBackground(new java.awt.Color(204, 204, 204));
+        jbInmueblesDisponibles.setBackground(new java.awt.Color(40, 45, 50));
         jbInmueblesDisponibles.setFont(new java.awt.Font("Microsoft JhengHei Light", 0, 18)); // NOI18N
         jbInmueblesDisponibles.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectoFinalG1/VistasImagenes/buscarAlquilerIconTam.png"))); // NOI18N
-        jbInmueblesDisponibles.setText("Inmuebles Disponibles");
+        jbInmueblesDisponibles.setText("Seleccion y Firma de Contrato");
         jbInmueblesDisponibles.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbInmueblesDisponiblesActionPerformed(evt);
             }
         });
 
-        jbPropietarios.setBackground(java.awt.Color.lightGray);
+        jbPropietarios.setBackground(new java.awt.Color(40, 45, 50));
         jbPropietarios.setFont(new java.awt.Font("Microsoft YaHei Light", 0, 18)); // NOI18N
         jbPropietarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectoFinalG1/VistasImagenes/propietarioIconTam.png"))); // NOI18N
-        jbPropietarios.setText("Propietario nuevo");
+        jbPropietarios.setText("Nuevo Propietario");
         jbPropietarios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbPropietariosActionPerformed(evt);
             }
         });
 
+        jbInquilinos.setBackground(new java.awt.Color(40, 45, 50));
         jbInquilinos.setFont(new java.awt.Font("Microsoft JhengHei Light", 0, 18)); // NOI18N
         jbInquilinos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectoFinalG1/VistasImagenes/inquilinoIconTam.png"))); // NOI18N
-        jbInquilinos.setText("Inquilino nuevo");
+        jbInquilinos.setText("Nuevo Inquilino");
         jbInquilinos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbInquilinosActionPerformed(evt);
             }
         });
 
-        jbContratos.setFont(new java.awt.Font("Microsoft YaHei Light", 0, 18)); // NOI18N
-        jbContratos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectoFinalG1/VistasImagenes/contratoIconTam.png"))); // NOI18N
-        jbContratos.setText("Contrato Nuevo");
-        jbContratos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbContratosActionPerformed(evt);
-            }
-        });
-
+        jButton1.setBackground(new java.awt.Color(40, 45, 50));
         jButton1.setFont(new java.awt.Font("Microsoft JhengHei Light", 0, 18)); // NOI18N
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectoFinalG1/VistasImagenes/agregarPropiedadTam.png"))); // NOI18N
-        jButton1.setText("Inmuebles Nuevos");
+        jButton1.setText("Nuevo Inmueble");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
+        jButton2.setBackground(new java.awt.Color(40, 45, 50));
         jButton2.setFont(new java.awt.Font("Microsoft JhengHei Light", 0, 18)); // NOI18N
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectoFinalG1/VistasImagenes/buscarContratoTam.png"))); // NOI18N
         jButton2.setText("Búsqueda de Contratos");
@@ -115,6 +108,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
+        jBEmpleado.setBackground(new java.awt.Color(40, 45, 50));
         jBEmpleado.setFont(new java.awt.Font("Microsoft JhengHei Light", 0, 18)); // NOI18N
         jBEmpleado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectoFinalG1/VistasImagenes/empleadoTam.png"))); // NOI18N
         jBEmpleado.setText("Gestión Empleado");
@@ -129,7 +123,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jDesktopPane1.setLayer(jbInmueblesDisponibles, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jbPropietarios, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jbInquilinos, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jbContratos, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jButton1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jButton2, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jBEmpleado, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -140,63 +133,96 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jDesktopPane1Layout.setHorizontalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                .addContainerGap(49, Short.MAX_VALUE)
+                .addGap(49, 49, 49)
                 .addComponent(jLabel1)
-                .addGap(72, 72, 72)
-                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jbContratos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jbPropietarios, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jbInmueblesDisponibles, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jbInquilinos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jBEmpleado, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jBEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbPropietarios, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbInquilinos, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbInmueblesDisponibles)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
                 .addComponent(jbInquilinos)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                        .addComponent(jbInmueblesDisponibles)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel1)
+                        .addGap(194, 194, 194))
+                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addGap(18, 18, 18)
                         .addComponent(jbPropietarios)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jbContratos)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(18, 18, 18)
+                        .addComponent(jbInmueblesDisponibles)
+                        .addGap(18, 18, 18)
                         .addComponent(jButton2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jBEmpleado)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jBEmpleado)
+                        .addGap(0, 30, Short.MAX_VALUE))))
         );
 
-        jmPropietarios.setText("Propietarios");
+        jMenuBar1.setBackground(new java.awt.Color(204, 204, 204));
 
-        jmiPropietarioNuevo.setText("Propietario Nuevo");
-        jmiPropietarioNuevo.addActionListener(new java.awt.event.ActionListener() {
+        jmPropietarios.setBackground(new java.awt.Color(204, 204, 204));
+        jmPropietarios.setForeground(new java.awt.Color(0, 0, 0));
+        jmPropietarios.setText("Gestion de Contratos y Personal");
+        jmPropietarios.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+
+        jMIEmpleado.setBackground(new java.awt.Color(153, 153, 153));
+        jMIEmpleado.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        jMIEmpleado.setForeground(new java.awt.Color(0, 0, 0));
+        jMIEmpleado.setText("Getion de Empleados");
+        jMIEmpleado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmiPropietarioNuevoActionPerformed(evt);
+                jMIEmpleadoActionPerformed(evt);
             }
         });
-        jmPropietarios.add(jmiPropietarioNuevo);
+        jmPropietarios.add(jMIEmpleado);
 
-        jmiNuevoInmueble.setText("Nuevo inmueble");
-        jmiNuevoInmueble.addActionListener(new java.awt.event.ActionListener() {
+        jmiBuscarContrato.setBackground(new java.awt.Color(153, 153, 153));
+        jmiBuscarContrato.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        jmiBuscarContrato.setForeground(new java.awt.Color(0, 0, 0));
+        jmiBuscarContrato.setText("Busqueda de Contratos");
+        jmiBuscarContrato.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmiNuevoInmuebleActionPerformed(evt);
+                jmiBuscarContratoActionPerformed(evt);
             }
         });
-        jmPropietarios.add(jmiNuevoInmueble);
+        jmPropietarios.add(jmiBuscarContrato);
+
+        jmiInmueblesDisponibles.setBackground(new java.awt.Color(153, 153, 153));
+        jmiInmueblesDisponibles.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        jmiInmueblesDisponibles.setForeground(new java.awt.Color(0, 0, 0));
+        jmiInmueblesDisponibles.setText("Inmuebles Disponibles y Cierre de Contrato");
+        jmiInmueblesDisponibles.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiInmueblesDisponiblesActionPerformed(evt);
+            }
+        });
+        jmPropietarios.add(jmiInmueblesDisponibles);
 
         jMenuBar1.add(jmPropietarios);
 
+        jmInquilinos.setBackground(new java.awt.Color(204, 204, 204));
+        jmInquilinos.setForeground(new java.awt.Color(0, 0, 0));
         jmInquilinos.setText("Inquilinos");
+        jmInquilinos.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        jmInquilinos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmInquilinosActionPerformed(evt);
+            }
+        });
 
+        jmiNuevoInquilino.setBackground(new java.awt.Color(153, 153, 153));
+        jmiNuevoInquilino.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        jmiNuevoInquilino.setForeground(new java.awt.Color(0, 0, 0));
         jmiNuevoInquilino.setText("Nuevo Inquilino");
         jmiNuevoInquilino.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -205,55 +231,57 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
         jmInquilinos.add(jmiNuevoInquilino);
 
-        jmiInmueblesDisponibles.setText("Inmuebles Disponibles");
-        jmiInmueblesDisponibles.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmiInmueblesDisponiblesActionPerformed(evt);
-            }
-        });
-        jmInquilinos.add(jmiInmueblesDisponibles);
-
         jMenuBar1.add(jmInquilinos);
 
-        jmContratos.setText("Contratos");
+        jMenu1.setBackground(new java.awt.Color(204, 204, 204));
+        jMenu1.setForeground(new java.awt.Color(0, 0, 0));
+        jMenu1.setText("Propietarios");
+        jMenu1.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
 
-        jmiBuscarContrato.setText("Busqueda de Contratos");
-        jmiBuscarContrato.addActionListener(new java.awt.event.ActionListener() {
+        jmiPropietarioNuevo.setBackground(new java.awt.Color(153, 153, 153));
+        jmiPropietarioNuevo.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        jmiPropietarioNuevo.setForeground(new java.awt.Color(0, 0, 0));
+        jmiPropietarioNuevo.setText("Propietario Nuevo");
+        jmiPropietarioNuevo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmiBuscarContratoActionPerformed(evt);
+                jmiPropietarioNuevoActionPerformed(evt);
             }
         });
-        jmContratos.add(jmiBuscarContrato);
-
-        jmiNuevoContrato.setText("Nuevo contrato");
-        jmiNuevoContrato.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmiNuevoContratoActionPerformed(evt);
-            }
-        });
-        jmContratos.add(jmiNuevoContrato);
-
-        jMenuBar1.add(jmContratos);
-
-        jMenu1.setText("Empleado");
-
-        jMIEmpleado.setText("Getion Empleado");
-        jMIEmpleado.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMIEmpleadoActionPerformed(evt);
-            }
-        });
-        jMenu1.add(jMIEmpleado);
+        jMenu1.add(jmiPropietarioNuevo);
 
         jMenuBar1.add(jMenu1);
 
+        jmContratos.setBackground(new java.awt.Color(204, 204, 204));
+        jmContratos.setForeground(new java.awt.Color(0, 0, 0));
+        jmContratos.setText("Inmuebles");
+        jmContratos.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+
+        jmiNuevoInmueble.setBackground(new java.awt.Color(153, 153, 153));
+        jmiNuevoInmueble.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        jmiNuevoInmueble.setForeground(new java.awt.Color(0, 0, 0));
+        jmiNuevoInmueble.setText("Nuevo inmueble");
+        jmiNuevoInmueble.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiNuevoInmuebleActionPerformed(evt);
+            }
+        });
+        jmContratos.add(jmiNuevoInmueble);
+
+        jMenuBar1.add(jmContratos);
+
+        jMSalir.setBackground(new java.awt.Color(204, 204, 204));
+        jMSalir.setForeground(new java.awt.Color(0, 0, 0));
         jMSalir.setText("Salir");
+        jMSalir.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         jMSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMSalirActionPerformed(evt);
             }
         });
 
+        jMISalir.setBackground(new java.awt.Color(153, 153, 153));
+        jMISalir.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        jMISalir.setForeground(new java.awt.Color(0, 0, 0));
         jMISalir.setText("Salir");
         jMISalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -282,6 +310,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void jmiPropietarioNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiPropietarioNuevoActionPerformed
         // TODO add your handling code here:
+        NuevoPropietario np = new NuevoPropietario(conexion);
+        np.setVisible(true);
+        jDesktopPane1.add(np);
+        jDesktopPane1.moveToFront(np);
+        jDesktopPane1.repaint();
     }//GEN-LAST:event_jmiPropietarioNuevoActionPerformed
 
     private void jmiNuevoInquilinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiNuevoInquilinoActionPerformed
@@ -298,18 +331,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jDesktopPane1.repaint();
     }//GEN-LAST:event_jmiBuscarContratoActionPerformed
 
-    private void jmiNuevoContratoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiNuevoContratoActionPerformed
-        jDesktopPane1.removeComponentListener(jInternalFrame);
-        //jDesktopPane1.removeAll();
-        NuevoContrato nc = new NuevoContrato(conexion);
-        nc.setVisible(true);
-        jDesktopPane1.add(nc);
-        jDesktopPane1.moveToFront(nc);
-        jDesktopPane1.repaint();
-    }//GEN-LAST:event_jmiNuevoContratoActionPerformed
-
     private void jmiInmueblesDisponiblesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiInmueblesDisponiblesActionPerformed
         // TODO add your handling code here:
+        PropiedadesDisponibles pd = new PropiedadesDisponibles(conexion);
+        pd.setVisible(true);
+        jDesktopPane1.add(pd);
+        jDesktopPane1.moveToFront(pd);
+        jDesktopPane1.repaint();
     }//GEN-LAST:event_jmiInmueblesDisponiblesActionPerformed
 
     private void jmiNuevoInmuebleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiNuevoInmuebleActionPerformed
@@ -363,16 +391,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jDesktopPane1.repaint();
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jbContratosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbContratosActionPerformed
-        // TODO add your handling code here:
-        jDesktopPane1.removeComponentListener(jInternalFrame);
-        NuevoContrato nc = new NuevoContrato(conexion);
-        nc.setVisible(true);
-        jDesktopPane1.add(nc);
-        jDesktopPane1.moveToFront(nc);
-        jDesktopPane1.repaint();
-    }//GEN-LAST:event_jbContratosActionPerformed
-
     private void jbPropietariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbPropietariosActionPerformed
         NuevoPropietario np = new NuevoPropietario(conexion);
         np.setVisible(true);
@@ -405,6 +423,15 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private void jMISalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMISalirActionPerformed
         dispose();
     }//GEN-LAST:event_jMISalirActionPerformed
+
+    private void jmInquilinosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmInquilinosActionPerformed
+        // TODO add your handling code here:
+        NuevoInquilino ni = new NuevoInquilino(conexion);
+        ni.setVisible(true);
+        jDesktopPane1.add(ni);
+        jDesktopPane1.moveToFront(ni);
+        jDesktopPane1.repaint();
+    }//GEN-LAST:event_jmInquilinosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -451,7 +478,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMSalir;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JButton jbContratos;
     private javax.swing.JButton jbInmueblesDisponibles;
     private javax.swing.JButton jbInquilinos;
     private javax.swing.JButton jbPropietarios;
@@ -460,7 +486,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jmPropietarios;
     private javax.swing.JMenuItem jmiBuscarContrato;
     private javax.swing.JMenuItem jmiInmueblesDisponibles;
-    private javax.swing.JMenuItem jmiNuevoContrato;
     private javax.swing.JMenuItem jmiNuevoInmueble;
     private javax.swing.JMenuItem jmiNuevoInquilino;
     private javax.swing.JMenuItem jmiPropietarioNuevo;

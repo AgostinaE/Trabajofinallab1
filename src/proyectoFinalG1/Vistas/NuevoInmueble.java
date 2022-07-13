@@ -156,7 +156,7 @@ public class NuevoInmueble extends javax.swing.JInternalFrame {
         jLabel5.setText("Tipo de Inmueble");
 
         jLabel6.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabel6.setText("Superficie");
+        jLabel6.setText("Superficie (m²)");
 
         jLabel7.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel7.setText("Caracteristicas");
@@ -198,7 +198,7 @@ public class NuevoInmueble extends javax.swing.JInternalFrame {
         });
 
         jLabel9.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabel9.setText("Precio de Alquiler");
+        jLabel9.setText("Precio de Alquiler ( $ AR)");
 
         jCbZona.setBackground(new java.awt.Color(204, 204, 204));
         jCbZona.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N

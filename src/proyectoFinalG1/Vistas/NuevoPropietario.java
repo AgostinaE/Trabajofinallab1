@@ -109,35 +109,28 @@ public class NuevoPropietario extends javax.swing.JInternalFrame {
         setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Nombre");
 
         jLabel2.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Apellido");
 
         jLabel3.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("DNI");
 
         jLabel4.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Domicilio Real");
 
         jLabel5.setBackground(new java.awt.Color(255, 102, 102));
         jLabel5.setFont(new java.awt.Font("SansSerif", 1, 24)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("Gestion de Propietarios");
         jLabel5.setOpaque(true);
 
         jLabel6.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
         jLabel6.setText("Teléfono");
 
         jTxtNombre.setBackground(new java.awt.Color(204, 204, 204));
         jTxtNombre.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jTxtNombre.setForeground(new java.awt.Color(0, 0, 0));
         jTxtNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTxtNombreActionPerformed(evt);
@@ -146,19 +139,15 @@ public class NuevoPropietario extends javax.swing.JInternalFrame {
 
         jTxtApellido.setBackground(new java.awt.Color(204, 204, 204));
         jTxtApellido.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jTxtApellido.setForeground(new java.awt.Color(0, 0, 0));
 
         jTxtDni.setBackground(new java.awt.Color(204, 204, 204));
         jTxtDni.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jTxtDni.setForeground(new java.awt.Color(0, 0, 0));
 
         jTxtDomicilio.setBackground(new java.awt.Color(204, 204, 204));
         jTxtDomicilio.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jTxtDomicilio.setForeground(new java.awt.Color(0, 0, 0));
 
         jBtnNuevo.setBackground(new java.awt.Color(255, 102, 102));
         jBtnNuevo.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jBtnNuevo.setForeground(new java.awt.Color(0, 0, 0));
         jBtnNuevo.setText("Nuevo Propietario");
         jBtnNuevo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -168,7 +157,6 @@ public class NuevoPropietario extends javax.swing.JInternalFrame {
 
         jBtnGuardar.setBackground(new java.awt.Color(255, 102, 102));
         jBtnGuardar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jBtnGuardar.setForeground(new java.awt.Color(0, 0, 0));
         jBtnGuardar.setText("Guardar");
         jBtnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -178,7 +166,6 @@ public class NuevoPropietario extends javax.swing.JInternalFrame {
 
         jBtnSalir.setBackground(new java.awt.Color(204, 204, 204));
         jBtnSalir.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jBtnSalir.setForeground(new java.awt.Color(0, 0, 0));
         jBtnSalir.setText("Salir");
         jBtnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -188,7 +175,6 @@ public class NuevoPropietario extends javax.swing.JInternalFrame {
 
         jBtnEditar.setBackground(new java.awt.Color(255, 102, 102));
         jBtnEditar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jBtnEditar.setForeground(new java.awt.Color(0, 0, 0));
         jBtnEditar.setText("Editar Propietario");
         jBtnEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -198,7 +184,6 @@ public class NuevoPropietario extends javax.swing.JInternalFrame {
 
         jBtnBorrar.setBackground(new java.awt.Color(255, 102, 102));
         jBtnBorrar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jBtnBorrar.setForeground(new java.awt.Color(0, 0, 0));
         jBtnBorrar.setText("Borrar Propietario");
         jBtnBorrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -208,7 +193,6 @@ public class NuevoPropietario extends javax.swing.JInternalFrame {
 
         jBtnBuscarXDni.setBackground(new java.awt.Color(255, 102, 102));
         jBtnBuscarXDni.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jBtnBuscarXDni.setForeground(new java.awt.Color(0, 0, 0));
         jBtnBuscarXDni.setText("Buscar Propietario Por DNI");
         jBtnBuscarXDni.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -218,15 +202,12 @@ public class NuevoPropietario extends javax.swing.JInternalFrame {
 
         jTxtTelefono.setBackground(new java.awt.Color(204, 204, 204));
         jTxtTelefono.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jTxtTelefono.setForeground(new java.awt.Color(0, 0, 0));
 
         jLabel7.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
         jLabel7.setText("Codigo de propietario");
 
         jLId.setBackground(new java.awt.Color(204, 204, 204));
         jLId.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLId.setForeground(new java.awt.Color(0, 0, 0));
 
         jButton1.setBackground(new java.awt.Color(255, 102, 102));
         jButton1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -267,12 +248,12 @@ public class NuevoPropietario extends javax.swing.JInternalFrame {
                         .addComponent(jBtnBorrar, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(39, 39, 39)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jBtnSalir)
                     .addComponent(jBtnEditar)
                     .addComponent(jBtnBuscarXDni)
                     .addComponent(jBtnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jBtnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBtnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(46, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -313,8 +294,8 @@ public class NuevoPropietario extends javax.swing.JInternalFrame {
                 .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBtnBorrar)
-                    .addComponent(jBtnSalir))
-                .addContainerGap(106, Short.MAX_VALUE))
+                    .addComponent(jBtnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         pack();
@@ -358,6 +339,9 @@ public class NuevoPropietario extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Algunos de los campos introducidos son incorrectos");
         }
         limpiar();
+        inhabilitar();
+        jLId.setEnabled(true);
+        jButton1.setEnabled(true);
     }//GEN-LAST:event_jBtnGuardarActionPerformed
 
     private void jBtnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSalirActionPerformed
@@ -367,7 +351,10 @@ public class NuevoPropietario extends javax.swing.JInternalFrame {
 
     private void jBtnBuscarXDniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnBuscarXDniActionPerformed
         // TODO add your handling code here:
-        habilitar();jBtnEditar.setEnabled(true);jBtnGuardar.setEnabled(false);jButton1.setEnabled(false);
+        habilitar();
+        jBtnEditar.setEnabled(true);
+        jBtnGuardar.setEnabled(false);
+        jButton1.setEnabled(false);
         try {
             int dni = Integer.parseInt(jTxtDni.getText());
             Propietario p = pd.obetenerPropietarioPorDNI(dni);
@@ -426,7 +413,10 @@ public class NuevoPropietario extends javax.swing.JInternalFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        habilitar();jBtnEditar.setEnabled(true);jBtnGuardar.setEnabled(false);jBtnBuscarXDni.setEnabled(false);
+        habilitar();
+        jBtnEditar.setEnabled(true);
+        jBtnGuardar.setEnabled(false);
+        jBtnBuscarXDni.setEnabled(false);
         try {
             int id = Integer.parseInt(jLId.getText());
             Propietario p = pd.obetenerPropietarioPorID(id);

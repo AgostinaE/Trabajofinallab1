@@ -241,7 +241,7 @@ public class NuevoEmpleado extends javax.swing.JInternalFrame {
                     .addComponent(jBEditarEmpleado)
                     .addComponent(jBBorrarEmpleado)
                     .addComponent(jBSalir))
-                .addContainerGap(52, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         pack();
@@ -330,10 +330,10 @@ public class NuevoEmpleado extends javax.swing.JInternalFrame {
 
     private void jBBuscarEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarEmpleadoActionPerformed
 
-        jBBorrarEmpleado.enable(true);
-        jBEditarEmpleado.enable(true);
-        jBGuardar.enable(false);
-        jBNuevo.enable(false);
+        jBBorrarEmpleado.setEnabled(true);
+        jBEditarEmpleado.setEnabled(true);
+        jBGuardar.setEnabled(true);
+        jBNuevo.setEnabled(true);
         activaCampos();
         Empleado em = (Empleado) jCBEmpleado.getSelectedItem();
         long dni = em.getDni();

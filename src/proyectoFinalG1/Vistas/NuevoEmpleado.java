@@ -22,6 +22,12 @@ public class NuevoEmpleado extends javax.swing.JInternalFrame {
     public NuevoEmpleado(Conexion conexion) {
         initComponents();
         limpiarCampos();
+        jCBEmpleado.setEnabled(true);
+        jBBorrarEmpleado.setEnabled(false);
+        jBBuscarEmpleado.setEnabled(true);
+        jBEditarEmpleado.setEnabled(false);
+        jBGuardar.setEnabled(false);
+        jBNuevo.setEnabled(true);
         ed = new EmpleadoData(conexion);
         desactivaCampos();
 
@@ -29,14 +35,7 @@ public class NuevoEmpleado extends javax.swing.JInternalFrame {
         cargoCombo();
         modelo = new DefaultTableModel();
         cargaEmpleados();
-        
-        jCBEmpleado.enable(true);
-        jBBorrarEmpleado.enable(false);
-        jBBuscarEmpleado.enable(false);
-        jBEditarEmpleado.enable(false);
-        jBGuardar.enable(false);
-        jBNuevo.enable(true);
-        
+
     }
 
     private void cargaEmpleados() {
@@ -64,7 +63,6 @@ public class NuevoEmpleado extends javax.swing.JInternalFrame {
 
     }
 
-   
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -256,13 +254,16 @@ public class NuevoEmpleado extends javax.swing.JInternalFrame {
     private void jBNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBNuevoActionPerformed
         limpiarCampos();
         activaCampos();
-        jBGuardar.enable(true);
+        jCBEmpleado.setEnabled(false);
+        jBBorrarEmpleado.setEnabled(true);
+        jBBuscarEmpleado.setEnabled(false);
+        jBEditarEmpleado.setEnabled(true);
+        jBGuardar.setEnabled(true);
 
     }//GEN-LAST:event_jBNuevoActionPerformed
 
     private void jBGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarActionPerformed
 
-        
         String nombre = jTNombre.getText();
         String apellido = jTApellido.getText();
         int dni = Integer.parseInt(jTDni.getText());
@@ -274,13 +275,21 @@ public class NuevoEmpleado extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Empleado Agregado con Exito");
         }
         limpiarCampos();
-        
+
         //Actualiza el jComboBox Empleado para que muestre los datos Actualizados.
         jCBEmpleado.removeAllItems();
         listaEmpleados = (ArrayList<Empleado>) ed.obtenerEmpleados();
         cargoCombo();
         modelo = new DefaultTableModel();
         cargaEmpleados();
+        limpiarCampos();
+        desactivaCampos();
+        jCBEmpleado.setEnabled(true);
+        jBBorrarEmpleado.setEnabled(false);
+        jBBuscarEmpleado.setEnabled(true);
+        jBEditarEmpleado.setEnabled(false);
+        jBGuardar.setEnabled(false);
+        jBNuevo.setEnabled(true);
     }//GEN-LAST:event_jBGuardarActionPerformed
 
     private void jBSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalirActionPerformed
@@ -298,8 +307,8 @@ public class NuevoEmpleado extends javax.swing.JInternalFrame {
             Empleado empleado = new Empleado(id, nombre, apellido, dni, activo);
             if (ed.modificarEmpleado(empleado)) {
 
-            JOptionPane.showMessageDialog(this, "Empleado modificado con Exito");
-        }
+                JOptionPane.showMessageDialog(this, "Empleado modificado con Exito");
+            }
         } catch (Exception e) {
 
             JOptionPane.showMessageDialog(this, "Usted debe ingresar un numero");
@@ -307,23 +316,21 @@ public class NuevoEmpleado extends javax.swing.JInternalFrame {
 
         }
 
-        
-        
         limpiarCampos();
         borraFilasTabla();
-        
+
         //Actualiza el jComboBox Empleado para que muestre los datos Actualizados.
         jCBEmpleado.removeAllItems();
         listaEmpleados = (ArrayList<Empleado>) ed.obtenerEmpleados();
         cargoCombo();
         modelo = new DefaultTableModel();
         cargaEmpleados();
-        
+
     }//GEN-LAST:event_jBEditarEmpleadoActionPerformed
 
     private void jBBuscarEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarEmpleadoActionPerformed
 
-        jBBorrarEmpleado.enable(true);       
+        jBBorrarEmpleado.enable(true);
         jBEditarEmpleado.enable(true);
         jBGuardar.enable(false);
         jBNuevo.enable(false);
@@ -349,19 +356,27 @@ public class NuevoEmpleado extends javax.swing.JInternalFrame {
         Empleado empleado = new Empleado();
         int id = -1;
         id = Integer.parseInt(jTId.getText());
-        
+
         if (ed.borrarEmpleado(id)) {
             JOptionPane.showMessageDialog(null, "Empleado borrado con Exito");
             limpiarCampos();
             desactivaCampos();
         }
-        
-         //Actualiza el jComboBox Empleado para que muestre los datos Actualizados.
+
+        //Actualiza el jComboBox Empleado para que muestre los datos Actualizados.
         jCBEmpleado.removeAllItems();
         listaEmpleados = (ArrayList<Empleado>) ed.obtenerEmpleados();
         cargoCombo();
         modelo = new DefaultTableModel();
         cargaEmpleados();
+        limpiarCampos();
+        desactivaCampos();
+        jCBEmpleado.setEnabled(true);
+        jBBorrarEmpleado.setEnabled(false);
+        jBBuscarEmpleado.setEnabled(true);
+        jBEditarEmpleado.setEnabled(false);
+        jBGuardar.setEnabled(false);
+        jBNuevo.setEnabled(true);
     }//GEN-LAST:event_jBBorrarEmpleadoActionPerformed
 
     private void jCBEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBEmpleadoActionPerformed
@@ -369,8 +384,8 @@ public class NuevoEmpleado extends javax.swing.JInternalFrame {
         jBNuevo.enable(false);
         jBBuscarEmpleado.enable(true);
         borraFilasTabla();
-        
-        
+
+
     }//GEN-LAST:event_jCBEmpleadoActionPerformed
 
     private void limpiarCampos() {

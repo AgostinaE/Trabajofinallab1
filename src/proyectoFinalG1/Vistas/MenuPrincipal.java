@@ -53,7 +53,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMISalir = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(214, 2147483647));
 
         jDesktopPane1.setBackground(new java.awt.Color(40, 45, 50));
         jDesktopPane1.setMaximumSize(new java.awt.Dimension(2147483647, 913));

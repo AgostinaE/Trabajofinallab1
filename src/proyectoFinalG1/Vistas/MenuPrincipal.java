@@ -318,6 +318,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void jmiNuevoInquilinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiNuevoInquilinoActionPerformed
         // TODO add your handling code here:
+         NuevoInquilino ni = new NuevoInquilino(conexion);
+        ni.setVisible(true);
+        jDesktopPane1.add(ni);
+        jDesktopPane1.moveToFront(ni);
+        jDesktopPane1.repaint();
     }//GEN-LAST:event_jmiNuevoInquilinoActionPerformed
 
     private void jmiBuscarContratoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiBuscarContratoActionPerformed
